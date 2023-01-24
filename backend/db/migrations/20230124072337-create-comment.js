@@ -11,12 +11,12 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        reference: { model: 'Users' },
+        references: { model: 'Users' },
         allowNull: false
       },
       messageId: {
         type: Sequelize.INTEGER,
-        reference: { model: 'Messages' },
+        references: { model: 'Messages' },
         allowNull: false
       },
       comment: {
@@ -24,7 +24,7 @@ module.exports = {
         allowNull: false
       },
       photo: {
-        type: Sequelize.BLOB,
+        type: Sequelize.BLOB('long'),
         allowNull: true
       },
       createdAt: {
