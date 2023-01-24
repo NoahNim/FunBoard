@@ -1,8 +1,7 @@
 const router = require("express").Router();
 
-router.get("/" , function(req, res) {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    res.send('Hello World!');
+router.get("/test" , function(req, res) {
+    res.json({ requestBody: req.body });
 })
 
 module.exports = router;
