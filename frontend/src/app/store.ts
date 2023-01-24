@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action, applyMiddleware, compose, MiddlewareArray } from '@reduxjs/toolkit';
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import userSlice from '../features/session/userSlice';
 
 export const store = configureStore({
   reducer: {
-
+    userSlice
   },
   middleware: new MiddlewareArray().concat(logger)
   
