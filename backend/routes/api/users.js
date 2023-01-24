@@ -8,6 +8,7 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
 
 const router = express.Router();
+const multer  = require('multer');
 
 const validateSignup = [
   check('email')
@@ -43,8 +44,15 @@ router.post(
   '',
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { username, fullName, email, password, biography, profilePhoto } = req.body;
-    const user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
+    let user;
+    if (req.file !== null) {
+      const { username, fullName, email, password, biography } = req.body
+      const pfPhoto = req.file.buffer
+      user = await User.signup({ username, fullName, email, password, biography, pfPhoto });
+    } else {
+      const { username, fullName, email, password, biography, profilePhoto } = req.body;
+      user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
+    }
 
     await setTokenCookie(res, user);
 
