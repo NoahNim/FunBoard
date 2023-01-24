@@ -11,8 +11,8 @@ export const Modal = ({children, isOpen, toggle}: ModalType) => {
     return (
         <>
  {isOpen &&  (
-            <div className="modal-overlay">
-                <div className="modal-box">
+            <div className="modal-overlay" onClick={toggle}>
+                <div className="modal-box" onClick={(e) => e.stopPropagation}>
                     {children}
                 </div>
             </div>
