@@ -1,15 +1,17 @@
-import { configureStore, ThunkAction, Action, applyMiddleware, compose, MiddlewareArray } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, } from '@reduxjs/toolkit';
 import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import userSlice from '../features/auth/userSlice';
+import userReducer from '../features/auth/userSlice';
+import { api } from './services/authApi';
 
 export const store = configureStore({
   reducer: {
-    auth: userSlice
+    [api.reducerPath]: api.reducer,
+    auth: userReducer,
   },
-  middleware: new MiddlewareArray().concat(logger)
-  
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware)
 });
+
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../features/auth/userSlice";
 import { useLoginMutation } from '../../app/services/authApi'
 import type { LoginRequest } from "../../app/services/authApi";
+import './loginForm.css'
 
 export const LoginForm = () => {
     const [username, setUserName] = useState("");
