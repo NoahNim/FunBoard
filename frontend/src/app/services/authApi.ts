@@ -37,7 +37,7 @@ export interface User {
     endpoints: (builder) => ({
       login: builder.mutation<UserResponse, LoginRequest>({
         query: (credentials) => ({
-          url: 'login',
+          url: '/',
           method: 'POST',
           body: credentials,
         }),
