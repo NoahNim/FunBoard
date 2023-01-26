@@ -47,3 +47,5 @@ export interface User {
       }),
     }),
   })
+
+  export const {useLoginMutation, useProtectedMutation } = api;
