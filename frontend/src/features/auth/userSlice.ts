@@ -3,7 +3,7 @@ import { User } from "../../app/services/authApi";
 import { RootState } from "../../app/store";
 
 interface UserState {
-    user: User | null;
+    user: User | null
     token: string | null
 }
 

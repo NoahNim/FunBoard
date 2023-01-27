@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 import { getCSRFCookie } from '../hooks';
 
+const cookieHead = "set-cookie"
+
 export interface User {
     id: number;
     fullName: string;
@@ -22,6 +24,7 @@ export interface User {
     username: string
     password: string
   }
+
   export const api = createApi({
     baseQuery: fetchBaseQuery({
       baseUrl: '/api/session',
@@ -41,7 +44,7 @@ export interface User {
           method: 'POST',    
           body: credentials,
         }),
-           // transformResponse: (response, meta, error) => console.log(meta.response.headers)
+          transformResponse: (response, meta, error) => console.log(meta?.response?.headers)
       }),
       protected: builder.mutation<{ message: string }, void>({
         query: () => 'protected',
