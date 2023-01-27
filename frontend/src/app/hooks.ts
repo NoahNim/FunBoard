@@ -16,7 +16,7 @@ export const getCSRFCookie = (name: string) => {
 export const getAuthToken = async (url: string) => {
     try {
         const res = await fetch(url, {
-            method: "GET",
+            method: "POST",
         })
     } catch (error) {
         console.log(error)

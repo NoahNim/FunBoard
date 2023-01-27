@@ -34,7 +34,7 @@ export interface User {
           console.log(token)
           headers.set('_csrf', `${token}`)
         } else {
-          await getAuthToken('/')
+          await getAuthToken('/api/session')
 
           const authToken = getCSRFCookie("_csrf")
 
