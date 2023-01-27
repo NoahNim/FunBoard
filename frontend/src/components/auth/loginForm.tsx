@@ -1,15 +1,18 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../app/hooks";
 import { setUser } from "../../features/auth/userSlice";
 import { useLoginMutation } from '../../app/services/authApi'
 import type { LoginRequest } from "../../app/services/authApi";
+import { getCookie } from "../../app/hooks";
 import './loginForm.css'
 
 export const LoginForm = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [login, { isLoading}] = useLoginMutation();
+
+    getCookie();
 
     const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
