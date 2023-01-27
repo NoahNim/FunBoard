@@ -6,8 +6,11 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const getCSRFCookie = (name: string) => {
-        const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1];
-        return cookieValue;
+
+        if (name) {
+            const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1];
+            return cookieValue;
+        }
 }
 
 export const getAuthToken = async (url: string) => {
@@ -16,7 +19,7 @@ export const getAuthToken = async (url: string) => {
             method: "GET",
         })
     } catch (error) {
-
+        console.log(error)
     }
 }
 

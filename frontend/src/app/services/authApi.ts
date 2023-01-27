@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
-import { getCSRFCookie } from '../hooks';
+import { getCSRFCookie, getAuthToken } from '../hooks';
 
 const cookieHead = "set-cookie"
 
@@ -33,7 +33,15 @@ export interface User {
         if (token !== null) {
           console.log(token)
           headers.set('_csrf', `${token}`)
-        } 
+        } else {
+          await getAuthToken('/')
+
+          const authToken = getCSRFCookie("_csrf")
+
+          if (authToken) {
+            headers.set('_csrf', authToken);
+          }
+        }
         return headers
       },
     }),
@@ -44,7 +52,6 @@ export interface User {
           method: 'POST',    
           body: credentials,
         }),
-          transformResponse: (response, meta, error) => console.log(meta?.response?.headers)
       }),
       protected: builder.mutation<{ message: string }, void>({
         query: () => 'protected',
