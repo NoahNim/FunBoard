@@ -6,15 +6,21 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const getCSRFCookie = (name: string) => {
-    const value = "; " + document.cookie;
-    const parts = value.split("; " + name + "=");
+        const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1];
+        return cookieValue;
+}
 
-    if (parts.length == 2) {
-        return parts.pop()?.split(";").shift();
+export const getAuthToken = async (url: string) => {
+    try {
+        const res = await fetch(url, {
+            method: "GET",
+        })
+    } catch (error) {
+
     }
 }
 
-export const createCSRFCookie = async () => {
+export const restoreCSRFCookie = async () => {
     try {
         const res = await fetch('/api/csrf/restore', {
             method: "GET"
@@ -23,4 +29,3 @@ export const createCSRFCookie = async () => {
         console.log(error)
     }
 }
-

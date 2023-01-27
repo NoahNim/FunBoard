@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../app/services/authApi";
 import { RootState } from "../../app/store";
-import { useLoginMutation } from "../../app/services/authApi";
 
 interface UserState {
     user: User | null;
