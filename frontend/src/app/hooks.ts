@@ -5,19 +5,22 @@ import type { RootState, AppDispatch } from './store';
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const getCookie = async () => {
+export const getCSRFCookie = (name: string) => {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
 
+    if (parts.length == 2) {
+        return parts.pop()?.split(";").shift();
+    }
+}
+
+export const createCSRFCookie = async () => {
     try {
         const res = await fetch('/api/csrf/restore', {
             method: "GET"
         })
-        
-        
-        if (res.ok) {
-            const token = await res.json();
-            console.log(token)
-        }
     } catch (error) {
-
+        console.log(error)
     }
 }
+
