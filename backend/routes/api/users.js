@@ -50,8 +50,8 @@ router.post(
       const pfPhoto = req.file.buffer
       user = await User.signup({ username, fullName, email, password, biography, pfPhoto });
     } else {
-      const { username, fullName, email, password, biography, profilePhoto } = req.body;
-      user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
+      const { username, fullName, email, password, biography } = req.body;
+      user = await User.signup({ username, fullName, email, password, biography });
     }
 
     const token = await setTokenCookie(res, user);

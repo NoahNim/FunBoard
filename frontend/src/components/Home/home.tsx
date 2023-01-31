@@ -1,5 +1,6 @@
 import { LoginForm } from "../auth/loginForm";
 import { LogoutButton } from "../auth/logoutButton";
+import { SignupForm } from "../auth/signupForm";
 
 export const Home = () => {
 
@@ -7,6 +8,7 @@ export const Home = () => {
         <div>
             <LoginForm />
             <LogoutButton />
+            <SignupForm />
         </div>
     )
 }
