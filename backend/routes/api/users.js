@@ -8,14 +8,14 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
 
 const router = express.Router();
-const multer  = require('multer');
+const multer = require('multer');
 
 const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Please provide a valid email.')
-    .isLength({ max: 100 })  
+    .isLength({ max: 100 })
   ,
   check('username')
     .exists({ checkFalsy: true })
@@ -34,14 +34,14 @@ const validateSignup = [
   check('fullName')
     .exists({ checkFalsy: true })
     .withMessage("Please put in a first name.")
-    .isLength({  max: 256 })
+    .isLength({ max: 256 })
     .withMessage("Name can not be more than 256 characters"),
   handleValidationErrors,
 ];
 
 // Sign up
 router.post(
-  '',
+  '/',
   validateSignup,
   asyncHandler(async (req, res) => {
     let user;
@@ -54,10 +54,11 @@ router.post(
       user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
     }
 
-    await setTokenCookie(res, user);
+    const token = await setTokenCookie(res, user);
 
     return res.json({
       user,
+      token
     });
   }),
 );

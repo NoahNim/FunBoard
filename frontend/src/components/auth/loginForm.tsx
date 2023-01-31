@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../app/store";
-import { setUser } from "../../features/auth/userSlice";
-import { useLoginMutation } from '../../app/services/authApi'
+import { useAppDispatch } from "../../redux/app/store";
+import { setUser } from "../../redux/features/auth/userSlice";
+import { useLoginMutation } from '../../redux/app/services/authApi'
 import './loginForm.css'
 
 export const LoginForm = () => {

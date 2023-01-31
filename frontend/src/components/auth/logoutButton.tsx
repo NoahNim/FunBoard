@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../app/store";
-import { useLazyLogoutQuery } from "../../app/services/authApi";
-import { removeUser } from "../../features/auth/userSlice";
+import { useAppDispatch } from "../../redux/app/store";
+import { useLazyLogoutQuery } from "../../redux/app/services/authApi";
+import { removeUser } from "../../redux/features/auth/userSlice";
 
 export const LogoutButton = () => {
     const dispatch = useAppDispatch();
@@ -10,8 +10,7 @@ export const LogoutButton = () => {
         event.preventDefault()
         const res = await trigger('/api/session/').unwrap()
 
-        if (res.message === 'success')
-        {
+        if (res.message === 'success') {
             console.log(res.message)
             localStorage.removeItem('user');
             dispatch(removeUser());
