@@ -23,6 +23,10 @@ export interface User {
     password: string
   }
 
+  export interface restoreRequest {
+    user: User
+  }
+
   export const api = createApi({
     baseQuery: fetchBaseQuery({
       baseUrl: '/',
@@ -52,7 +56,7 @@ export interface User {
           body: JSON.stringify(credentials)
         }),
       }),
-      restoreUser: builder.mutation<UserResponse, User>({
+      restoreUser: builder.mutation<UserResponse, restoreRequest>({
         query: () => ('/api/session/')
       }, 
       ),

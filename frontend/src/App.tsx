@@ -4,7 +4,7 @@ import { useModal } from './features/modal/useModal';
 import { LoginForm } from './components/auth/loginForm';
 import { useRestoreQuery, useRestoreUserMutation } from './app/services/authApi';
 import { useEffect } from 'react';
-import { setUser } from './features/auth/userSlice';
+import { restoreUser } from './features/auth/userSlice';
 import { useAppDispatch } from './app/store';
 import { getCSRFCookie } from './app/hooks';
 
@@ -13,24 +13,22 @@ function App() {
   const [restoreUser, {isLoading}] = useRestoreUserMutation()
   const dispatch = useAppDispatch()
 
-  const getResoredUser = async () => {
+  const getRestoredUser = async () => {
     try {
       const storedUser = localStorage.getItem('user')
-      const user = JSON.parse(storedUser)
+      if (storedUser !== null) {
+        const user = JSON.parse(storedUser)
 
-      const res = await restoreUser(user).unwrap()
+        const res = await restoreUser(user).unwrap()
+        const resUser = {user: res.user}
+        // dispatch(restoreUser(resUser))
+      }
+
     } catch (error) {
 
     }
   }
 
-  useEffect(() => {
-    if (user !== undefined) {
-      const userObj = 
-
-      dispatch(setUser(userObj))
-    }
-  })
 
   return (
     <div className="App">

@@ -20,10 +20,17 @@ const userSlice = createSlice({
           state.token = token
           localStorage.setItem('user', JSON.stringify(user))
         },
+        restoreUser: (
+          state,
+          { payload: { user, token } }: PayloadAction<{ user: User; token: string }>
+        ) => {
+          state.user = user
+          state.token = token
+        },
       },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, restoreUser } = userSlice.actions
 
 export default userSlice.reducer
 
