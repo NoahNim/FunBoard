@@ -8,6 +8,7 @@ import { store } from './app/store';
 import { restoreUser } from './features/auth/userSlice';
 import { api } from './app/services/authApi';
 import { useAppDispatch } from './app/store';
+import { LogoutButton } from './components/auth/logoutButton';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="App">
       <LoginForm />
+      <LogoutButton />
     </div>
   );
 }

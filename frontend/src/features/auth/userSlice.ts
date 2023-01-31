@@ -26,10 +26,16 @@ const userSlice = createSlice({
           state.user = user
           state.token = token
         },
+        removeUser: (
+          state
+        ) => {
+          state.user = null
+          state.token = null
+        },
       },
 })
 
-export const { setUser, restoreUser } = userSlice.actions
+export const { setUser, restoreUser, removeUser } = userSlice.actions
 
 export default userSlice.reducer
 

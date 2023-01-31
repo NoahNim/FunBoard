@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { getCSRFCookie, useAppDispatch } from "../../app/hooks";
+import { useAppDispatch } from "../../app/store";
 import { setUser } from "../../features/auth/userSlice";
 import { useLoginMutation } from '../../app/services/authApi'
 import './loginForm.css'
