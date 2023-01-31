@@ -1,3 +1,12 @@
-import React, {useState} from "react";
-import { useAppDispatch } from "../../app/hooks";
-import { setUser } from "../../features/auth/userSlice";
+import { LoginForm } from "../auth/loginForm";
+import { LogoutButton } from "../auth/logoutButton";
+
+export const Home = () => {
+
+    return (
+        <div>
+            <LoginForm />
+            <LogoutButton />
+        </div>
+    )
+}

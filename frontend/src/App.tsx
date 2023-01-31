@@ -1,14 +1,11 @@
 import './App.css';
 import { useEffect } from 'react';
-import { Modal } from './components/Modal/modal';
-import { useModal } from './features/modal/useModal';
-import { LoginForm } from './components/auth/loginForm';
 import { getCSRFCookie } from './app/hooks';
 import { store } from './app/store';
 import { restoreUser } from './features/auth/userSlice';
 import { api } from './app/services/authApi';
 import { useAppDispatch } from './app/store';
-import { LogoutButton } from './components/auth/logoutButton';
+import { Home } from './components/Home/home';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -17,11 +14,11 @@ function App() {
 
   useEffect(() => {
     if (authToken !== null && storedUser !== null) {
-    const parsedUser = JSON.parse(storedUser);
-    const res = store.dispatch(api.endpoints.restoreUser.initiate(parsedUser)).unwrap()
-    res.then((res) => {
-      const user = {user: res.user, token: res.token}
-       dispatch(restoreUser(user))
+      const parsedUser = JSON.parse(storedUser);
+      const res = store.dispatch(api.endpoints.restoreUser.initiate(parsedUser)).unwrap()
+      res.then((res) => {
+        const user = { user: res.user, token: res.token }
+        dispatch(restoreUser(user))
       })
     }
   })
@@ -29,8 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <LoginForm />
-      <LogoutButton />
+      <Home />
     </div>
   );
 }

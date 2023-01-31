@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useAppDispatch } from "../../app/store";
 import { setUser } from "../../features/auth/userSlice";
 import { useLoginMutation } from '../../app/services/authApi'
@@ -8,13 +8,13 @@ export const LoginForm = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
-    const [login, { isLoading}] = useLoginMutation();
+    const [login, { isLoading }] = useLoginMutation();
 
     const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setUserName(e.target.value)
     }
-    
+
     const passwordChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
 
@@ -25,8 +25,8 @@ export const LoginForm = () => {
         e.preventDefault();
 
         const credential = username
-        
-        const user = {credential, password}
+
+        const user = { credential, password }
 
         try {
             const res = await login(user).unwrap();
@@ -38,8 +38,8 @@ export const LoginForm = () => {
     }
 
     return (
-        <div className="login-form">
-            <form onSubmit={loginSubmitFunction}>
+        <div>
+            <form onSubmit={loginSubmitFunction} className="login-form">
                 <label>username/email </label>
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>
                 <label>password </label>
