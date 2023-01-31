@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import { useAppDispatch } from "../../app/hooks";
+import { getCSRFCookie, useAppDispatch } from "../../app/hooks";
 import { setUser } from "../../features/auth/userSlice";
 import { useLoginMutation } from '../../app/services/authApi'
-import type { LoginRequest } from "../../app/services/authApi";
 import './loginForm.css'
 
 export const LoginForm = () => {
@@ -31,6 +30,7 @@ export const LoginForm = () => {
 
         try {
             const res = await login(user).unwrap();
+
             dispatch(setUser(res));
         } catch (error) {
             console.log(error)

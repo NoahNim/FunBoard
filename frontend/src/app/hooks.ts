@@ -14,21 +14,12 @@ export const getCSRFCookie = (name: string) => {
         }
 }
 
-export const getAuthToken = async (url: string) => {
-    try {
-        const res = await fetch(url, {
-            method: "POST",
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 export const restoreCSRFCookie = async () => {
     try {
         const res = await fetch('/api/csrf/restore', {
             method: "GET"
         })
+
     } catch (error) {
         console.log(error)
     }

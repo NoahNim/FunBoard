@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
-import { getCSRFCookie, getAuthToken } from '../hooks';
-
-const cookieHead = "set-cookie"
+import { getCSRFCookie } from '../hooks';
 
 export interface User {
     id: number;
@@ -27,13 +25,12 @@ export interface User {
 
   export const api = createApi({
     baseQuery: fetchBaseQuery({
-      baseUrl: '/api/session',
+      baseUrl: '/',
       prepareHeaders: async (headers, { getState }) => {
         const token = (getState() as RootState).auth.token
         if (token !== null) {
           console.log(token)
-          headers.set('Cookie', `${token}`)
-          console.log("if conditional fired")
+          headers.set('XSRF-TOKEN', `${token}`)
         } 
         else {
           const authToken = getCSRFCookie("XSRF-TOKEN")
@@ -50,10 +47,17 @@ export interface User {
     endpoints: (builder) => ({
       login: builder.mutation<UserResponse, LoginRequest>({
         query: (credentials) => ({
-          url: '/',
+          url: '/api/session/',
           method: 'POST',    
-          body: JSON.stringify(credentials),
+          body: JSON.stringify(credentials)
         }),
+      }),
+      restoreUser: builder.mutation<UserResponse, User>({
+        query: () => ('/api/session/')
+      }, 
+      ),
+      restore: builder.query({
+        query: () => '/api/csrf/restore'
       }),
       protected: builder.mutation<{ message: string }, void>({
         query: () => 'protected',
@@ -61,4 +65,4 @@ export interface User {
     }),
   })
 
-  export const {useLoginMutation, useProtectedMutation } = api;
+  export const {useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation } = api;

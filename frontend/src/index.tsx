@@ -5,13 +5,10 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { restoreCSRFCookie } from './app/hooks';
 
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-
-restoreCSRFCookie();
 
 root.render(
   <React.StrictMode>
