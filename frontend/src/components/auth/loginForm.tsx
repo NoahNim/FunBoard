@@ -27,6 +27,8 @@ export const LoginForm = () => {
 
         const user = {username, password}
 
+        console.log(user)
+
         try {
             const res = await login(user).unwrap();
             console.log(res)

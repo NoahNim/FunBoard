@@ -8,7 +8,8 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const getCSRFCookie = (name: string) => {
 
         if (name) {
-            const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1];
+            const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1]
+
             return cookieValue;
         }
 }

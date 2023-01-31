@@ -32,14 +32,14 @@ export interface User {
         const token = (getState() as RootState).auth.token
         if (token !== null) {
           console.log(token)
-          headers.set('_csrf', `${token}`)
-        } else {
-          await getAuthToken('/api/session')
-
-          const authToken = getCSRFCookie("_csrf")
+          headers.set('Cookie', `${token}`)
+          console.log("if conditional fired")
+        } 
+        else {
+          const authToken = getCSRFCookie("XSRF-TOKEN")
 
           if (authToken) {
-            headers.set('_csrf', authToken);
+            headers.set('XSRF-TOKEN', authToken);
           }
         }
         return headers

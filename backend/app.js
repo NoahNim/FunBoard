@@ -5,12 +5,14 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
-const sequelize = require('sequelize')
+const sequelize = require('sequelize');
+const config = require('./config/index');
 
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
+const jwt = config.jwtConfig
 
 const app = express();
 app.use(morgan('dev'));
@@ -35,7 +37,7 @@ if (!isProduction) {
         sameSite: isProduction && "Lax",
         httpOnly: true,
       },
-    })
+    }),
   );
 
   app.use(routes);
