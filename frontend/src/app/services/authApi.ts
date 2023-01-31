@@ -21,7 +21,7 @@ export interface User {
   }
 
   export interface LoginRequest {
-    username: string
+    credential: string,
     password: string
   }
 
@@ -42,15 +42,17 @@ export interface User {
             headers.set('XSRF-TOKEN', authToken);
           }
         }
+
+        headers.set('Content-Type', 'application/json')
         return headers
       },
     }),
     endpoints: (builder) => ({
       login: builder.mutation<UserResponse, LoginRequest>({
-        query: (credentials) => ({
+        query: (credentials) => (console.log(credentials), {
           url: '/',
           method: 'POST',    
-          body: credentials,
+          body: JSON.stringify(credentials),
         }),
       }),
       protected: builder.mutation<{ message: string }, void>({

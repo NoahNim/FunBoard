@@ -25,9 +25,9 @@ export const LoginForm = () => {
     const loginSubmitFunction = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const user = {username, password}
-
-        console.log(user)
+        const credential = username
+        
+        const user = {credential, password}
 
         try {
             const res = await login(user).unwrap();
