@@ -15,7 +15,7 @@ export interface User {
   
   export interface UserResponse {
     user: User,
-    token: string
+    token: string | null | undefined
   }
 
   export interface LoginRequest {
@@ -33,7 +33,6 @@ export interface User {
       prepareHeaders: async (headers, { getState }) => {
         const token = (getState() as RootState).auth.token
         if (token !== null) {
-          console.log(token)
           headers.set('XSRF-TOKEN', `${token}`)
         } 
         else {

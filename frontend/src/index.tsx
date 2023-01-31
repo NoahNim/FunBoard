@@ -5,10 +5,13 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-
+import { api } from './app/services/authApi';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+store.dispatch(api.endpoints.restore.initiate("/"));
+
 
 root.render(
   <React.StrictMode>

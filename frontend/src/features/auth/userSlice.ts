@@ -4,9 +4,8 @@ import { RootState } from "../../app/store";
 
 interface UserState {
     user: User | null
-    token: string | null
+    token: string | null | undefined
 }
-
 
 const userSlice = createSlice({
     name: 'auth',
@@ -14,7 +13,7 @@ const userSlice = createSlice({
     reducers: {
         setUser: (
           state,
-          { payload: { user, token } }: PayloadAction<{ user: User; token: string }>
+          { payload: { user, token } }: PayloadAction<{ user: User; token: string | null | undefined }>
         ) => {
           state.user = user
           state.token = token
@@ -22,7 +21,7 @@ const userSlice = createSlice({
         },
         restoreUser: (
           state,
-          { payload: { user, token } }: PayloadAction<{ user: User; token: string }>
+          { payload: { user, token } }: PayloadAction<{ user: User; token: string | null | undefined }>
         ) => {
           state.user = user
           state.token = token

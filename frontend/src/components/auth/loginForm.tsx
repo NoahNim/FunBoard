@@ -30,8 +30,8 @@ export const LoginForm = () => {
 
         try {
             const res = await login(user).unwrap();
-
-            dispatch(setUser(res));
+            const logUser = { user: res.user, token: res.token }
+            dispatch(setUser(logUser));
         } catch (error) {
             console.log(error)
         }
