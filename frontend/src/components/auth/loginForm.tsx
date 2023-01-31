@@ -31,7 +31,6 @@ export const LoginForm = () => {
 
         try {
             const res = await login(user).unwrap();
-            console.log(res)
             dispatch(setUser(res));
         } catch (error) {
             console.log(error)

@@ -49,7 +49,7 @@ export interface User {
     }),
     endpoints: (builder) => ({
       login: builder.mutation<UserResponse, LoginRequest>({
-        query: (credentials) => (console.log(credentials), {
+        query: (credentials) => ({
           url: '/',
           method: 'POST',    
           body: JSON.stringify(credentials),

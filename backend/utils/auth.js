@@ -22,8 +22,6 @@ const setTokenCookie = (res, user) => {
     sameSite: isProduction && "Lax",
   });
 
-  console.log(token)
-
   return token;
 };
 
