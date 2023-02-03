@@ -1,10 +1,12 @@
 const config = require('./index');
 
 const db = config.db;
+const jwtConfig = config.jwtConfig
 const username = db.username;
 const password = db.password;
 const database = db.database;
 const host = db.host;
+const jwtSecret = jwtConfig.secret;
 
 module.exports = {
   development: {
@@ -12,6 +14,7 @@ module.exports = {
     password,
     database,
     host,
+    jwtSecret,
     dialect: 'postgres',
     seederStorage: 'sequelize',
   },

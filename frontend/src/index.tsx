@@ -1,13 +1,17 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store } from './redux/app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { api } from './redux/app/services/authApi';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+store.dispatch(api.endpoints.restore.initiate("/"));
+
 
 root.render(
   <React.StrictMode>

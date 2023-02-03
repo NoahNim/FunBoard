@@ -1,4 +1,3 @@
-
 const express = require("express");
 const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
@@ -8,14 +7,16 @@ const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
 
 const router = express.Router();
-const multer  = require('multer');
+const multer = require('multer');
+
+const upload = multer({ dest: './uploads/' })
 
 const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Please provide a valid email.')
-    .isLength({ max: 100 })  
+    .isLength({ max: 100 })
   ,
   check('username')
     .exists({ checkFalsy: true })
@@ -34,30 +35,29 @@ const validateSignup = [
   check('fullName')
     .exists({ checkFalsy: true })
     .withMessage("Please put in a first name.")
-    .isLength({  max: 256 })
+    .isLength({ max: 256 })
     .withMessage("Name can not be more than 256 characters"),
   handleValidationErrors,
 ];
 
+
 // Sign up
 router.post(
-  '',
+  '/',
+  upload.single('profilePhoto'),
   validateSignup,
   asyncHandler(async (req, res) => {
     let user;
-    if (req.file !== null) {
-      const { username, fullName, email, password, biography } = req.body
-      const pfPhoto = req.file.buffer
-      user = await User.signup({ username, fullName, email, password, biography, pfPhoto });
-    } else {
-      const { username, fullName, email, password, biography, profilePhoto } = req.body;
-      user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
-    }
+    console.log(req.file)
+    const { username, fullName, email, password, biography } = req.body
+    const profilePhoto = req.file
+    user = await User.signup({ username, fullName, email, password, biography, profilePhoto });
 
-    await setTokenCookie(res, user);
+    const token = await setTokenCookie(res, user);
 
     return res.json({
       user,
+      token
     });
   }),
 );

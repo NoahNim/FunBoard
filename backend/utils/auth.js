@@ -19,7 +19,6 @@ const setTokenCookie = (res, user) => {
   res.cookie("token", token, {
     maxAge: expiresIn * 1000, // maxAge in milliseconds
     httpOnly: true,
-    secure: isProduction,
     sameSite: isProduction && "Lax",
   });
 
