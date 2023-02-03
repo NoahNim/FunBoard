@@ -1,14 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 import { getCSRFCookie } from '../hooks';
+import { ZodStringCheck } from 'zod';
 
 export interface User {
   id: number;
+  username: string;
   fullName: string;
   email: string;
   password: string;
   biography: string;
-  profilePhoto: File;
+  profilePhoto: File | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,14 +32,16 @@ export interface restoreRequest {
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
-    prepareHeaders: async (headers, { getState }) => {
+    prepareHeaders: async (headers, endpoint) => {
       const authToken = getCSRFCookie("XSRF-TOKEN")
 
       if (authToken) {
         headers.set('XSRF-TOKEN', authToken);
       }
 
-      headers.set('Content-Type', 'application/json')
+      headers.set('Content-type', 'application/json')
+
+
       return headers
     },
   }),
@@ -49,13 +53,14 @@ export const api = createApi({
         body: JSON.stringify(credentials)
       }),
     }),
-    signup: builder.mutation<UserResponse, User>({
-      query: (userInfo) => ({
-        url: "/api/users/",
-        method: "POST",
-        body: JSON.stringify(userInfo)
-      })
-    }),
+    // signup: builder.mutation<UserResponse, Partial<User>>({
+    //   query: (userInfo) => ({
+    //     url: "/api/session/signup",
+    //     method: "POST",
+    //     'XSRF-TOKEN': getCSRFCookie('_csrf'),
+    //     body: JSON.stringify(userInfo)
+    //   })
+    // }),
     restoreUser: builder.mutation<UserResponse, restoreRequest>({
       query: () => ('/api/session/')
     },
@@ -76,4 +81,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, } = api;
