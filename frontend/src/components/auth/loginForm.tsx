@@ -44,7 +44,7 @@ export const LoginForm = () => {
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>
                 <label>password </label>
                 <input type="password" value={password} onChange={passwordChangeHandler}></input>
-                <button type="submit">Submiit</button>
+                <button type="submit">Login</button>
             </form>
         </div>
     )
