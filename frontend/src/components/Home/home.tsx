@@ -1,16 +1,17 @@
+import { useAppSelector } from "../../redux/app/hooks";
 import { LoginForm } from "../auth/loginForm";
 import { LogoutButton } from "../auth/logoutButton";
 import { SignupForm } from "../auth/signupForm";
-import { Modal } from "../Modal/modal";
+
 
 export const Home = () => {
-
+    const sessionUser = useAppSelector((state) => state?.auth?.user)
+    console.log(sessionUser)
     return (
         <div>
-            <Modal buttonValue="Login" ><LoginForm /></Modal>
-            <Modal buttonValue="Register"><SignupForm /></Modal>
+            <LoginForm />
+            <SignupForm />
             <LogoutButton />
-
         </div>
     )
 }

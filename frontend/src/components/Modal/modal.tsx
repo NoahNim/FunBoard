@@ -3,20 +3,21 @@ import './modal.css'
 import useModal from "./useModal";
 
 interface ModalType {
-    children?: ReactNode,
-    buttonValue: string
+    children?: ReactNode;
+    buttonValue: string;
+    isOpen: boolean;
+    toggle: () => void
 }
 
-export const Modal = ({ children, buttonValue }: ModalType) => {
-    const { isOpen, toggle } = useModal();
-
+export const Modal = ({ children, buttonValue, isOpen, toggle }: ModalType) => {
     return (
         <>
             <button onClick={toggle}>{buttonValue}</button>
             {isOpen && (
-                <div className="modal-overlay" onClick={toggle}>
+                <div className="modal-overlay">
                     <div className="modal-box" onClick={(e) => e.stopPropagation}>
                         {children}
+                        <button onClick={toggle}>Cancel</button>
                     </div>
                 </div>
             )

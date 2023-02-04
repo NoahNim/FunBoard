@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, } from "@reduxjs/toolkit";
 import { User } from "../../app/services/authApi";
 import { RootState } from "../../app/store";
-import { getCSRFCookie } from "../../app/hooks";
 
 interface UserState {
   user: User | null
@@ -44,4 +43,4 @@ export const { setUser, restoreUser, removeUser } = userSlice.actions
 
 export default userSlice.reducer
 
-export const selectCurrentUser = (state: RootState) => state.auth.user
+export const selectCurrentUser = (state: RootState) => state?.auth?.user

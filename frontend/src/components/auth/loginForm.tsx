@@ -3,8 +3,12 @@ import { useAppDispatch } from "../../redux/app/store";
 import { setUser } from "../../redux/features/auth/userSlice";
 import { useLoginMutation } from '../../redux/app/services/authApi'
 import './loginForm.css'
+import { Modal } from "../Modal/modal";
+import useModal from "../Modal/useModal";
+
 
 export const LoginForm = () => {
+    const { isOpen, toggle } = useModal();
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
@@ -38,7 +42,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <div>
+        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
             <form onSubmit={loginSubmitFunction} className="login-form">
                 <label>username/email </label>
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>
@@ -46,6 +50,6 @@ export const LoginForm = () => {
                 <input type="password" value={password} onChange={passwordChangeHandler}></input>
                 <button type="submit">Login</button>
             </form>
-        </div>
+        </Modal>
     )
 }
