@@ -55,6 +55,7 @@ export const SignupForm = () => {
             const res = await signup(formData).unwrap();
             const signupUser = { user: res.user, token: res.token }
             dispatch(setUser(signupUser));
+            toggle()
         } catch (error) {
             console.log(error)
         }

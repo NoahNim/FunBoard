@@ -36,6 +36,7 @@ export const LoginForm = () => {
             const res = await login(user).unwrap();
             const logUser = { user: res.user, token: res.token }
             dispatch(setUser(logUser));
+            toggle()
         } catch (error) {
             console.log(error)
         }

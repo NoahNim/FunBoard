@@ -9,9 +9,14 @@ export const Home = () => {
     console.log(sessionUser)
     return (
         <div>
-            <LoginForm />
-            <SignupForm />
-            <LogoutButton />
+            {
+                !sessionUser ?
+                    <>
+                        <LoginForm />
+                        <SignupForm />
+                    </>
+                    : <LogoutButton />
+            }
         </div>
     )
 }
