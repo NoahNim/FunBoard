@@ -48,7 +48,6 @@ router.post(
   validateSignup,
   asyncHandler(async (req, res) => {
     let user;
-    console.log(req.file)
     const { username, fullName, email, password, biography } = req.body
     const profilePhoto = req.file
     user = await User.signup({ username, fullName, email, password, biography, profilePhoto });

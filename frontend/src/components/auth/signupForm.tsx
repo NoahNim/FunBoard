@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { setUser } from "../../redux/features/auth/userSlice";
 import { useAppDispatch } from "../../redux/app/store";
 import { User } from "../../redux/app/services/authApi";
-import { signup } from "../../redux/features/auth/userSlice";
+// import { signup } from "../../redux/features/auth/userSlice";
+import { useSignupMutation, UserResponse } from "../../redux/app/services/authApi";
 
 export const SignupForm = () => {
     const dispatch = useAppDispatch();
+    const [signup, { isLoading }] = useSignupMutation();
     const [formState, setFormState] = useState({
         username: "",
         fullName: "",
@@ -48,9 +50,9 @@ export const SignupForm = () => {
         if (formState.profilePhoto) formData.append("profilePhoto", formState.profilePhoto)
         console.log(typeof formData)
         try {
-            const res = await dispatch(signup(formData));
-            // const signupUser = { user: res.user, token: res.token }
-            // dispatch(setUser(signupUser));
+            const res = await signup(formData).unwrap();
+            const signupUser = { user: res.user, token: res.token }
+            dispatch(setUser(signupUser));
         } catch (error) {
             console.log(error)
         }

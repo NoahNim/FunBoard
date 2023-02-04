@@ -3,7 +3,6 @@ import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import userReducer from '../features/auth/userSlice';
 import { api } from './services/authApi';
-
 export const store = configureStore({
 
   reducer: {
