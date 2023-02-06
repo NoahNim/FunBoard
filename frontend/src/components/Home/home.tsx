@@ -1,16 +1,23 @@
-import { useAppSelector } from "../../redux/app/hooks";
-import { LoginForm } from "../Menu/auth/loginForm";
-import { LogoutButton } from "../Menu/auth/logoutButton";
-import { SignupForm } from "../Menu/auth/signupForm";
 import { Menu } from "../Menu/Menu";
+import "./home.css"
 
 
 export const Home = () => {
-    const sessionUser = useAppSelector((state) => state?.auth?.user)
-    console.log(sessionUser)
+
     return (
         <div>
-            <Menu />
+            <div className="top-bar" >
+                <div>
+
+                </div>
+                <div>
+                    Funboard
+                </div>
+                <Menu />
+            </div>
+            <div>
+
+            </div>
         </div>
     )
 }

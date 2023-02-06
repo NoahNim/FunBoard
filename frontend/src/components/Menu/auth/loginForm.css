@@ -4,3 +4,11 @@
     justify-content: center;
     flex-direction: column;
 }
+
+button {
+    background-color: #C6D8D3;
+}
+
+.logout-button {
+    width: 100%;
+}

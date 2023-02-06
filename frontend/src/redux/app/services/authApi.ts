@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from '../store';
 import { getCSRFCookie } from '../hooks';
 
 export interface User {
@@ -9,7 +8,7 @@ export interface User {
   email: string;
   password: string;
   biography: string;
-  profilePhoto: File | null;
+  profilePhoto: Blob | null | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,6 +16,7 @@ export interface User {
 export interface UserResponse {
   user: User,
   token: string | null | undefined
+  userImage: Buffer | null;
 }
 
 export interface LoginRequest {

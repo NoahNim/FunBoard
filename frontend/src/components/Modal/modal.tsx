@@ -12,12 +12,12 @@ interface ModalType {
 export const Modal = ({ children, buttonValue, isOpen, toggle }: ModalType) => {
     return (
         <>
-            <button onClick={toggle}>{buttonValue}</button>
+            <button style={isOpen ? { backgroundColor: "#D81E5B" } : { backgroundColor: "#C6D8D3" }} onClick={toggle}>{buttonValue}</button>
             {isOpen && (
                 <div className="modal-overlay">
                     <div className="modal-box" onClick={(e) => e.stopPropagation}>
                         {children}
-                        <button onClick={toggle}>Cancel</button>
+                        <button style={{ backgroundColor: "#D81E5B" }} onClick={toggle}>Cancel</button>
                     </div>
                 </div>
             )

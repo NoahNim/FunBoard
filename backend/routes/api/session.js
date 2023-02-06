@@ -6,7 +6,6 @@ const upload = multer({ dest: 'uploads/' })
 const { handleValidationErrors } = require("../../utils/validation");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User } = require("../../db/models");
-
 const router = express.Router();
 
 const validateLogin = [
@@ -97,12 +96,10 @@ router.get(
 
       return res.json({
         user: user.toSafeObject(),
-        token: token
+        token: token,
       });
     } else return res.json({});
   })
 );
-
-
 
 module.exports = router;

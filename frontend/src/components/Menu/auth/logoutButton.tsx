@@ -1,6 +1,7 @@
 import { useAppDispatch } from "../../../redux/app/store";
 import { useLazyLogoutQuery } from "../../../redux/app/services/authApi";
 import { removeUser } from "../../../redux/features/auth/userSlice";
+import "./loginForm";
 
 export const LogoutButton = () => {
     const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ export const LogoutButton = () => {
 
     return (
         <div>
-            <button onClick={logoutHandler}>Logout</button>
+            <button className="logout-button" onClick={logoutHandler}>Logout</button>
         </div>
     )
 }

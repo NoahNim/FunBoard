@@ -3,6 +3,7 @@ import { useAppSelector } from "../../redux/app/store";
 import { LoginForm } from "./auth/loginForm";
 import { LogoutButton } from "./auth/logoutButton";
 import { SignupForm } from "./auth/signupForm";
+import { UserInfo } from "./auth/UserInfo";
 import "./menu.css"
 
 interface MenuDrawerProps {
@@ -15,14 +16,18 @@ export const MenuDrawer = ({ show, toggle }: MenuDrawerProps) => {
 
     return (
         <div className={show ? "side-drawer open drawer-styles" : "side-drawer"}>
-            <button onClick={toggle}>Close</button>
+            <button style={{ backgroundColor: "#D81E5B", width: "20%" }} onClick={toggle}>Close</button>
             {
                 !sessionUser ?
                     <>
                         <LoginForm />
                         <SignupForm />
                     </>
-                    : <LogoutButton />
+                    :
+                    <>
+                        <LogoutButton />
+                        <UserInfo />
+                    </>
             }
         </div>
     )

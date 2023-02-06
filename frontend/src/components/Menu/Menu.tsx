@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { LoginForm } from "./auth/loginForm";
-import { LogoutButton } from "./auth/logoutButton";
-import { SignupForm } from "./auth/signupForm";
 import { MenuDrawer } from "./MenuDrawer";
 import "./menu.css"
 
@@ -21,7 +18,7 @@ export const Menu = () => {
 
     return (
         <div>
-            <button onClick={toggleDrawerHandler}>Hamburger</button>
+            <button onClick={toggleDrawerHandler} className="hamburger">Menu</button>
             <MenuDrawer show={drawerOpen} toggle={toggleDrawerHandler} />
         </div>
     )
