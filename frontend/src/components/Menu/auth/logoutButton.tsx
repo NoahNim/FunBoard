@@ -1,6 +1,6 @@
-import { useAppDispatch } from "../../redux/app/store";
-import { useLazyLogoutQuery } from "../../redux/app/services/authApi";
-import { removeUser } from "../../redux/features/auth/userSlice";
+import { useAppDispatch } from "../../../redux/app/store";
+import { useLazyLogoutQuery } from "../../../redux/app/services/authApi";
+import { removeUser } from "../../../redux/features/auth/userSlice";
 
 export const LogoutButton = () => {
     const dispatch = useAppDispatch();

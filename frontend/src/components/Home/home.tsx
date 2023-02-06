@@ -1,7 +1,8 @@
 import { useAppSelector } from "../../redux/app/hooks";
-import { LoginForm } from "../auth/loginForm";
-import { LogoutButton } from "../auth/logoutButton";
-import { SignupForm } from "../auth/signupForm";
+import { LoginForm } from "../Menu/auth/loginForm";
+import { LogoutButton } from "../Menu/auth/logoutButton";
+import { SignupForm } from "../Menu/auth/signupForm";
+import { Menu } from "../Menu/Menu";
 
 
 export const Home = () => {
@@ -9,14 +10,7 @@ export const Home = () => {
     console.log(sessionUser)
     return (
         <div>
-            {
-                !sessionUser ?
-                    <>
-                        <LoginForm />
-                        <SignupForm />
-                    </>
-                    : <LogoutButton />
-            }
+            <Menu />
         </div>
     )
 }

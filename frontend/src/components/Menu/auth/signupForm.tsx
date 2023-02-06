@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { setUser } from "../../redux/features/auth/userSlice";
-import { useAppDispatch } from "../../redux/app/store";
-import { User } from "../../redux/app/services/authApi";
-import { useSignupMutation, UserResponse } from "../../redux/app/services/authApi";
-import { Modal } from "../Modal/modal";
-import useModal from "../Modal/useModal";
+import { setUser } from "../../../redux/features/auth/userSlice";
+import { useAppDispatch } from "../../../redux/app/store";
+import { useSignupMutation, UserResponse } from "../../../redux/app/services/authApi";
+import { Modal } from "../../Modal/modal";
+import useModal from "../../Modal/useModal";
 
 export const SignupForm = () => {
     const { isOpen, toggle } = useModal();

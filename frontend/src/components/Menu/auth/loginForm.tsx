@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../redux/app/store";
-import { setUser } from "../../redux/features/auth/userSlice";
-import { useLoginMutation } from '../../redux/app/services/authApi'
+import { useAppDispatch } from "../../../redux/app/store";
+import { setUser } from "../../../redux/features/auth/userSlice";
+import { useLoginMutation } from '../../../redux/app/services/authApi'
 import './loginForm.css'
-import { Modal } from "../Modal/modal";
-import useModal from "../Modal/useModal";
+import { Modal } from "../../Modal/modal";
+import useModal from "../../Modal/useModal";
 
 
 export const LoginForm = () => {
