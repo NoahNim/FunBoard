@@ -16,3 +16,7 @@ code {
 ul {
   list-style-type: none;
 }
+
+button {
+  border-radius: 10px;
+}
