@@ -18,7 +18,7 @@ export const UserInfo = () => {
                     <li>{currentUser?.fullName}</li>
                     <li>{currentUser?.email}</li>
                     <li>{currentUser?.biography}</li>
-                    <li><img src={`${window.location.href}${currentUser?.profilePhoto}`}></img></li>
+                    <li><img style={{ borderRadius: "10px", objectFit: "cover", width: "50%", height: "50%" }} src={`${window.location.href}${currentUser?.profilePhoto}`}></img></li>
                 </ul>
             </div>
         </Modal>
