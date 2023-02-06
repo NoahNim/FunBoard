@@ -16,7 +16,7 @@ export const MenuDrawer = ({ show, toggle }: MenuDrawerProps) => {
 
     return (
         <div className={show ? "side-drawer open drawer-styles" : "side-drawer"}>
-            <button style={{ backgroundColor: "#D81E5B", width: "20%" }} onClick={toggle}>Close</button>
+            <button style={{ backgroundColor: "#e69797", width: "20%" }} onClick={toggle}>Close</button>
             {
                 !sessionUser ?
                     <>
