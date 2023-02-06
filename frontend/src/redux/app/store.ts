@@ -5,7 +5,6 @@ import userReducer from '../features/auth/userSlice';
 import { api } from './services/authApi';
 
 export const store = configureStore({
-
   reducer: {
     [api.reducerPath]: api.reducer,
     auth: userReducer,

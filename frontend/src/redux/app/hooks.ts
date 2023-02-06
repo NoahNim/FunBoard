@@ -7,11 +7,11 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const getCSRFCookie = (name: string) => {
 
-        if (name) {
-            const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1]
+    if (name) {
+        const cookieValue = document.cookie.split("; ").find((row) => row.startsWith(name))?.split('=')[1]
 
-            return cookieValue;
-        }
+        return cookieValue;
+    }
 }
 
 export const restoreCSRFCookie = async () => {
@@ -23,4 +23,13 @@ export const restoreCSRFCookie = async () => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const getBase64Img = (file: any) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
 }

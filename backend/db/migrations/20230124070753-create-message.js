@@ -23,7 +23,7 @@ module.exports = {
         allowNull: true
       },
       photo: {
-        type: Sequelize.BLOB('long'),
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {
