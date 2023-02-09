@@ -15,7 +15,7 @@ export const Home = () => {
                 </div>
                 <Menu />
             </div>
-            <div>
+            <div className="main">
                 <Messages />
             </div>
         </div>
