@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../redux/app/store";
 import { getBase64Img } from "../../../redux/app/hooks";
-import { Modal } from "../../Modal/modal";
-import useModal from "../../Modal/useModal";
+import { Modal } from "../../Modal/Modal";
+import useModal from "../../Modal/UseModal";
 
 export const UserInfo = () => {
     const currentUser = useAppSelector((state) => state?.auth?.user);

@@ -100,4 +100,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation } = api;

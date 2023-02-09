@@ -32,8 +32,7 @@ router.get("/", asyncHandler(async (req, res) => {
 
 // Get Message
 router.get("/:id", asyncHandler(async (req, res) => {
-    let messageReq = req;
-    let messageId = messageReq.id;
+    let messageId = req.params.id;
 
     let message = await Message.findByPk(messageId);
 

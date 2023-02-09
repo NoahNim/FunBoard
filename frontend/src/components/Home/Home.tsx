@@ -1,11 +1,9 @@
 import { Menu } from "../Menu/Menu";
+import { Messages } from "../Messages/Messages";
 import "./home.css"
-import { useAppSelector } from "../../redux/app/store";
 
 
 export const Home = () => {
-    const sessionUser = useAppSelector((state) => state?.auth?.user);
-
     return (
         <div>
             <div className="top-bar" >
@@ -18,7 +16,7 @@ export const Home = () => {
                 <Menu />
             </div>
             <div>
-
+                <Messages />
             </div>
         </div>
     )

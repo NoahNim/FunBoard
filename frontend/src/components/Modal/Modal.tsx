@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import './modal.css'
-import useModal from "./useModal";
+import useModal from "./UseModal";
 
 interface ModalType {
     children?: ReactNode;
