@@ -14,8 +14,7 @@ const messageSlice = createSlice({
             { payload: { message } }: PayloadAction<{ message: Message }>
         ) => {
             state.message = message
-        }
-
+        },
     }
 })
 

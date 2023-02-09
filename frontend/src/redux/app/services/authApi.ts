@@ -42,6 +42,12 @@ export interface messageResponse {
   message: Message;
 }
 
+export interface MessageList {
+  messages: {
+    [key: string]: Message | null
+  } | null
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
@@ -84,6 +90,9 @@ export const api = createApi({
         'XSRF-TOKEN': getCSRFCookie('XSRF-TOKEN')
       })
     }),
+    getMessages: builder.mutation<MessageList, "/api/messages/">({
+      query: () => ("/api/messages/")
+    }),
     createMessage: builder.mutation<messageResponse, FormData>({
       query: (messageData) => ({
         url: "/api/messages/",
@@ -100,4 +109,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesMutation } = api;

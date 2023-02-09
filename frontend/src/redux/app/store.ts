@@ -3,13 +3,15 @@ import logger from 'redux-logger'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import userReducer from '../features/auth/userSlice';
 import messageReducer from '../features/message/messageSlice';
+import messageListReducer from '../features/message/messageListSlice';
 import { api } from './services/authApi';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth: userReducer,
-    message: messageReducer
+    message: messageReducer,
+    messageList: messageListReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware).concat(logger)
 });
