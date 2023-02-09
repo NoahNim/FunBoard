@@ -4,12 +4,11 @@
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: #3A3335;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-color: #3A3335;
 }
 
 .modal-box {

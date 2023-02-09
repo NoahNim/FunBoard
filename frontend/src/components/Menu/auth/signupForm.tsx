@@ -49,7 +49,6 @@ export const SignupForm = () => {
         formData.append("password", formState.password)
         formData.append("biography", formState.biography)
         if (formState.profilePhoto) formData.append("profilePhoto", formState.profilePhoto)
-        console.log(typeof formData)
         try {
             const res = await signup(formData).unwrap();
             const signupUser = { user: res.user, token: res.token }

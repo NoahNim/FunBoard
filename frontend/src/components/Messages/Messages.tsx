@@ -7,7 +7,7 @@ export const Messages = () => {
 
     return (
         <>
-            {!sessionUser ? <></> : <CreateMessage />}
+            {!sessionUser ? <></> : <CreateMessage sessionUser={sessionUser} />}
         </>
     )
 }

@@ -16,7 +16,13 @@ const validateMessage = [
         .exists({ checkFalsy: true })
         .withMessage('Please write up some text for the post'),
     check('photo')
-        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            if (req.file.mimetype === "image/png" || req.file.mimetype === "image/jpg" || req.file.mimetype === "image/jpeg") {
+                return true;
+            } else {
+                return false;
+            }
+        })
         .withMessage('Please give your post a photo'),
     handleValidationErrors
 ]
@@ -36,7 +42,7 @@ router.get("/:id", asyncHandler(async (req, res) => {
 
     let message = await Message.findByPk(messageId);
 
-    return res.json({ message })
+    return res.json(message)
 }))
 
 
@@ -59,9 +65,9 @@ router.post(
             photo
         })
 
-        await message.save();
+        await newMessage.save();
 
-        return res.json({ message })
+        return res.json(newMessage)
     })
 )
 
