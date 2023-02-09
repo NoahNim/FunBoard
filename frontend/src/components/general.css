@@ -1,0 +1,32 @@
+.box {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin: 1%;
+}
+
+.box ul {
+    width: 50%;
+    overflow-wrap: break-word;
+    overflow: scroll;
+    margin: 5%;
+}
+
+.box li {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px;
+    border-style: groove;
+    border-color: black;
+    margin: 1%;
+}
+
+.post-images {
+    object-fit: cover;
+    border-radius: 10px;
+}

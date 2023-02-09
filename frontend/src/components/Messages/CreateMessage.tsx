@@ -35,7 +35,7 @@ export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
         }
     }
 
-    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
 
         setFormState({
@@ -70,7 +70,7 @@ export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
                 <label>Title</label>
                 <input type="text" name="title" value={formState.title} onChange={changeHandler}></input>
                 <label>Message Text</label>
-                <input type="text" name="message" value={formState.message} onChange={changeHandler}></input>
+                <textarea name="message" value={formState.message} onChange={changeHandler}></textarea>
                 <label>Photo</label>
                 <input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler}></input>
                 <button type="submit">Submit</button>
