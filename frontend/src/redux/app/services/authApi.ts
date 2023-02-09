@@ -14,18 +14,32 @@ export interface User {
 }
 
 export interface UserResponse {
-  user: User,
-  token: string | null | undefined
+  user: User;
+  token: string | null | undefined;
   userImage: Buffer | null;
 }
 
 export interface LoginRequest {
-  credential: string,
-  password: string
+  credential: string;
+  password: string;
 }
 
 export interface restoreRequest {
-  user: User
+  user: User;
+}
+
+export interface Message {
+  id: number;
+  userId: number;
+  title: string;
+  message: string;
+  photo: Blob;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface messageResponse {
+  message: Message;
 }
 
 export const api = createApi({
@@ -68,6 +82,13 @@ export const api = createApi({
         url: '/api/session/',
         method: "DELETE",
         'XSRF-TOKEN': getCSRFCookie('XSRF-TOKEN')
+      })
+    }),
+    createMessage: builder.mutation<messageResponse, FormData>({
+      query: (messageData) => ({
+        url: "/api/messages/",
+        method: "POST",
+        body: messageData
       })
     }),
     restore: builder.query({
