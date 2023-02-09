@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { setMessage } from "../../redux/features/message/messageSlice";
 import { useAppDispatch } from "../../redux/app/hooks";
 import { Modal } from "../Modal/Modal";
 import useModal from "../Modal/UseModal";
 import { User } from "../../redux/app/services/authApi";
 import { useCreateMessageMutation } from "../../redux/app/services/authApi";
 import "./messagesForm.css"
+import { QueryActionCreatorResult } from "@reduxjs/toolkit/dist/query/core/buildInitiate";
+import { BaseQueryFn } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
+import { FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
+import { QueryDefinition } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
 
 interface CreateMessageProps {
-    sessionUser: User
+    sessionUser: User;
+    refetch: () => any;
 }
 
 
-export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
+export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
     const dispatch = useAppDispatch();
     const { isOpen, toggle } = useModal();
     const [makeMessage, { isLoading }] = useCreateMessageMutation();
@@ -30,8 +34,6 @@ export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
                 ...formState,
                 [e.target.name]: e.target.files[0]
             })
-
-            console.log(formState)
         }
     }
 
@@ -42,7 +44,6 @@ export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
             ...formState,
             [e.target.name]: e.target.value
         })
-        console.log(formState)
     }
 
     const CreateMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,6 +59,8 @@ export const CreateMessage = ({ sessionUser }: CreateMessageProps) => {
             const res = await makeMessage(formData).unwrap();
             const returnedMessage = { message: res.message }
             console.log(returnedMessage)
+            refetch();
+            toggle();
         } catch (error) {
             console.log(error)
         }
