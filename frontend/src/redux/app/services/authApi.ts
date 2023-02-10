@@ -156,6 +156,15 @@ export const api = createApi({
         body: messageData
       })
     }),
+    deleteComment: builder.mutation<commentResponse, number>({
+      query: (id) => (
+        {
+          url: `/api/messages/comments/${id}`,
+
+          method: "DELETE",
+        }
+      )
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -165,4 +174,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery, useCreateCommentMutation, useEditCommentMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery, useCreateCommentMutation, useEditCommentMutation, useDeleteCommentMutation } = api;

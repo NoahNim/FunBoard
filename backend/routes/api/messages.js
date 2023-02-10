@@ -63,7 +63,7 @@ router.get("/", asyncHandler(async (req, res) => {
 // Create Message
 router.post(
     '/',
-    upload.single('photo'),
+    uploadComments.single('photo'),
     requireAuth,
     validateMessage,
     asyncHandler(async (req, res) => {
@@ -141,7 +141,7 @@ router.post("/post-comment", uploadComments.single('photo'), requireAuth, valida
     let userId = req.user.id;
 
     const { comment, messageId } = req.body;
-    const photo = req.file.path;
+    const photo = req?.file?.path;
 
     const newComment = Comment.build({
         userId,
@@ -175,5 +175,18 @@ router.put('/edit-comment', requireAuth, validateEditComment, asyncHandler(async
 
     return res.json(commentPk)
 }))
+
+//deleteComment
+router.delete('/comments/:id', requireAuth, asyncHandler(async (req, res) => {
+    let commentId = req.params.id;
+    let comment = await Comment.findByPk(commentId);
+
+    const resComment = res.json(comment)
+
+    await comment.destroy();
+
+    return resComment
+}))
+
 
 module.exports = router;
