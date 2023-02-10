@@ -27,10 +27,8 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                             </li>
                         </ul>
                     </div>
-                    <div className="box-container">
-                        <ul>
-                            <Comments messageId={id} />
-                        </ul>
+                    <div>
+                        <Comments messageId={id} />
                     </div>
                 </div>
             </div>

@@ -10,7 +10,6 @@
 
 .box-container {
     width: 100%;
-    border-radius: 1%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -20,10 +19,21 @@
 
 .box-message {
     padding: 2em;
+    border-radius: 5%;
     display: flex;
     flex-direction: row;
     background: #fff;
     width: 80%;
+    bottom: 0;
+}
+
+.box-comment {
+    padding: 2em;
+    display: flex;
+    border-radius: 5%;
+    flex-direction: row;
+    background: #fff;
+    width: 100%;
     bottom: 0;
 }
 
@@ -42,6 +52,10 @@
     border-style: groove;
     border-color: black;
     margin: 1%;
+}
+
+.box-comment li {
+    border-style: none;
 }
 
 .post-images {

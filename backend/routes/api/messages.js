@@ -114,11 +114,11 @@ router.get("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
 
     const comments = await Comment.findAll({
         where: {
-            messageId: messageId
+            messageId: parseInt(messageId)
         }
     })
 
-    return res.json(comments)
+    return res.json({ comments })
 }))
 
 module.exports = router;

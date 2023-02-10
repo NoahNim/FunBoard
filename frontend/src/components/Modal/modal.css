@@ -28,7 +28,7 @@
   padding: 1rem;
   border-radius: 1rem;
   width: 50%;
-  height: 50%;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
