@@ -33,8 +33,9 @@
     border-radius: 5%;
     flex-direction: row;
     background: #fff;
-    width: 100%;
+    width: 70%;
     bottom: 0;
+    margin: 2%;
 }
 
 .box ul {

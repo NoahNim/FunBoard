@@ -3,6 +3,7 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/messasgephotos' })
+const uploadComments = multer({ dest: 'uploads/commentphotos' })
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { Message } = require("../../db/models");
@@ -33,6 +34,13 @@ const validateEditMessage = [
     check('message')
         .exists({ checkFalsy: true })
         .withMessage('Please write up some text for the post'),
+    handleValidationErrors
+]
+
+const validateComment = [
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please write up some text for the comment'),
     handleValidationErrors
 ]
 
@@ -119,6 +127,26 @@ router.get("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
     })
 
     return res.json({ comments })
+}))
+
+// Create Comment
+
+router.post("/post-comment", uploadComments.single('photo'), requireAuth, validateComment, asyncHandler(async (req, res) => {
+    let userId = req.user.id;
+
+    const { comment, messageId } = req.body;
+    const photo = req.file.path;
+
+    const newComment = Comment.build({
+        userId,
+        messageId,
+        comment,
+        photo
+    })
+
+    await newComment.save();
+
+    return res.json(newComment)
 }))
 
 module.exports = router;

@@ -27,7 +27,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div style={{ width: "100%" }}>
                         <Comments messageId={id} />
                     </div>
                 </div>

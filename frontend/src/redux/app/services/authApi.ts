@@ -61,6 +61,10 @@ export interface Comment {
   photo: Blob | null | undefined;
 }
 
+export interface commentResponse {
+  comment: Comment;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
@@ -135,6 +139,13 @@ export const api = createApi({
     getComments: builder.query({
       query: (id) => (`/api/messages/${id}/comments`)
     }),
+    createComment: builder.mutation<commentResponse, FormData>({
+      query: (commentData) => ({
+        url: "/api/messages/post-comment",
+        method: "POST",
+        body: commentData
+      })
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -144,4 +155,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery, useCreateCommentMutation } = api;
