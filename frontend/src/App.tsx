@@ -5,7 +5,7 @@ import { store } from './redux/app/store';
 import { restoreUser } from './redux/features/auth/userSlice';
 import { api } from './redux/app/services/authApi';
 import { useAppDispatch } from './redux/app/store';
-import { Home } from './components/Home/home';
+import { Home } from './components/Home/Home';
 
 function App() {
   const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useAppDispatch } from "../../../redux/app/store";
 import { useSignupMutation, UserResponse } from "../../../redux/app/services/authApi";
-import { Modal } from "../../Modal/modal";
-import useModal from "../../Modal/useModal";
+import { Modal } from "../../Modal/Modal";
+import useModal from "../../Modal/UseModal";
 
 export const SignupForm = () => {
     const { isOpen, toggle } = useModal();
@@ -49,7 +49,6 @@ export const SignupForm = () => {
         formData.append("password", formState.password)
         formData.append("biography", formState.biography)
         if (formState.profilePhoto) formData.append("profilePhoto", formState.profilePhoto)
-        console.log(typeof formData)
         try {
             const res = await signup(formData).unwrap();
             const signupUser = { user: res.user, token: res.token }

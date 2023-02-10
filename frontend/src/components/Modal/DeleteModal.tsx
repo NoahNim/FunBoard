@@ -1,18 +1,17 @@
 import React, { ReactNode } from "react";
 import './modal.css'
-import useModal from "./useModal";
 
-interface ModalType {
+interface DeleteModalType {
     children?: ReactNode;
     buttonValue: string;
     isOpen: boolean;
     toggle: () => void
 }
 
-export const Modal = ({ children, buttonValue, isOpen, toggle }: ModalType) => {
+export const DeleteModal = ({ children, buttonValue, isOpen, toggle }: DeleteModalType) => {
     return (
         <>
-            <button style={isOpen ? { backgroundColor: "#e69797" } : { backgroundColor: "#CFD2CD" }} onClick={toggle}>{buttonValue}</button>
+            <button style={isOpen ? { backgroundColor: "#e69797" } : { backgroundColor: "#e69797" }} onClick={toggle}>{buttonValue}</button>
             {isOpen && (
                 <div className="modal-overlay">
                     <div className="modal-box" onClick={(e) => e.stopPropagation}>

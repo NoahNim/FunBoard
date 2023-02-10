@@ -3,5 +3,14 @@
     flex-direction: row;
     justify-content: space-between;
     height: 20px;
+    background-color: #847577;
+
+}
+
+.main {
     background-color: #A6A2A2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,0 +1,53 @@
+.box {
+    width: 100%;
+    margin: 1%;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-container {
+    width: 100%;
+    border-radius: 1%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1%;
+}
+
+.box-message {
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    background: #fff;
+    width: 80%;
+}
+
+.box ul {
+    width: 50%;
+    overflow-wrap: break-word;
+    overflow: scroll;
+    margin: 5%;
+}
+
+.box li {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 1px;
+    border-style: groove;
+    border-color: black;
+    margin: 1%;
+}
+
+.post-images {
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.box button {
+    border-radius: 0%;
+}

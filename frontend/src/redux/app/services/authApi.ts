@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { url } from 'inspector';
 import { getCSRFCookie } from '../hooks';
 
 export interface User {
@@ -14,18 +15,42 @@ export interface User {
 }
 
 export interface UserResponse {
-  user: User,
-  token: string | null | undefined
+  user: User;
+  token: string | null | undefined;
   userImage: Buffer | null;
 }
 
 export interface LoginRequest {
-  credential: string,
-  password: string
+  credential: string;
+  password: string;
 }
 
 export interface restoreRequest {
-  user: User
+  user: User;
+}
+
+export interface Message {
+  id: number;
+  userId: number;
+  title: string;
+  message: string;
+  photo: Blob;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface messageResponse {
+  message: Message;
+}
+
+export interface MessageList {
+  messages: {
+    [key: string]: Message | null
+  } | null
+}
+
+export interface MessageListResponse {
+  messages: MessageList
 }
 
 export const api = createApi({
@@ -70,6 +95,35 @@ export const api = createApi({
         'XSRF-TOKEN': getCSRFCookie('XSRF-TOKEN')
       })
     }),
+    getMessages: builder.query({
+      query: () => ("/api/messages/")
+    }),
+    createMessage: builder.mutation<messageResponse, FormData>({
+      query: (messageData) => ({
+        url: "/api/messages/",
+        method: "POST",
+        body: messageData
+      })
+    }),
+    editMessage: builder.mutation<messageResponse, Partial<Message>>({
+      query: (messageData) => ({
+        url: "/api/messages/",
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: messageData
+      })
+    }),
+    deleteMessage: builder.mutation<messageResponse, number>({
+      query: (id) => (
+        {
+          url: `/api/messages/${id}`,
+
+          method: "DELETE",
+        }
+      )
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -79,4 +133,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation } = api;
