@@ -141,9 +141,19 @@ export const api = createApi({
     }),
     createComment: builder.mutation<commentResponse, FormData>({
       query: (commentData) => ({
-        url: "/api/messages/post-comment",
+        url: "/api/messages/post-comment/",
         method: "POST",
         body: commentData
+      })
+    }),
+    editComment: builder.mutation<commentResponse, Partial<Comment>>({
+      query: (messageData) => ({
+        url: "/api/messages/edit-comment/",
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: messageData
       })
     }),
     restore: builder.query({
@@ -155,4 +165,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery, useCreateCommentMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery, useCreateCommentMutation, useEditCommentMutation } = api;

@@ -2,6 +2,7 @@ import { useAppSelector } from "../../../redux/app/store";
 import { useGetCommentsQuery, Comment } from "../../../redux/app/services/authApi";
 import "../../general.css"
 import { CreateComment } from "./CreateComment";
+import { EditComment } from "./EditComment";
 
 interface CommentsProps {
     messageId: number;
@@ -17,11 +18,14 @@ export const Comments = ({ messageId }: CommentsProps) => {
             <CreateComment messageId={messageId} sessionUser={sessionUser} refetch={refetch} />
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
-                    <div className="box-comment">
-                        {comment?.photo ? <img className="post-images" src={`${window.location.href}${comment?.photo}`}></img> : <></>}
-                        <ul key={comment?.id}>
-                            <li key={index}>{comment?.comment}</li>
-                        </ul>
+                    <div className="box-comment-container">
+                        {sessionUser ? <><EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} /></> : <></>}
+                        <div className="box-comment">
+                            {comment?.photo ? <img className="post-images" src={`${window.location.href}${comment?.photo}`}></img> : <></>}
+                            <ul key={comment?.id}>
+                                <li key={index}>{comment?.comment}</li>
+                            </ul>
+                        </div>
                     </div>
                 )
             })}

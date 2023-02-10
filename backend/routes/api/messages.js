@@ -44,6 +44,13 @@ const validateComment = [
     handleValidationErrors
 ]
 
+const validateEditComment = [
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please write up some text for the comment'),
+    handleValidationErrors
+]
+
 // Get Messages
 router.get("/", asyncHandler(async (req, res) => {
     const messages = await Message.findAll({})
@@ -81,7 +88,6 @@ router.post(
 // Edit Message
 
 router.put('/', requireAuth, validateEditMessage, asyncHandler(async (req, res) => {
-    console.log(req.body)
     let userId = req.user.id;
     let messageId = req.body.id;
 
@@ -147,6 +153,27 @@ router.post("/post-comment", uploadComments.single('photo'), requireAuth, valida
     await newComment.save();
 
     return res.json(newComment)
+}))
+
+//Edit Comment
+
+router.put('/edit-comment', requireAuth, validateEditComment, asyncHandler(async (req, res) => {
+    let userId = req.user.id;
+    let commentId = req.body.id;
+
+    const commentPk = await Comment.findByPk(commentId)
+
+    const { comment, messageId } = req.body
+
+    const updatedComment = {
+        comment,
+        userId,
+        messageId
+    }
+
+    await commentPk.update(updatedComment)
+
+    return res.json(commentPk)
 }))
 
 module.exports = router;
