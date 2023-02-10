@@ -100,4 +100,15 @@ router.put('/', requireAuth, validateEditMessage, asyncHandler(async (req, res) 
     return res.json(messagePk)
 }))
 
+router.delete('/:id', requireAuth, asyncHandler(async (req, res) => {
+    let messageId = req.params.id;
+    let message = await Message.findByPk(messageId);
+
+    const resMessage = res.json(message)
+
+    await message.destroy();
+
+    return resMessage
+}))
+
 module.exports = router;

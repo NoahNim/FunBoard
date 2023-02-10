@@ -6,6 +6,7 @@ import "../general.css"
 import "./messagesForm.css"
 import { SingleMessage } from "./SingleMessage";
 import { EditMessage } from "./EditMessage";
+import { DeleteMessage } from "./DeleteMessage";
 
 export const Messages = () => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
@@ -24,7 +25,11 @@ export const Messages = () => {
                                 <div className="box-message">
                                     <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
                                     <ul key={message.id}>
-                                        {sessionUser ? <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} /> : <></>}
+                                        {sessionUser ?
+                                            <>
+                                                <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                                <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                            </> : <></>}
                                         <li key={index}>{message.title}</li>
                                         <li key={`${message.message}${Math.random()}`}>
                                             <p>{message.message}</p>

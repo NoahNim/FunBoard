@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { url } from 'inspector';
 import { getCSRFCookie } from '../hooks';
 
 export interface User {
@@ -114,6 +115,15 @@ export const api = createApi({
         body: messageData
       })
     }),
+    deleteMessage: builder.mutation<messageResponse, number>({
+      query: (id) => (
+        {
+          url: `/api/messages/${id}`,
+
+          method: "DELETE",
+        }
+      )
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -123,4 +133,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation } = api;
