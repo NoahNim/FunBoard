@@ -1,11 +1,11 @@
 import { useAppSelector, useAppDispatch } from "../../redux/app/store";
 import { CreateMessage } from "./CreateMessage";
 import { useGetMessagesQuery } from "../../redux/app/services/authApi";
-import { getMessages } from "../../redux/features/message/messageListSlice";
 import { Message } from "../../redux/app/services/authApi";
 import "../general.css"
 import "./messagesForm.css"
 import { SingleMessage } from "./SingleMessage";
+import { EditMessage } from "./EditMessage";
 
 export const Messages = () => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
@@ -24,6 +24,7 @@ export const Messages = () => {
                                 <div className="box-message">
                                     <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
                                     <ul key={message.id}>
+                                        {sessionUser ? <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} /> : <></>}
                                         <li key={index}>{message.title}</li>
                                         <li key={`${message.message}${Math.random()}`}>
                                             <p>{message.message}</p>

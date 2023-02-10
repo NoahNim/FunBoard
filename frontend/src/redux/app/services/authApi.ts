@@ -104,6 +104,16 @@ export const api = createApi({
         body: messageData
       })
     }),
+    editMessage: builder.mutation<messageResponse, Partial<Message>>({
+      query: (messageData) => ({
+        url: "/api/messages/",
+        method: "PUT",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: messageData
+      })
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -113,4 +123,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation } = api;

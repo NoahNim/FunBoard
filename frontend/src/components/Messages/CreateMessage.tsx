@@ -1,14 +1,9 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../redux/app/hooks";
 import { Modal } from "../Modal/Modal";
 import useModal from "../Modal/UseModal";
 import { User } from "../../redux/app/services/authApi";
 import { useCreateMessageMutation } from "../../redux/app/services/authApi";
 import "./messagesForm.css"
-import { QueryActionCreatorResult } from "@reduxjs/toolkit/dist/query/core/buildInitiate";
-import { BaseQueryFn } from "@reduxjs/toolkit/dist/query/baseQueryTypes";
-import { FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
-import { QueryDefinition } from "@reduxjs/toolkit/dist/query/endpointDefinitions";
 
 interface CreateMessageProps {
     sessionUser: User;
@@ -17,7 +12,6 @@ interface CreateMessageProps {
 
 
 export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
-    const dispatch = useAppDispatch();
     const { isOpen, toggle } = useModal();
     const [makeMessage, { isLoading }] = useCreateMessageMutation();
     const [formState, setFormState] = useState({

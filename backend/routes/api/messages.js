@@ -27,6 +27,13 @@ const validateMessage = [
     handleValidationErrors
 ]
 
+const validateEditMessage = [
+    check('message')
+        .exists({ checkFalsy: true })
+        .withMessage('Please write up some text for the post'),
+    handleValidationErrors
+]
+
 // Get Messages
 router.get("/", asyncHandler(async (req, res) => {
     const messages = await Message.findAll({})
@@ -70,5 +77,27 @@ router.post(
         return res.json(newMessage)
     })
 )
+
+// Edit Message
+
+router.put('/', requireAuth, validateEditMessage, asyncHandler(async (req, res) => {
+    console.log(req.body)
+    let userId = req.user.id;
+    let messageId = req.body.id;
+
+    const messagePk = await Message.findByPk(messageId)
+
+    const { message } = req.body;
+
+    const updatedMessage = {
+        message,
+        userId,
+        messageId
+    }
+
+    await messagePk.update(updatedMessage)
+
+    return res.json(messagePk)
+}))
 
 module.exports = router;
