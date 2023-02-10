@@ -24,12 +24,13 @@
     flex-direction: row;
     background: #fff;
     width: 80%;
+    bottom: 0;
 }
 
 .box ul {
     width: 50%;
-    overflow-wrap: break-word;
-    overflow: scroll;
+    word-wrap: break-word;
+    overflow-wrap: scroll;
     margin: 5%;
 }
 

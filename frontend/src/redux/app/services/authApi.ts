@@ -53,6 +53,14 @@ export interface MessageListResponse {
   messages: MessageList
 }
 
+export interface Comment {
+  id: number;
+  userId: number;
+  messageId: number;
+  comment: string;
+  photo: Blob | null | undefined;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
@@ -124,6 +132,9 @@ export const api = createApi({
         }
       )
     }),
+    getComments: builder.query({
+      query: (id) => (`/api/messages/${id}/comments`)
+    }),
     restore: builder.query({
       query: () => '/api/csrf/restore'
     }),
@@ -133,4 +144,4 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation } = api;
+export const { useLoginMutation, useProtectedMutation, useRestoreQuery, useRestoreUserMutation, useLazyLogoutQuery, useSignupMutation, useCreateMessageMutation, useGetMessagesQuery, useEditMessageMutation, useDeleteMessageMutation, useGetCommentsQuery } = api;

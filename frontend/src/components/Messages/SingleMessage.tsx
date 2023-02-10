@@ -1,5 +1,7 @@
 import { MessageModal } from "../Modal/MessaageModal";
 import useModal from "../Modal/UseModal";
+import { Comments } from "./Comments/Comments";
+
 
 interface SingleMessageProps {
     title: string;
@@ -23,6 +25,11 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                             <li key={`${message}${Math.random()}`}>
                                 <p>{message}</p>
                             </li>
+                        </ul>
+                    </div>
+                    <div className="box-container">
+                        <ul>
+                            <Comments messageId={id} />
                         </ul>
                     </div>
                 </div>

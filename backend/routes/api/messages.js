@@ -6,6 +6,8 @@ const upload = multer({ dest: 'uploads/messasgephotos' })
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { Message } = require("../../db/models");
+const { Comment } = require("../../db/models");
+const { User } = require("../../db/models");
 const router = express.Router();
 
 const validateMessage = [
@@ -42,16 +44,6 @@ router.get("/", asyncHandler(async (req, res) => {
         messages
     })
 }))
-
-// Get Message
-router.get("/:id", asyncHandler(async (req, res) => {
-    let messageId = req.body.id;
-
-    let message = await Message.findByPk(messageId);
-
-    return res.json(message)
-}))
-
 
 // Create Message
 router.post(
@@ -109,6 +101,24 @@ router.delete('/:id', requireAuth, asyncHandler(async (req, res) => {
     await message.destroy();
 
     return resMessage
+}))
+
+/* -------------------------------------------------------------------------- */
+
+// Comments
+
+// Get Comments
+
+router.get("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
+    const messageId = req.params.id
+
+    const comments = await Comment.findAll({
+        where: {
+            messageId: messageId
+        }
+    })
+
+    return res.json(comments)
 }))
 
 module.exports = router;
