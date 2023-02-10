@@ -1,5 +1,7 @@
 import { MessageModal } from "../Modal/MessaageModal";
 import useModal from "../Modal/UseModal";
+import { Comments } from "./Comments/Comments";
+
 
 interface SingleMessageProps {
     title: string;
@@ -24,6 +26,9 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                                 <p>{message}</p>
                             </li>
                         </ul>
+                    </div>
+                    <div style={{ width: "100%" }}>
+                        <Comments messageId={id} />
                     </div>
                 </div>
             </div>

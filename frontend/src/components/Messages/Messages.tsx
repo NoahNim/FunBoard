@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../../redux/app/store";
+import { useAppSelector } from "../../redux/app/store";
 import { CreateMessage } from "./CreateMessage";
 import { useGetMessagesQuery } from "../../redux/app/services/authApi";
 import { Message } from "../../redux/app/services/authApi";

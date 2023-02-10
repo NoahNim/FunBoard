@@ -3,9 +3,12 @@ const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/messasgephotos' })
+const uploadComments = multer({ dest: 'uploads/commentphotos' })
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { Message } = require("../../db/models");
+const { Comment } = require("../../db/models");
+const { User } = require("../../db/models");
 const router = express.Router();
 
 const validateMessage = [
@@ -34,6 +37,20 @@ const validateEditMessage = [
     handleValidationErrors
 ]
 
+const validateComment = [
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please write up some text for the comment'),
+    handleValidationErrors
+]
+
+const validateEditComment = [
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please write up some text for the comment'),
+    handleValidationErrors
+]
+
 // Get Messages
 router.get("/", asyncHandler(async (req, res) => {
     const messages = await Message.findAll({})
@@ -43,20 +60,10 @@ router.get("/", asyncHandler(async (req, res) => {
     })
 }))
 
-// Get Message
-router.get("/:id", asyncHandler(async (req, res) => {
-    let messageId = req.body.id;
-
-    let message = await Message.findByPk(messageId);
-
-    return res.json(message)
-}))
-
-
 // Create Message
 router.post(
     '/',
-    upload.single('photo'),
+    uploadComments.single('photo'),
     requireAuth,
     validateMessage,
     asyncHandler(async (req, res) => {
@@ -81,7 +88,6 @@ router.post(
 // Edit Message
 
 router.put('/', requireAuth, validateEditMessage, asyncHandler(async (req, res) => {
-    console.log(req.body)
     let userId = req.user.id;
     let messageId = req.body.id;
 
@@ -110,5 +116,77 @@ router.delete('/:id', requireAuth, asyncHandler(async (req, res) => {
 
     return resMessage
 }))
+
+/* -------------------------------------------------------------------------- */
+
+// Comments
+
+// Get Comments
+
+router.get("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
+    const messageId = req.params.id
+
+    const comments = await Comment.findAll({
+        where: {
+            messageId: parseInt(messageId)
+        }
+    })
+
+    return res.json({ comments })
+}))
+
+// Create Comment
+
+router.post("/post-comment", uploadComments.single('photo'), requireAuth, validateComment, asyncHandler(async (req, res) => {
+    let userId = req.user.id;
+
+    const { comment, messageId } = req.body;
+    const photo = req?.file?.path;
+
+    const newComment = Comment.build({
+        userId,
+        messageId,
+        comment,
+        photo
+    })
+
+    await newComment.save();
+
+    return res.json(newComment)
+}))
+
+//Edit Comment
+
+router.put('/edit-comment', requireAuth, validateEditComment, asyncHandler(async (req, res) => {
+    let userId = req.user.id;
+    let commentId = req.body.id;
+
+    const commentPk = await Comment.findByPk(commentId)
+
+    const { comment, messageId } = req.body
+
+    const updatedComment = {
+        comment,
+        userId,
+        messageId
+    }
+
+    await commentPk.update(updatedComment)
+
+    return res.json(commentPk)
+}))
+
+//deleteComment
+router.delete('/comments/:id', requireAuth, asyncHandler(async (req, res) => {
+    let commentId = req.params.id;
+    let comment = await Comment.findByPk(commentId);
+
+    const resComment = res.json(comment)
+
+    await comment.destroy();
+
+    return resComment
+}))
+
 
 module.exports = router;
