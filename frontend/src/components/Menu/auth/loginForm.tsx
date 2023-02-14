@@ -12,7 +12,8 @@ export const LoginForm = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading, isError }] = useLoginMutation();
+    const [errorList, setErrorList] = useState([])
 
     const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -37,13 +38,16 @@ export const LoginForm = () => {
             const logUser = { user: res.user, token: res.token }
             dispatch(setUser(logUser));
             toggle()
-        } catch (error) {
-            console.log(error)
+        } catch (error: any | unknown) {
+            const data = await error?.data.errors
+
+            setErrorList(data)
         }
     }
 
     return (
         <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
+            {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={loginSubmitFunction} className="login-form">
                 <label>username/email </label>
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>

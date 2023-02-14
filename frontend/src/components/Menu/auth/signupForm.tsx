@@ -8,7 +8,7 @@ import useModal from "../../Modal/UseModal";
 export const SignupForm = () => {
     const { isOpen, toggle } = useModal();
     const dispatch = useAppDispatch();
-    const [signup, { isLoading }] = useSignupMutation();
+    const [signup, { isLoading, isError }] = useSignupMutation();
     const [formState, setFormState] = useState({
         username: "",
         fullName: "",
@@ -17,6 +17,7 @@ export const SignupForm = () => {
         biography: "",
         profilePhoto: null,
     })
+    const [errorList, setErrorList] = useState([])
 
     const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -54,13 +55,16 @@ export const SignupForm = () => {
             const signupUser = { user: res.user, token: res.token }
             dispatch(setUser(signupUser));
             toggle()
-        } catch (error) {
-            console.log(error)
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
     return (
         <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Register">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={signupSubmitHandler} className="login-form" encType="multipart/form-data">
                 <label>username</label>
                 <input type="text" name="username" value={formState.username} onChange={changeHandler}></input>
