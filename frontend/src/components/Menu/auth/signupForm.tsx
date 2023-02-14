@@ -2,7 +2,7 @@ import { useState } from "react";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useAppDispatch } from "../../../redux/app/store";
 import { useSignupMutation, UserResponse } from "../../../redux/app/services/authApi";
-import { Modal } from "../../Modal/Modal";
+import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
 
 export const SignupForm = () => {
@@ -60,7 +60,7 @@ export const SignupForm = () => {
     }
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Register">
+        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Register">
             <form onSubmit={signupSubmitHandler} className="login-form" encType="multipart/form-data">
                 <label>username</label>
                 <input type="text" name="username" value={formState.username} onChange={changeHandler}></input>
@@ -76,6 +76,6 @@ export const SignupForm = () => {
                 <input type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler}></input>
                 <button type="submit">Submit</button>
             </form>
-        </Modal>
+        </LoginModal>
     )
 }
