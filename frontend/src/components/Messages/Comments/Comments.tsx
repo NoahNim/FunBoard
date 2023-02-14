@@ -20,7 +20,7 @@ export const Comments = ({ messageId }: CommentsProps) => {
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
                     <div className="box-comment-container">
-                        {sessionUser ? <>
+                        {sessionUser?.id === comment.userId ? <>
                             <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
                             <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
                         </> : <></>}

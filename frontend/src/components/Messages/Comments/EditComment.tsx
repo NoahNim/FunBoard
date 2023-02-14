@@ -16,8 +16,9 @@ interface EditCommentProps {
 
 export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: EditCommentProps) => {
     const { isOpen, toggle } = useModal();
-    const [editComment, { isLoading }] = useEditCommentMutation();
+    const [editComment, { isLoading, isError }] = useEditCommentMutation();
     const [formState, setFormState] = useState(comment)
+    const [errorList, setErrorList] = useState([])
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
@@ -36,14 +37,17 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
             console.log(returnedComment)
             refetch();
             toggle();
-        } catch (error) {
-            console.log(error)
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} buttonValue="Edit comment">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={CreateMessageSubmitHandler} className="message-form" encType="multipart/form-data">
                 <label>Edit Comment</label>
                 <textarea name="message" value={formState} onChange={changeHandler}></textarea>

@@ -13,11 +13,12 @@ interface CreateMessageProps {
 
 export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessageProps) => {
     const { isOpen, toggle } = useModal();
-    const [makeComment, { isLoading }] = useCreateCommentMutation();
+    const [makeComment, { isLoading, isError }] = useCreateCommentMutation();
     const [formState, setFormState] = useState({
         comment: "",
         photo: null
     })
+    const [errorList, setErrorList] = useState([])
 
     const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -54,14 +55,17 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
             console.log(returnedComnent)
             refetch();
             toggle();
-        } catch (error) {
-            console.log(error)
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} buttonValue="Post Comment">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={CreateCommentSubmitHandler} className="message-form" encType="multipart/form-data">
                 <label>Comment Text</label>
                 <textarea name="comment" value={formState.comment} onChange={changeHandler}></textarea>
