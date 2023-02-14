@@ -16,8 +16,9 @@ interface EditMessageProps {
 
 export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMessageProps) => {
     const { isOpen, toggle } = useModal();
-    const [editMessage, { isLoading }] = useEditMessageMutation();
+    const [editMessage, { isLoading, isError }] = useEditMessageMutation();
     const [formState, setFormState] = useState(message)
+    const [errorList, setErrorList] = useState([])
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
@@ -36,14 +37,17 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
             console.log(returnedMessage)
             refetch();
             toggle();
-        } catch (error) {
-            console.log(error)
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} buttonValue="Edit Message">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <div>{title}</div>
             <form onSubmit={CreateMessageSubmitHandler} className="message-form" encType="multipart/form-data">
                 <label>Message Text</label>

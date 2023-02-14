@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../redux/app/store";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useLoginMutation } from '../../../redux/app/services/authApi'
 import './loginForm.css'
-import { Modal } from "../../Modal/Modal";
+import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
 
 
@@ -12,7 +12,8 @@ export const LoginForm = () => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
-    const [login, { isLoading }] = useLoginMutation();
+    const [login, { isLoading, isError }] = useLoginMutation();
+    const [errorList, setErrorList] = useState([])
 
     const usernameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -37,13 +38,17 @@ export const LoginForm = () => {
             const logUser = { user: res.user, token: res.token }
             dispatch(setUser(logUser));
             toggle()
-        } catch (error) {
-            console.log(error)
+            setErrorList([])
+        } catch (error: any | unknown) {
+            const data = await error?.data.errors
+
+            setErrorList(data)
         }
     }
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
+        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
+            {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={loginSubmitFunction} className="login-form">
                 <label>username/email </label>
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>
@@ -51,6 +56,6 @@ export const LoginForm = () => {
                 <input type="password" value={password} onChange={passwordChangeHandler}></input>
                 <button type="submit">Login</button>
             </form>
-        </Modal>
+        </LoginModal>
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../redux/app/store";
 import { getBase64Img } from "../../../redux/app/hooks";
-import { Modal } from "../../Modal/Modal";
+import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
 
 export const UserInfo = () => {
@@ -11,7 +11,7 @@ export const UserInfo = () => {
     console.log(window.location.href)
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Profile" >
+        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Profile" >
             <div>
                 <ul>
                     <li>{currentUser?.username}</li>
@@ -21,7 +21,7 @@ export const UserInfo = () => {
                     <li><img style={{ borderRadius: "10px", objectFit: "cover", width: "50%", height: "50%" }} src={`${window.location.href}${currentUser?.profilePhoto}`}></img></li>
                 </ul>
             </div>
-        </Modal>
+        </LoginModal>
     )
 
 }

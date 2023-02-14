@@ -25,7 +25,7 @@ export const Messages = () => {
                                 <div className="box-message">
                                     <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
                                     <ul key={message.id}>
-                                        {sessionUser ?
+                                        {sessionUser?.id === message.userId ?
                                             <>
                                                 <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
                                                 <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />

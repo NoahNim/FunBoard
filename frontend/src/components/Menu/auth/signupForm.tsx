@@ -2,13 +2,13 @@ import { useState } from "react";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useAppDispatch } from "../../../redux/app/store";
 import { useSignupMutation, UserResponse } from "../../../redux/app/services/authApi";
-import { Modal } from "../../Modal/Modal";
+import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
 
 export const SignupForm = () => {
     const { isOpen, toggle } = useModal();
     const dispatch = useAppDispatch();
-    const [signup, { isLoading }] = useSignupMutation();
+    const [signup, { isLoading, isError }] = useSignupMutation();
     const [formState, setFormState] = useState({
         username: "",
         fullName: "",
@@ -17,6 +17,7 @@ export const SignupForm = () => {
         biography: "",
         profilePhoto: null,
     })
+    const [errorList, setErrorList] = useState([])
 
     const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -54,13 +55,17 @@ export const SignupForm = () => {
             const signupUser = { user: res.user, token: res.token }
             dispatch(setUser(signupUser));
             toggle()
-        } catch (error) {
-            console.log(error)
+            setErrorList([])
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Register">
+        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Register">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={signupSubmitHandler} className="login-form" encType="multipart/form-data">
                 <label>username</label>
                 <input type="text" name="username" value={formState.username} onChange={changeHandler}></input>
@@ -76,6 +81,6 @@ export const SignupForm = () => {
                 <input type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler}></input>
                 <button type="submit">Submit</button>
             </form>
-        </Modal>
+        </LoginModal>
     )
 }

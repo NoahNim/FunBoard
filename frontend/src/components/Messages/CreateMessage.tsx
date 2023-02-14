@@ -13,12 +13,13 @@ interface CreateMessageProps {
 
 export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
     const { isOpen, toggle } = useModal();
-    const [makeMessage, { isLoading }] = useCreateMessageMutation();
+    const [makeMessage, { isLoading, isError }] = useCreateMessageMutation();
     const [formState, setFormState] = useState({
         title: "",
         message: "",
         photo: null
     })
+    const [errorList, setErrorList] = useState([])
 
     const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -55,14 +56,17 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
             console.log(returnedMessage)
             refetch();
             toggle();
-        } catch (error) {
-            console.log(error)
+        } catch (error: unknown | any) {
+            const data = await error.data.errors
+
+            setErrorList(data)
         }
     }
 
 
     return (
         <Modal isOpen={isOpen} toggle={toggle} buttonValue="Post Message">
+            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={CreateMessageSubmitHandler} className="message-form" encType="multipart/form-data">
                 <label>Title</label>
                 <input type="text" name="title" value={formState.title} onChange={changeHandler}></input>
