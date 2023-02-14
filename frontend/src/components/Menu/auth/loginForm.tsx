@@ -38,6 +38,7 @@ export const LoginForm = () => {
             const logUser = { user: res.user, token: res.token }
             dispatch(setUser(logUser));
             toggle()
+            setErrorList([])
         } catch (error: any | unknown) {
             const data = await error?.data.errors
 

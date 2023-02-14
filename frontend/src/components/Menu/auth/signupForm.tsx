@@ -55,6 +55,7 @@ export const SignupForm = () => {
             const signupUser = { user: res.user, token: res.token }
             dispatch(setUser(signupUser));
             toggle()
+            setErrorList([])
         } catch (error: unknown | any) {
             const data = await error.data.errors
 
