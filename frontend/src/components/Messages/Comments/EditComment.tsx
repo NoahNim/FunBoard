@@ -34,7 +34,6 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
         try {
             const res = await editComment(commentData).unwrap();
             const returnedComment = { comment: res.comment }
-            console.log(returnedComment)
             refetch();
             toggle();
         } catch (error: unknown | any) {

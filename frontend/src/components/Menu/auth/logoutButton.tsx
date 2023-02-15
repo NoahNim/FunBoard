@@ -12,7 +12,6 @@ export const LogoutButton = () => {
         const res = await trigger('/api/session/').unwrap()
 
         if (res.message === 'success') {
-            console.log(res.message)
             localStorage.removeItem('user');
             dispatch(removeUser());
         }

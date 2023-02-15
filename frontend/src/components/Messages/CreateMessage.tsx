@@ -53,7 +53,6 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
         try {
             const res = await makeMessage(formData).unwrap();
             const returnedMessage = { message: res.message }
-            console.log(returnedMessage)
             refetch();
             toggle();
         } catch (error: unknown | any) {

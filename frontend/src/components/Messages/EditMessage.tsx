@@ -34,7 +34,6 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
         try {
             const res = await editMessage(messageData).unwrap();
             const returnedMessage = { message: res.message }
-            console.log(returnedMessage)
             refetch();
             toggle();
         } catch (error: unknown | any) {

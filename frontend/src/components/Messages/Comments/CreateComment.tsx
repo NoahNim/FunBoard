@@ -51,8 +51,6 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
 
         try {
             const res = await makeComment(formData).unwrap();
-            const returnedComnent = { comment: res.comment }
-            console.log(returnedComnent)
             refetch();
             toggle();
         } catch (error: unknown | any) {

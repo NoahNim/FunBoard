@@ -8,8 +8,6 @@ export const UserInfo = () => {
     const currentUser = useAppSelector((state) => state?.auth?.user);
     const { isOpen, toggle } = useModal();
 
-    console.log(window.location.href)
-
     return (
         <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Profile" >
             <div>
