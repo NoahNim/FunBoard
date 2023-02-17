@@ -33,3 +33,4 @@ module.exports = {
     } //it is here
   },
 };
+   // "build": "npm run build --prefix backend"
