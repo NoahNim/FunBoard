@@ -13,12 +13,17 @@ export const Messages = () => {
     const { data: messagesObj, isFetching, isLoading, refetch } = useGetMessagesQuery({})
     if (isLoading) return <div>Loading...</div>
     const messagesList = messagesObj?.messages?.slice().reverse();
+    const adminMessages = messagesObj?.messages?.forEach((message: Message) => {
+        if (message.userId === 4) {
+            return message
+        }
+    })
 
     return (
         <div className="messages-options">
             {!sessionUser ? <></> : <CreateMessage refetch={refetch} sessionUser={sessionUser} />}
             <div className="messages-list">
-                {messagesList?.map((message: Message, index: number) => {
+                {adminMessages?.map((message: Message, index: number) => {
                     if (message.userId === 4) {
                         return (
                             <div className="box">
