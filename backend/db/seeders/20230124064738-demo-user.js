@@ -21,7 +21,7 @@ module.exports = {
      * }], {});
     */
     options.tableName = 'Users';
-    return queryInterface.bulkInsert('Users', [
+    return queryInterface.bulkInsert(options, [
       {
         username: 'Demo-lition',
         fullName: 'demo',
@@ -43,7 +43,7 @@ module.exports = {
      */
     const Op = Sequelize.Op;
     options.tableName = 'Users';
-    return queryInterface.bulkDelete('Users', {
+    return queryInterface.bulkDelete(options, {
       username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
     }, {});
 
