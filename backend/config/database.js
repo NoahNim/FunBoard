@@ -19,7 +19,7 @@ module.exports = {
     seederStorage: 'sequelize',
   },
   production: {
-    use_env_variable: 'postgres://nimpostgres_user:VFATCFhnhWGqosR9rSnfbmSoCgC89izX@dpg-cfm448cgqg469ks8u3hg-a/nimpostgres',
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     seederStorage: 'sequelize',
     dialectOptions: {
