@@ -13,12 +13,7 @@ export const Messages = () => {
     const { data: messagesObj, isFetching, isLoading, refetch } = useGetMessagesQuery({})
     if (isLoading) return <div>Loading...</div>
     const messagesList = messagesObj?.messages?.slice().reverse();
-    const adminMessages = messagesObj?.messages?.forEach((message: Message) => {
-        if (message.userId === 4) {
-            console.log(message)
-            return message
-        }
-    })
+    const adminMessages = messagesObj?.messages?.reduce((message: Message) => message.userId === 4)
 
     return (
         <div className="messages-options">
