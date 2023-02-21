@@ -50,7 +50,7 @@ export const LoginForm = () => {
         <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
             {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={loginSubmitFunction} className="login-form">
-                <label>username/email </label>
+                <label>username / email </label>
                 <input type="text" value={username} onChange={usernameChangeHandler}></input>
                 <label>password </label>
                 <input type="password" value={password} onChange={passwordChangeHandler}></input>

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../redux/app/store";
-import { getBase64Img } from "../../../redux/app/hooks";
 import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
+import "../menu.css"
 
 export const UserInfo = () => {
     const currentUser = useAppSelector((state) => state?.auth?.user);
@@ -10,13 +9,13 @@ export const UserInfo = () => {
 
     return (
         <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Profile" >
-            <div>
+            <div className="user-info">
                 <ul>
-                    <li>{currentUser?.username}</li>
-                    <li>{currentUser?.fullName}</li>
-                    <li>{currentUser?.email}</li>
-                    <li>{currentUser?.biography}</li>
-                    <li><img style={{ borderRadius: "10px", objectFit: "cover", width: "50%", height: "50%" }} src={`${window.location.href}${currentUser?.profilePhoto}`}></img></li>
+                    <li> username: {currentUser?.username}</li>
+                    <li> name: {currentUser?.fullName}</li>
+                    <li> email: {currentUser?.email}</li>
+                    <li> bio: {currentUser?.biography}</li>
+                    <li style={{ borderRadius: "10px", objectFit: "cover", width: "70%", height: "70%" }}><img style={{ borderRadius: "10px", objectFit: "cover", width: "100%", height: "100%" }} src={`${window.location.href}${currentUser?.profilePhoto}`}></img></li>
                 </ul>
             </div>
         </LoginModal>

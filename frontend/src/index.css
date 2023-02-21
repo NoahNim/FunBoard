@@ -20,3 +20,12 @@ ul {
 button {
   border-radius: 10px;
 }
+
+input {
+  width: 95%;
+}
+
+label {
+  min-width: 20%;
+  overflow-wrap: break-word;
+}

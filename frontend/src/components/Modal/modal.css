@@ -37,14 +37,12 @@
 
 .login-modal-box {
   background-color: #A6A2A2;
-  padding: 1rem;
   border-radius: 1rem;
-  width: 80%;
-  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2%;
-  overflow: scroll;
+  overflow-wrap: normal;
+  width: 100%;
+  min-width: 1%;
 }
