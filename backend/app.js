@@ -12,8 +12,6 @@ const config = require('./config/index');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
-const jwt = config.jwtConfig
-
 const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
