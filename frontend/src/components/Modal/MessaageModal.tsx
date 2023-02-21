@@ -11,7 +11,7 @@ interface ModalType {
 export const MessageModal = ({ children, buttonValue, isOpen, toggle }: ModalType) => {
     return (
         <>
-            <button style={isOpen ? { backgroundColor: "#e69797" } : { background: "#fff", width: "5%%", marginTop: "-3%", border: "0px" }} onClick={toggle}>{buttonValue}</button>
+            <button style={isOpen ? { backgroundColor: "#e69797" } : { background: "#fff", width: "5%%", border: "0px" }} onClick={toggle}>{buttonValue}</button>
             {isOpen && (
                 <div className="modal-overlay">
                     <div className="message-modal-box" onClick={(e) => e.stopPropagation}>

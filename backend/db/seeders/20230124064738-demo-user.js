@@ -2,10 +2,10 @@
 const bcrypt = require('bcryptjs');
 
 /** @type {import('sequelize-cli').Migration} */
-let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
-}
+// let options = {};
+// if (process.env.NODE_ENV === 'production') {
+//   options.schema = process.env.SCHEMA;  // define your schema in options object
+// }
 
 console.log(options.schema)
 
@@ -20,7 +20,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    options.tableName = 'Users';
+    // options.tableName = 'Users';
     return queryInterface.bulkInsert(options, [
       {
         username: 'Demo-lition',

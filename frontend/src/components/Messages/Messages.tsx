@@ -23,20 +23,25 @@ export const Messages = () => {
                         <div className="box">
                             <div className="box-container">
                                 <div className="box-message">
-                                    <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
-                                    <ul key={message.id}>
-                                        {sessionUser?.id === message.userId ?
-                                            <>
-                                                <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
-                                                <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
-                                            </> : <></>}
-                                        <li key={index}>{message.title}</li>
-                                        <li key={`${message.message}${Math.random()}`}>
-                                            <p>{message.message}</p>
-                                        </li>
-                                    </ul>
+                                    <div className="box-message-contents">
+                                        <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
+                                        <ul key={message.id}>
+                                            {sessionUser?.id === message.userId ?
+                                                <>
+                                                    <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                                    <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                                </> : <></>}
+                                            <li key={index}>{message.title}</li>
+                                            <li key={`${message.message}${Math.random()}`}>
+                                                <p>{message.message}</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                                    </div>
+
                                 </div>
-                                <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                             </div>
                         </div>
                     )

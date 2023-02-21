@@ -13,10 +13,10 @@ export const LoginModal = ({ children, buttonValue, isOpen, toggle }: LoginModal
         <>
             <button style={isOpen ? { backgroundColor: "#e69797" } : { backgroundColor: "#CFD2CD" }} onClick={toggle}>{buttonValue}</button>
             {isOpen && (
-                <div className="modal-overlay">
+                <div>
                     <div className="login-modal-box" onClick={(e) => e.stopPropagation}>
                         {children}
-                        <button style={{ backgroundColor: "#e69797", width: "21%" }} onClick={toggle}>Cancel</button>
+                        <button style={{ backgroundColor: "#e69797", }} onClick={toggle}>Cancel</button>
                     </div>
                 </div>
             )

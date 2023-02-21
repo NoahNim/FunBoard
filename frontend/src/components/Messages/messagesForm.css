@@ -13,12 +13,13 @@
 
 .messages-options {
     margin: 1%;
-    width: 100%;
+    width: fit-content;
     justify-content: center;
     align-items: center;
 }
 
 .messages-list {
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;

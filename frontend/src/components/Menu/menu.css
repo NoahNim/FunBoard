@@ -5,11 +5,12 @@
     top: 0;
     right: 0;
     width: 20%;
+    min-width: 20em;
     z-index: 200;
-    box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 0px 2.3px rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
     transition: transform 0.3s ease-out;
-    border-color: #3A3335;
+    border-color: #A6A2A2;
 }
 
 .side-drawer.open {
@@ -26,4 +27,28 @@
     flex-direction: column;
     height: fit-content;
     background-color: #CFD2CD;
+}
+
+.user-info {
+    overflow-wrap: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-info ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.user-info ul li {
+    border-radius: 1px;
+    border-color: rgb(102, 100, 100);
+    border-style: solid;
+    margin: 3px;
+    object-fit: cover;
 }

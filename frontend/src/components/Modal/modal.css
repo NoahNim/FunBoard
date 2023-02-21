@@ -15,12 +15,15 @@
 }
 
 .modal-box {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #A6A2A2;
   padding: 1rem;
   border-radius: 1rem;
-  width: 20%;
-  height: 50%;
+  min-width: 20%;
+  height: 70%;
 }
 
 .message-modal-box {
@@ -37,14 +40,12 @@
 
 .login-modal-box {
   background-color: #A6A2A2;
-  padding: 1rem;
   border-radius: 1rem;
-  width: 80%;
-  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2%;
-  overflow: scroll;
+  overflow-wrap: normal;
+  width: 100%;
+  min-width: 1%;
 }
