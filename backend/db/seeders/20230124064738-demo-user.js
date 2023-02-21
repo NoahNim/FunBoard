@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-console.log(options)
+console.log(options.schema.tableName)
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -20,8 +20,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    options.tableName = 'users';
-    return queryInterface.bulkInsert('users', [
+    options.tableName = 'Users';
+    return queryInterface.bulkInsert('Users', [
       {
         username: 'Demo-lition',
         fullName: 'demo',
@@ -42,8 +42,8 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     const Op = Sequelize.Op;
-    options.tableName = 'users';
-    return queryInterface.bulkDelete('users', {
+    options.tableName = 'Users';
+    return queryInterface.bulkDelete('Users', {
       username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
     }, {});
 
