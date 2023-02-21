@@ -18,8 +18,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    options.tableName = 'Users';
-    return queryInterface.bulkInsert('Users', [
+    options.tableName = 'users';
+    return queryInterface.bulkInsert('users', [
       {
         username: 'Demo-lition',
         fullName: 'demo',
@@ -40,8 +40,8 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     const Op = Sequelize.Op;
-    options.tableName = 'Users';
-    return queryInterface.bulkDelete('Users', {
+    options.tableName = 'users';
+    return queryInterface.bulkDelete('users', {
       username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
     }, {});
 
