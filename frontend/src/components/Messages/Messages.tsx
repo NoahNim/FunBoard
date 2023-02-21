@@ -15,6 +15,7 @@ export const Messages = () => {
     const messagesList = messagesObj?.messages?.slice().reverse();
     const adminMessages = messagesObj?.messages?.forEach((message: Message) => {
         if (message.userId === 4) {
+            console.log(message)
             return message
         }
     })
@@ -24,34 +25,32 @@ export const Messages = () => {
             {!sessionUser ? <></> : <CreateMessage refetch={refetch} sessionUser={sessionUser} />}
             <div className="messages-list">
                 {adminMessages?.map((message: Message, index: number) => {
-                    if (message.userId === 4) {
-                        return (
-                            <div className="box">
-                                <div className="box-container">
-                                    <div className="box-message">
-                                        <div className="box-message-contents">
-                                            <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
-                                            <ul key={message.id}>
-                                                {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
-                                                    <>
-                                                        <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
-                                                        <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
-                                                    </> : <></>}
-                                                <li key={index}>{message.title}</li>
-                                                <li key={`${message.message}${Math.random()}`}>
-                                                    <p>{message.message}</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
-                                        </div>
-
+                    return (
+                        <div className="box">
+                            <div className="box-container">
+                                <div className="box-message">
+                                    <div className="box-message-contents">
+                                        <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
+                                        <ul key={message.id}>
+                                            {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
+                                                <>
+                                                    <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                                    <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                                </> : <></>}
+                                            <li key={index}>{message.title}</li>
+                                            <li key={`${message.message}${Math.random()}`}>
+                                                <p>{message.message}</p>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <div>
+                                        <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                                    </div>
+
                                 </div>
                             </div>
-                        )
-                    }
+                        </div>
+                    )
                 })}
                 {messagesList?.map((message: Message, index: number) => {
                     return (
