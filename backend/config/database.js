@@ -8,6 +8,8 @@ const database = db.database;
 const host = db.host;
 const jwtSecret = jwtConfig.secret;
 
+console.log(process.env.NODE_ENV)
+
 module.exports = {
   development: {
     username,
