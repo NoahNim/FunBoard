@@ -15,12 +15,15 @@
 }
 
 .modal-box {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #A6A2A2;
   padding: 1rem;
   border-radius: 1rem;
-  width: 20%;
-  height: 50%;
+  min-width: 20%;
+  height: 70%;
 }
 
 .message-modal-box {
