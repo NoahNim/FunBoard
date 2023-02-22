@@ -1,4 +1,4 @@
-import { Menu } from "../Menu/Menu";
+import { MainMenu } from "../Menu/Menu";
 import { Messages } from "../Messages/Messages";
 import "./home.css"
 
@@ -13,7 +13,7 @@ export const Home = () => {
                 <div>
                     Funboard
                 </div>
-                <Menu />
+                <MainMenu />
             </div>
             <div className="main">
                 <Messages />

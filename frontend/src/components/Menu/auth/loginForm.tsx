@@ -5,6 +5,22 @@ import { useLoginMutation } from '../../../redux/app/services/authApi'
 import './loginForm.css'
 import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input,
+    Button,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
+} from '@chakra-ui/react'
 
 
 export const LoginForm = () => {
@@ -47,15 +63,21 @@ export const LoginForm = () => {
     }
 
     return (
-        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
-            {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
-            <form onSubmit={loginSubmitFunction} className="login-form">
-                <label>username / email </label>
-                <input type="text" value={username} onChange={usernameChangeHandler}></input>
-                <label>password </label>
-                <input type="password" value={password} onChange={passwordChangeHandler}></input>
-                <button type="submit">Login</button>
-            </form>
-        </LoginModal>
+        <Menu>
+            <MenuButton as={Button}>Login</MenuButton>
+            <MenuList>
+                <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
+                    {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
+                    <form onSubmit={loginSubmitFunction} className="login-form">
+                        <label>username / email </label>
+                        <input type="text" value={username} onChange={usernameChangeHandler}></input>
+                        <label>password </label>
+                        <input type="password" value={password} onChange={passwordChangeHandler}></input>
+                        <button type="submit">Login</button>
+                    </form>
+                </LoginModal>
+            </MenuList>
+        </Menu>
+
     )
 }

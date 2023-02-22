@@ -11,7 +11,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
-    Box,
+    Text
 } from '@chakra-ui/react'
 import { useAppSelector } from "../../redux/app/store";
 import { LoginForm } from "./auth/loginForm";
@@ -19,7 +19,7 @@ import { LogoutButton } from "./auth/logoutButton";
 import { SignupForm } from "./auth/signupForm";
 import { UserInfo } from "./auth/UserInfo";
 
-export const Menu = () => {
+export const MainMenu = () => {
     const sessionUser = useAppSelector((state) => state?.auth?.user)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any | undefined | null>()
@@ -28,7 +28,7 @@ export const Menu = () => {
     return (
         <>
             <Button ref={btnRef} backgroundColor={'#CFD2CD'} onClick={onOpen}>
-                Open
+                Login Or Register
             </Button>
             <Drawer
                 isOpen={isOpen}
@@ -53,6 +53,7 @@ export const Menu = () => {
                         {
                             !sessionUser ?
                                 <>
+                                    <Text>Login or Register!</Text>
                                     <LoginForm />
                                     <SignupForm />
                                 </>
