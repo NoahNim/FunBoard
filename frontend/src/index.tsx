@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { api } from './redux/app/services/authApi';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -16,7 +17,9 @@ store.dispatch(api.endpoints.restore.initiate("/"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </Provider>
   </React.StrictMode>
 );
