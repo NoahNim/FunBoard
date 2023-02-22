@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useAppDispatch } from "../../../redux/app/store";
-import { useSignupMutation, UserResponse } from "../../../redux/app/services/authApi";
-import { LoginModal } from "../../Modal/LoginModal";
-import useModal from "../../Modal/UseModal";
+import { useSignupMutation, } from "../../../redux/app/services/authApi";
+import {
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Input,
+    Button,
+    Box,
+    Textarea
+} from '@chakra-ui/react'
+
 
 export const SignupForm = () => {
-    const { isOpen, toggle } = useModal();
     const dispatch = useAppDispatch();
     const [signup, { isLoading, isError }] = useSignupMutation();
     const [formState, setFormState] = useState({
@@ -54,7 +61,6 @@ export const SignupForm = () => {
             const res = await signup(formData).unwrap();
             const signupUser = { user: res.user, token: res.token }
             dispatch(setUser(signupUser));
-            toggle()
             setErrorList([])
         } catch (error: unknown | any) {
             const data = await error.data.errors
@@ -64,23 +70,92 @@ export const SignupForm = () => {
     }
 
     return (
-        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Register">
+        <>
             {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
-            <form onSubmit={signupSubmitHandler} className="login-form" encType="multipart/form-data">
-                <label>username</label>
-                <input type="text" name="username" value={formState.username} onChange={changeHandler}></input>
-                <label>fullName</label>
-                <input type="text" name="fullName" value={formState.fullName} onChange={changeHandler}></input>
-                <label>email</label>
-                <input type="email" name="email" value={formState.email} onChange={changeHandler}></input>
-                <label>password</label>
-                <input type="password" name="password" value={formState.password} onChange={changeHandler}></input>
-                <label>biography</label>
-                <input type="text" name="biography" value={formState.biography} onChange={changeHandler}></input>
-                <label>profile photo</label>
-                <input type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler}></input>
-                <button type="submit">Submit</button>
+            <form onSubmit={signupSubmitHandler} encType="multipart/form-data">
+                <FormControl
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                >
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        username</FormLabel>
+                    <Input
+                        type="text" name="username"
+                        value={formState.username}
+                        onChange={changeHandler}
+                        border={'1px'}
+                        bg={'#fff'}
+                    ></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}>
+                        fullName
+                    </FormLabel>
+                    <Input
+                        type="text"
+                        name="fullName"
+                        value={formState.fullName}
+                        onChange={changeHandler}
+                        border={'1px'}
+                        bg={'#fff'}
+                    ></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        email
+                    </FormLabel>
+                    <Input
+                        type="email" name="email"
+                        value={formState.email}
+                        onChange={changeHandler}
+                        border={'1px'}
+                        bg={'#fff'}
+                    ></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        password
+                    </FormLabel>
+                    <Input
+                        type="password" name="password"
+                        value={formState.password}
+                        onChange={changeHandler}
+                        border={'1px'}
+                        bg={'#fff'}></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        biography
+                    </FormLabel>
+                    <Input
+                        type="text" name="biography"
+                        value={formState.biography}
+                        onChange={changeHandler}
+                        border={'1px'}
+                        bg={'#fff'}
+                    ></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        profile photo
+                    </FormLabel>
+                    <Input
+                        type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg"
+                        border={'none'}
+                        onChange={fileChangeHandler}
+                    ></Input>
+                    <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Register</Button>
+                </FormControl>
             </form>
-        </LoginModal>
+        </>
     )
 }

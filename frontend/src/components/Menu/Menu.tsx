@@ -83,8 +83,8 @@ export const MainMenu = () => {
                                             >
                                                 <Text>Register</Text>
                                             </AccordionButton>
-                                            <AccordionPanel>
-                                                <SignupForm />
+                                            <AccordionPanel backgroundColor={'#ededed'}>
+                                                < SignupForm />
                                             </AccordionPanel>
                                         </AccordionItem>
                                     </Accordion>
