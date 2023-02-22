@@ -8,10 +8,10 @@ import useModal from "../../Modal/UseModal";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
     FormHelperText,
     Input,
     Button,
+    Box
 } from '@chakra-ui/react'
 
 
@@ -49,21 +49,30 @@ export const LoginForm = () => {
             setErrorList([])
         } catch (error: any | unknown) {
             const data = await error?.data.errors
-
+            console.log(data)
             setErrorList(data)
         }
     }
 
-    console.log(typeof FormControl)
-
     return (
-        <FormControl onSubmit={loginSubmitFunction}>
-            {isError ? <FormErrorMessage>{errorList.map((error) => <>{error}</>)}</FormErrorMessage> : <></>}
-            <FormLabel>username / email </FormLabel>
-            <Input type="text" value={username} onChange={usernameChangeHandler}></Input>
-            <FormLabel>password </FormLabel>
-            <Input type="password" value={password} onChange={passwordChangeHandler}></Input>
-            <Button type="submit">Login</Button>
-        </FormControl >
+        <form onSubmit={loginSubmitFunction}>
+            <FormControl
+                display={'flex'}
+                flexDirection={'column'}
+                justifyContent={'center'}
+                alignItems={'center'}
+            >
+                {isError ? <FormHelperText
+                    display={'flex'}
+                    flexDirection={'column'}
+                    color={'red'}
+                >{errorList.map((error) => <Box>{error}</Box>)}</FormHelperText> : <></>}
+                <FormLabel>username / email </FormLabel>
+                <Input border={'1px'} bg={'#fff'} type="text" value={username} onChange={usernameChangeHandler}></Input>
+                <FormLabel>password </FormLabel>
+                <Input border={'1px'} bg={'#fff'} type="password" value={password} onChange={passwordChangeHandler}></Input>
+                <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Login</Button>
+            </FormControl >
+        </form >
     )
 }

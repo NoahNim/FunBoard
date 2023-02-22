@@ -65,15 +65,24 @@ export const MainMenu = () => {
                                     flexDirection={'column'}
                                     justifyContent={'flex-start'}
                                 >
-                                    <Accordion>
+                                    <Accordion allowToggle>
                                         <AccordionItem>
-                                            <AccordionButton>Login</AccordionButton>
-                                            <AccordionPanel>
+                                            <AccordionButton display={'flex'}
+                                                flexDirection={'row'}
+                                                justifyContent={'center'}>
+                                                <Text>Login</Text>
+                                            </AccordionButton>
+                                            <AccordionPanel backgroundColor={'#ededed'}>
                                                 <LoginForm />
                                             </AccordionPanel>
                                         </AccordionItem>
                                         <AccordionItem>
-                                            <AccordionButton>Register</AccordionButton>
+                                            <AccordionButton display={'flex'}
+                                                flexDirection={'row'}
+                                                justifyContent={'center'}
+                                            >
+                                                <Text>Register</Text>
+                                            </AccordionButton>
                                             <AccordionPanel>
                                                 <SignupForm />
                                             </AccordionPanel>

@@ -8,6 +8,9 @@ export const theme = extendTheme({
                 color: 'default',
                 bg: '#A6A2A2',
             },
+            button: {
+                border: '3%'
+            }
         }),
     },
 })
