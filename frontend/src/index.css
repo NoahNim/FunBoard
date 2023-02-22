@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #A6A2A2;
 }
 
 code {
@@ -15,17 +14,4 @@ code {
 
 ul {
   list-style-type: none;
-}
-
-button {
-  border-radius: 10px;
-}
-
-input {
-  width: 95%;
-}
-
-label {
-  min-width: 20%;
-  overflow-wrap: break-word;
 }

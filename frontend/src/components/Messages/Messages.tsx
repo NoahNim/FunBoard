@@ -7,6 +7,17 @@ import "./messagesForm.css"
 import { SingleMessage } from "./SingleMessage";
 import { EditMessage } from "./EditMessage";
 import { DeleteMessage } from "./DeleteMessage";
+import {
+    Card, CardHeader,
+    CardBody,
+    CardFooter,
+    Stack,
+    Box,
+    Text,
+    Heading,
+    StackDivider,
+    Image
+} from '@chakra-ui/react'
 
 export const Messages = () => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
@@ -15,38 +26,75 @@ export const Messages = () => {
     const messagesList = messagesObj?.messages?.slice().reverse();
 
     return (
-        <div className="messages-options">
+        <Box width={'60%'}>
+            <Card
+                display={'flex'}
+                flexDirection={'row'}
+                overflow='scroll'
+                variant='outline'
+                margin={'1%'}
+                maxWidth={'100%'}
+                minWidth={'20%'}
+                justifyContent={'center'}
+                alignItems={'center'}
+            >
+                <Image
+                    objectFit={'cover'}
+                    maxW={{ base: '100%', sm: '200px' }}
+                    src={'https://i.imgur.com/KCVm8DV.jpg'}
+                    alt='Photo Not Found!'
+                    borderRadius={'lg'}
+                />
+                <Stack divider={<StackDivider />} spacing='4'>
+                    <CardBody
+                        alignItems={'center'}
+                    >
+                        <Heading>Hello everyone!</Heading>
+                        <Text>Welcome to the Funboard! Click Create Message to make a message. Click Logon/Register in the Top Bar to Login or Register! Please be civil and kind to your fellow community members.</Text>
+                    </CardBody>
+                </Stack>
+            </Card>
             {!sessionUser ? <></> : <CreateMessage refetch={refetch} sessionUser={sessionUser} />}
-            <div className="messages-list">
-                {messagesList?.map((message: Message, index: number) => {
-                    return (
-                        <div className="box">
-                            <div className="box-container">
-                                <div className="box-message">
-                                    <div className="box-message-contents">
-                                        <img className="post-images" src={`${window.location.href}${message?.photo}`}></img>
-                                        <ul key={message.id}>
-                                            {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
-                                                <>
-                                                    <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
-                                                    <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
-                                                </> : <></>}
-                                            <li key={index}>{message.title}</li>
-                                            <li key={`${message.message}${Math.random()}`}>
-                                                <p>{message.message}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
-                                    </div>
+            {messagesList?.map((message: Message, index: number) => {
+                return (
+                    <Card
+                        display={'flex'}
+                        flexDirection={'row'}
+                        justifyContent={'space-between'}
+                        alignItems={'center'}
+                        overflow='scroll'
+                        variant='outline'
+                        margin={'1%'}
+                        maxWidth={'100%'}
+                        minWidth={'20%'}
+                    >
+                        <Stack divider={<StackDivider />} spacing='4'>
+                            <Image
+                                objectFit={'cover'}
+                                maxW={{ base: '100%', sm: '200px' }}
+                                src={`${window.location.href}${message?.photo}`}
+                                alt='Photo Not Found!'
+                                borderRadius={'lg'}
+                            />
+                        </Stack>
+                        <Stack divider={<StackDivider />} spacing='4'>
+                            <CardBody>
+                                <Heading>{message.title}</Heading>
 
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
-        </div>
+                                <Text>{message.message}</Text>
+                            </CardBody>
+                        </Stack>
+                        <CardFooter>
+                            {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
+                                <>
+                                    <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                    <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                </> : <></>}
+                            <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                        </CardFooter>
+                    </Card>
+                )
+            })}
+        </Box>
     )
 }
