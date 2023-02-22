@@ -11,6 +11,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
+    Box,
 } from '@chakra-ui/react'
 import { useAppSelector } from "../../redux/app/store";
 import { LoginForm } from "./auth/loginForm";
@@ -19,6 +20,7 @@ import { SignupForm } from "./auth/signupForm";
 import { UserInfo } from "./auth/UserInfo";
 
 export const Menu = () => {
+    const sessionUser = useAppSelector((state) => state?.auth?.user)
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef<any | undefined | null>()
 
@@ -33,13 +35,33 @@ export const Menu = () => {
                 placement='right'
                 onClose={onClose}
                 finalFocusRef={btnRef}
+
             >
-                <DrawerContent>
+                <DrawerContent
+                    display={'flex'}
+                    flexDirection={'column'}
+                    alignItems={'flex-start'}
+                    background={'#A6A2A2'}
+                >
                     <DrawerCloseButton />
 
-
-                    <DrawerBody>
-
+                    <DrawerBody
+                        display={'flex'}
+                        flexDirection={'column'}
+                        margin={"40%"}
+                    >
+                        {
+                            !sessionUser ?
+                                <>
+                                    <LoginForm />
+                                    <SignupForm />
+                                </>
+                                :
+                                <>
+                                    <UserInfo />
+                                    <LogoutButton />
+                                </>
+                        }
                     </DrawerBody>
 
                     <DrawerFooter>
@@ -48,10 +70,6 @@ export const Menu = () => {
                         </Button>
                     </DrawerFooter>
                 </DrawerContent>
-
-
-
-
             </Drawer>
 
         </>
