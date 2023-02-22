@@ -11,7 +11,13 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
-    Text
+    Text,
+    Box,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
 } from '@chakra-ui/react'
 import { useAppSelector } from "../../redux/app/store";
 import { LoginForm } from "./auth/loginForm";
@@ -44,24 +50,46 @@ export const MainMenu = () => {
                     background={'#A6A2A2'}
                 >
                     <DrawerCloseButton />
+                    <DrawerHeader>{!sessionUser ? <Text>Login or Register!</Text> : <></>}</DrawerHeader>
 
                     <DrawerBody
                         display={'flex'}
                         flexDirection={'column'}
-                        margin={"40%"}
+                        justifyContent={'flex-start'}
+                        width={'100%'}
                     >
                         {
                             !sessionUser ?
-                                <>
-                                    <Text>Login or Register!</Text>
-                                    <LoginForm />
-                                    <SignupForm />
-                                </>
+                                <Box
+                                    display={'flex'}
+                                    flexDirection={'column'}
+                                    justifyContent={'flex-start'}
+                                >
+                                    <Accordion>
+                                        <AccordionItem>
+                                            <AccordionButton>Login</AccordionButton>
+                                            <AccordionPanel>
+                                                <LoginForm />
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                        <AccordionItem>
+                                            <AccordionButton>Register</AccordionButton>
+                                            <AccordionPanel>
+                                                <SignupForm />
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                    </Accordion>
+
+                                </Box>
                                 :
-                                <>
+                                <Box
+                                    display={'flex'}
+                                    flexDirection={'column'}
+                                    justifyContent={'flex-start'}
+                                >
                                     <UserInfo />
                                     <LogoutButton />
-                                </>
+                                </Box>
                         }
                     </DrawerBody>
 

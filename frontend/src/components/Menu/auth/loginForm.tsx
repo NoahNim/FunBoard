@@ -12,14 +12,6 @@ import {
     FormHelperText,
     Input,
     Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
 } from '@chakra-ui/react'
 
 
@@ -42,7 +34,7 @@ export const LoginForm = () => {
         setPassword(e.target.value)
     }
 
-    const loginSubmitFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+    const loginSubmitFunction = async (e: any) => {
         e.preventDefault();
 
         const credential = username
@@ -62,22 +54,16 @@ export const LoginForm = () => {
         }
     }
 
-    return (
-        <Menu>
-            <MenuButton as={Button}>Login</MenuButton>
-            <MenuList>
-                <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
-                    {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
-                    <form onSubmit={loginSubmitFunction} className="login-form">
-                        <label>username / email </label>
-                        <input type="text" value={username} onChange={usernameChangeHandler}></input>
-                        <label>password </label>
-                        <input type="password" value={password} onChange={passwordChangeHandler}></input>
-                        <button type="submit">Login</button>
-                    </form>
-                </LoginModal>
-            </MenuList>
-        </Menu>
+    console.log(typeof FormControl)
 
+    return (
+        <FormControl onSubmit={loginSubmitFunction}>
+            {isError ? <FormErrorMessage>{errorList.map((error) => <>{error}</>)}</FormErrorMessage> : <></>}
+            <FormLabel>username / email </FormLabel>
+            <Input type="text" value={username} onChange={usernameChangeHandler}></Input>
+            <FormLabel>password </FormLabel>
+            <Input type="password" value={password} onChange={passwordChangeHandler}></Input>
+            <Button type="submit">Login</Button>
+        </FormControl >
     )
 }
