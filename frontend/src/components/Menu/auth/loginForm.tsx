@@ -3,7 +3,6 @@ import { useAppDispatch } from "../../../redux/app/store";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useLoginMutation } from '../../../redux/app/services/authApi'
 import './loginForm.css'
-import { LoginModal } from "../../Modal/LoginModal";
 import useModal from "../../Modal/UseModal";
 import {
     FormControl,

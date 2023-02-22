@@ -21,8 +21,7 @@ import {
 
 export const Messages = () => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
-    const { data: messagesObj, isFetching, isLoading, refetch } = useGetMessagesQuery({})
-    if (isLoading) return <div>Loading...</div>
+    const { data: messagesObj, refetch } = useGetMessagesQuery({})
     const messagesList = messagesObj?.messages?.slice().reverse();
 
     return (
@@ -67,6 +66,7 @@ export const Messages = () => {
                         margin={'1%'}
                         maxWidth={'100%'}
                         minWidth={'20%'}
+                        key={message.id}
                     >
                         <Stack divider={<StackDivider />} spacing='4'>
                             <Image
@@ -80,7 +80,6 @@ export const Messages = () => {
                         <Stack divider={<StackDivider />} spacing='4'>
                             <CardBody>
                                 <Heading>{message.title}</Heading>
-
                                 <Text>{message.message}</Text>
                             </CardBody>
                         </Stack>
