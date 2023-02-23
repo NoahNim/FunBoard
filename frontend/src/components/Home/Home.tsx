@@ -1,23 +1,28 @@
-import { MainMenu } from "../Menu/Menu";
+// import { MainMenu } from "../Menu/Menu";
+import { Box } from "@chakra-ui/react";
 import { Messages } from "../Messages/Messages";
-import "./home.css"
+import { TopBar } from "../TopBar/TopBar";
+import { useGetMessagesQuery } from "../../redux/app/services/authApi";
 
 
 export const Home = () => {
-    return (
-        <div>
-            <div className="top-bar" >
-                <div>
+    const { data: messagesObj, refetch } = useGetMessagesQuery({})
+    const messagesList = messagesObj?.messages?.slice().reverse();
 
-                </div>
-                <div>
-                    Funboard
-                </div>
-                <MainMenu />
-            </div>
-            <div className="main">
-                <Messages />
-            </div>
-        </div>
+    return (
+        <Box>
+            <Box>
+                <TopBar refetch={refetch} />
+            </Box>
+            <Box
+                display={'flex'}
+                flexDirection={'column'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                w={'100%'}
+            >
+                <Messages messagesList={messagesList} refetch={refetch} />
+            </Box>
+        </Box>
     )
 }

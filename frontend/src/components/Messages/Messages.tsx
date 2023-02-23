@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../redux/app/store";
-import { CreateMessage } from "./CreateMessage";
 import { useGetMessagesQuery } from "../../redux/app/services/authApi";
 import { Message } from "../../redux/app/services/authApi";
 import "../general.css"
@@ -19,10 +18,14 @@ import {
     Image
 } from '@chakra-ui/react'
 
-export const Messages = () => {
+interface MessageProps {
+    messagesList: any
+    refetch: () => any
+}
+
+export const Messages = ({ messagesList, refetch }: MessageProps) => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
-    const { data: messagesObj, refetch } = useGetMessagesQuery({})
-    const messagesList = messagesObj?.messages?.slice().reverse();
+
 
     return (
         <Box width={'60%'}>
@@ -53,7 +56,6 @@ export const Messages = () => {
                     </CardBody>
                 </Stack>
             </Card>
-            {!sessionUser ? <></> : <CreateMessage refetch={refetch} sessionUser={sessionUser} />}
             {messagesList?.map((message: Message, index: number) => {
                 return (
                     <Card
