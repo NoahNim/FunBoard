@@ -42,11 +42,11 @@ export const MainMenu = () => {
                 <DrawerContent
                     display={'flex'}
                     flexDirection={'column'}
-                    alignItems={'flex-start'}
+                    alignItems={'center'}
                     background={'#A6A2A2'}
                 >
                     <DrawerCloseButton />
-                    <DrawerHeader></DrawerHeader>
+                    <DrawerHeader>{sessionUser ? 'Setings' : 'Login or Register'}</DrawerHeader>
 
                     <DrawerBody
                         display={'flex'}
@@ -65,6 +65,7 @@ export const MainMenu = () => {
                                                 justifyContent={'center'}
                                                 border={'2px solid'}
                                                 borderRadius={'10px'}
+                                                bg={'#CFD2CD'}
                                             >
                                                 <Text>Login</Text>
                                             </AccordionButton>
@@ -78,6 +79,7 @@ export const MainMenu = () => {
                                                 justifyContent={'center'}
                                                 border={'2px solid'}
                                                 borderRadius={'10px'}
+                                                bg={'#CFD2CD'}
                                             >
                                                 <Text>Register</Text>
                                             </AccordionButton>
@@ -95,6 +97,7 @@ export const MainMenu = () => {
                                             justifyContent={'center'}
                                             border={'2px solid'}
                                             borderRadius={'10px'}
+                                            bg={'#CFD2CD'}
                                         >
                                             <Text>Profile Info</Text>
                                         </AccordionButton>
@@ -106,8 +109,8 @@ export const MainMenu = () => {
                         }
                     </DrawerBody>
 
-                    <DrawerFooter>
-                        <Button mr={3} backgroundColor={"#e69797"} onClick={onClose}>
+                    <DrawerFooter width={'100%'} padding={'0'}>
+                        <Button mr={3} backgroundColor={"#e69797"} onClick={onClose} width={'100%'}>
                             Close
                         </Button>
                     </DrawerFooter>
