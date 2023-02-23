@@ -57,29 +57,31 @@ export const MainMenu = () => {
                         flexDirection={'column'}
                         justifyContent={'flex-start'}
                         width={'100%'}
+                        padding={'0'}
                     >
                         {
                             !sessionUser ?
-                                <Box
-                                    display={'flex'}
-                                    flexDirection={'column'}
-                                    justifyContent={'flex-start'}
-                                >
-                                    <Accordion allowToggle>
-                                        <AccordionItem>
+                                <>
+                                    <Accordion allowToggle width={'100%'} padding={'0'}>
+                                        <AccordionItem width={'100%'} >
                                             <AccordionButton display={'flex'}
                                                 flexDirection={'row'}
-                                                justifyContent={'center'}>
+                                                justifyContent={'center'}
+                                                border={'2px solid'}
+                                                borderRadius={'10px'}
+                                            >
                                                 <Text>Login</Text>
                                             </AccordionButton>
                                             <AccordionPanel backgroundColor={'#ededed'}>
                                                 <LoginForm />
                                             </AccordionPanel>
                                         </AccordionItem>
-                                        <AccordionItem>
+                                        <AccordionItem width={'100%'}>
                                             <AccordionButton display={'flex'}
                                                 flexDirection={'row'}
                                                 justifyContent={'center'}
+                                                border={'2px solid'}
+                                                borderRadius={'10px'}
                                             >
                                                 <Text>Register</Text>
                                             </AccordionButton>
@@ -89,7 +91,7 @@ export const MainMenu = () => {
                                         </AccordionItem>
                                     </Accordion>
 
-                                </Box>
+                                </>
                                 :
                                 <Box
                                     display={'flex'}
