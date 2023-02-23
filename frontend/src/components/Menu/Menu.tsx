@@ -1,23 +1,19 @@
-import { useState, useRef } from "react";
-import { MenuDrawer } from "./MenuDrawer";
-import "./menu.css"
+import { useRef } from "react";
 import {
     Button,
     Drawer,
     DrawerBody,
     DrawerFooter,
     DrawerHeader,
-    DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
     Text,
-    Box,
     Accordion,
     AccordionItem,
     AccordionButton,
     AccordionPanel,
-    AccordionIcon,
+
 } from '@chakra-ui/react'
 import { useAppSelector } from "../../redux/app/store";
 import { LoginForm } from "./auth/loginForm";
@@ -34,7 +30,7 @@ export const MainMenu = () => {
     return (
         <>
             <Button ref={btnRef} backgroundColor={'#CFD2CD'} onClick={onOpen}>
-                Login Or Register
+                {!sessionUser ? <Text>Login or Register!</Text> : <>Settings</>}
             </Button>
             <Drawer
                 isOpen={isOpen}
@@ -50,7 +46,7 @@ export const MainMenu = () => {
                     background={'#A6A2A2'}
                 >
                     <DrawerCloseButton />
-                    <DrawerHeader>{!sessionUser ? <Text>Login or Register!</Text> : <></>}</DrawerHeader>
+                    <DrawerHeader></DrawerHeader>
 
                     <DrawerBody
                         display={'flex'}
@@ -90,17 +86,23 @@ export const MainMenu = () => {
                                             </AccordionPanel>
                                         </AccordionItem>
                                     </Accordion>
-
                                 </>
                                 :
-                                <Box
-                                    display={'flex'}
-                                    flexDirection={'column'}
-                                    justifyContent={'flex-start'}
-                                >
-                                    <UserInfo />
-                                    <LogoutButton />
-                                </Box>
+                                <Accordion allowToggle width={'100%'} padding={'0'}>
+                                    <AccordionItem width={'100%'} >
+                                        <AccordionButton display={'flex'}
+                                            flexDirection={'row'}
+                                            justifyContent={'center'}
+                                            border={'2px solid'}
+                                            borderRadius={'10px'}
+                                        >
+                                            <Text>Profile Info</Text>
+                                        </AccordionButton>
+                                        <AccordionPanel backgroundColor={'#ededed'} padding={"0"}>
+                                            <UserInfo />
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                </Accordion>
                         }
                     </DrawerBody>
 
