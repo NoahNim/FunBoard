@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../../redux/app/store";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useLoginMutation } from '../../../redux/app/services/authApi'
-import './loginForm.css'
 import {
     FormControl,
     FormLabel,
@@ -57,6 +56,8 @@ export const LoginForm = () => {
                 flexDirection={'column'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                w={'100%'}
+                h={'100%'}
             >
                 {isError ? <FormHelperText
                     display={'flex'}

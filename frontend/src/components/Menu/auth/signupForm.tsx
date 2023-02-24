@@ -9,7 +9,8 @@ import {
     Input,
     Button,
     Box,
-    Textarea
+    Textarea,
+    Text
 } from '@chakra-ui/react'
 
 
@@ -150,10 +151,9 @@ export const SignupForm = () => {
                     </FormLabel>
                     <Input
                         type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg"
-                        border={'none'}
                         onChange={fileChangeHandler}
                     ></Input>
-                    <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Register</Button>
+                    <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Post</Button>
                 </FormControl>
             </form>
         </>
