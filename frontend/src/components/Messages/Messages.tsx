@@ -7,7 +7,7 @@ import { SingleMessage } from "./SingleMessage";
 import { EditMessage } from "./EditMessage";
 import { DeleteMessage } from "./DeleteMessage";
 import {
-    Card, CardHeader,
+    Card,
     CardBody,
     CardFooter,
     Stack,
@@ -15,7 +15,8 @@ import {
     Text,
     Heading,
     StackDivider,
-    Image
+    Image,
+    Container,
 } from '@chakra-ui/react'
 
 interface MessageProps {
@@ -28,7 +29,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
 
     return (
-        <Box width={'60%'}>
+        <Box width={'80%'}>
             <Card
                 display={'flex'}
                 flexDirection={'row'}
@@ -63,7 +64,6 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                         flexDirection={'row'}
                         justifyContent={'space-between'}
                         alignItems={'center'}
-                        overflow='scroll'
                         variant='outline'
                         margin={'1%'}
                         maxWidth={'100%'}
@@ -79,23 +79,38 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                 borderRadius={'lg'}
                             />
                         </Stack>
-                        <Stack divider={<StackDivider />} spacing='4'>
-                            <CardBody>
-                                <Heading>{message.title}</Heading>
-                                <Text>{message.message}</Text>
-                            </CardBody>
-                        </Stack>
-                        <CardFooter>
+
+                        <Stack
+                            divider={<StackDivider />}
+                            spacing='6'
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                            maxHeight={'2xs'}
+                            maxWidth={'3xs'}
+                        >
+                            <Heading>{message.title}</Heading>
+                            <Container margin={'0'} overflowY={'scroll'} overflowX={'scroll'} overflowWrap={'anywhere'} centerContent>
+                                <CardBody>
+                                    <Text>{message.message}</Text>
+                                </CardBody>
+                            </Container>
                             {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
-                                <>
+                                <Box
+                                    display={'flex'}
+                                    flexDirection={'row'}
+                                >
                                     <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
                                     <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
-                                </> : <></>}
+                                </Box> : <></>}
+                        </Stack>
+
+                        <CardFooter>
                             <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                         </CardFooter>
                     </Card>
                 )
             })}
-        </Box>
+        </Box >
     )
 }

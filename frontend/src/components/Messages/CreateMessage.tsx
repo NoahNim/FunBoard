@@ -64,6 +64,7 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
         try {
             const res = await makeMessage(formData).unwrap();
             const returnedMessage = { message: res.message }
+            onClose();
             refetch();
         } catch (error: unknown | any) {
             const data = await error.data.errors
