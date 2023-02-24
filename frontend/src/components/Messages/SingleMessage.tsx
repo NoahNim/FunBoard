@@ -25,6 +25,11 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
         <Box
             width={'100%'}
             height={'100%'}
+            marginTop={'5%'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
         >
             <Card
                 display={'flex'}
@@ -35,6 +40,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                 justifyContent={'center'}
                 alignItems={'center'}
                 height={'100%'}
+                width={'100%'}
             >
 
                 <Image
@@ -69,7 +75,22 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                         </CardBody>
                     </Box>
                 </Stack>
-                <Comments messageId={id} />
+                <Stack
+                    divider={<StackDivider />}
+                    spacing='1'
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    height={'2xs'}
+                    width={'100%'}
+                >
+                    <Box width={'100%'}>
+                        <CardFooter width={'100%'}>
+                            <Comments messageId={id} />
+                        </CardFooter>
+                    </Box>
+
+                </Stack>
             </Card>
         </Box>
     )

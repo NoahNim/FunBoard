@@ -34,7 +34,7 @@ export const ReModal = ({ children, buttonValue, modalHeight, modalWidth }: ReMo
                     height={modalHeight}
                 >
                     <ModalCloseButton />
-                    <ModalBody marginTop={'3%'}>
+                    <ModalBody padding={'0'} marginTop={'3%'}>
                         {children}
                     </ModalBody>
                 </ModalContent>

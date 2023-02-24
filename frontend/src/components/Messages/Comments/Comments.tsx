@@ -33,52 +33,62 @@ export const Comments = ({ messageId }: CommentsProps) => {
             {sessionUser ? <CreateComment messageId={messageId} sessionUser={sessionUser} refetch={refetch} /> : null}
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
-                    <Card
+                    <Box
+                        width={'100%'}
+                        height={'100%'}
                         display={'flex'}
                         flexDirection={'column'}
-                        overflow='scroll'
-                        variant='outline'
-                        margin={'1%'}
                         justifyContent={'center'}
                         alignItems={'center'}
-                        width={'100%'}
-                        key={comment.id}
                     >
-                        {comment?.photo ? <Image
-                            src={`${window.location.href}${comment?.photo}`}
-                            alt='Photo Not Found!'
-                            borderRadius={'lg'}
-                        /> : <></>}
-                        <Stack
-                            divider={<StackDivider />}
-                            spacing='1'
+                        <Card
+                            border={'1px'}
                             display={'flex'}
-                            justifyContent={'space-between'}
+                            flexDirection={'column'}
+                            overflow='scroll'
+                            variant='outline'
+                            margin={'1%'}
+                            justifyContent={'center'}
                             alignItems={'center'}
-                            height={'2xs'}
                             width={'100%'}
-                            margin={'0'}
+                            key={comment.id}
                         >
-                            <Box
-                                overflowY={'scroll'}
-                                width={{ base: '100%', md: '100%', lg: '100%' }}
-                                height={'100%'}
-                                border={'1px'}
-                                borderRadius={'5%'}
+                            {comment?.photo ? <Image
+                                src={`${window.location.href}${comment?.photo}`}
+                                alt='Photo Not Found!'
+                                borderRadius={'lg'}
+                            /> : <></>}
+                            <Stack
+                                divider={<StackDivider />}
+                                spacing='1'
+                                display={'flex'}
+                                justifyContent={'space-between'}
+                                alignItems={'center'}
+                                height={'2xs'}
+                                width={'100%'}
+                                margin={'0'}
                             >
-                                <CardBody>{comment?.comment}</CardBody>
-                            </Box>
-                        </Stack>
-                        <CardFooter
-                            width={'100%'}
-                            overflow={'scroll'}
-                        >
-                            {sessionUser?.id === comment.userId || sessionUser?.username === "noah" ? <>
-                                <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
-                                <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
-                            </> : <></>}
-                        </CardFooter>
-                    </Card>
+                                <Box
+                                    overflowY={'scroll'}
+                                    width={{ base: '100%', md: '100%', lg: '100%' }}
+                                    height={'100%'}
+                                    borderRadius={'5%'}
+                                >
+                                    <CardBody>{comment?.comment}</CardBody>
+                                </Box>
+                            </Stack>
+                            <CardFooter
+                                width={'100%'}
+                                overflow={'scroll'}
+                            >
+                                {sessionUser?.id === comment.userId || sessionUser?.username === "noah" ?
+                                    <Box width={'100%'}>
+                                        <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
+                                        <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
+                                    </Box> : <></>}
+                            </CardFooter>
+                        </Card>
+                    </Box>
                 )
             })}
         </Box>
