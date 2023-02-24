@@ -31,8 +31,8 @@ export const ReModal = ({ children, buttonValue }: ReModalProps) => {
                     padding={'0'}
                     mb={'0'}
                 >
-                    <ModalCloseButton />
-                    <ModalBody>
+                    <ModalCloseButton width={'6%'} height={'5%'} />
+                    <ModalBody marginTop={'1%'}>
                         {children}
                     </ModalBody>
                 </ModalContent>
