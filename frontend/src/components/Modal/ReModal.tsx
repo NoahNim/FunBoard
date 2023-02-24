@@ -27,7 +27,7 @@ export const ReModal = ({ children, buttonValue, modalHeight, modalWidth }: ReMo
                 isOpen={isOpen}
                 onClose={onClose}
             >
-                <ModalOverlay />
+                <ModalOverlay justifyContent={'center'} />
 
                 <ModalContent
                     maxWidth={modalWidth}

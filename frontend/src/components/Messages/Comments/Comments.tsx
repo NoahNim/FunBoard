@@ -100,8 +100,9 @@ export const Comments = ({ messageId }: CommentsProps) => {
                                         <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
                                             <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
                                         </ReModal>
-
-                                        <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
+                                        <ReModal modalWidth="30%" modalHeight={'40%'} buttonValue={<><DeleteIcon color={'red'} /></>}>
+                                            <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
+                                        </ReModal>
                                     </Box> : <></>}
                             </CardFooter>
                         </Card>

@@ -122,7 +122,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                     <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
                                         <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
                                     </ReModal>
-                                    <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><DeleteIcon color={'red'} /></>}>
+                                    <ReModal modalWidth="30%" modalHeight={'40%'} buttonValue={<><DeleteIcon color={'red'} /></>}>
                                         <DeleteMessage title={message.title} id={message.id} refetch={refetch} sessionUser={sessionUser} />
                                     </ReModal>
                                 </Box> : <></>}
