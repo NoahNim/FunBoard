@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { User, Comment } from "../../../redux/app/services/authApi";
-import { Modal } from "../../Modal/Modal";
-import useModal from "../../Modal/UseModal";
+import {
+    useModalContext,
+    Button,
+    Input,
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Textarea,
+    Box,
+    Text
+} from "@chakra-ui/react";
+import { DownloadIcon } from "@chakra-ui/icons";
 import { useCreateCommentMutation } from "../../../redux/app/services/authApi";
 
 interface CreateMessageProps {
@@ -12,7 +22,7 @@ interface CreateMessageProps {
 
 
 export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessageProps) => {
-    const { isOpen, toggle } = useModal();
+    const { onClose } = useModalContext()
     const [makeComment, { isLoading, isError }] = useCreateCommentMutation();
     const [formState, setFormState] = useState({
         comment: "",
@@ -51,8 +61,8 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
 
         try {
             const res = await makeComment(formData).unwrap();
+            onClose();
             refetch();
-            toggle();
         } catch (error: unknown | any) {
             const data = await error.data.errors
 
@@ -60,18 +70,75 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
         }
     }
 
-
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Post Comment">
-            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
-            <form onSubmit={CreateCommentSubmitHandler} className="message-form" encType="multipart/form-data">
-                <label>Comment Text</label>
-                <textarea name="comment" value={formState.comment} onChange={changeHandler}></textarea>
-                <label>Photo</label>
-                <input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler}></input>
-                <button type="submit">Submit</button>
+        <>
+            <form onSubmit={CreateCommentSubmitHandler} style={{ height: '100%', width: '100%' }} encType="multipart/form-data">
+                <FormControl
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    padding={'1%'}
+                >
+                    {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
+                    <FormLabel
+                        marginTop={'1%'}
+                    >Enter Your Comment</FormLabel>
+                    <Textarea
+                        height={'90%'}
+                        border={'1px'}
+                        name="comment"
+                        value={formState.comment}
+                        onChange={changeHandler}></Textarea>
+                    <Box
+                        display={'flex'}
+                        flexDirection={'column'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        width={'100%'}
+                    >
+                        <FormLabel
+                            width={'100%'}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                        >
+                            <Text>Photo Upload</Text>
+                            <Box display={'flex'}
+                                flexDirection={'column'}
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                                width={'100%'}
+                                cursor={'grab'}
+                            >
+                                <DownloadIcon
+                                    cursor={'grab'}
+                                    width={'100%'} />
+                                <Input
+                                    type="file"
+                                    id="file"
+                                    name="photo"
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    onChange={fileChangeHandler}
+                                    opacity={'0'}
+                                    marginTop={'-5%'}
+                                    cursor={'grab'}
+                                    height={'10%'}
+                                    width={'100%'}
+                                ></Input>
+                            </Box>
+                        </FormLabel>
+                    </Box>
+                    <Button
+                        type="submit"
+                        bg={'#CFD2CD'}
+                        width={'100%'}
+                    >Post Comment</Button>
+                </FormControl>
             </form>
-        </Modal>
+        </>
     )
 
 }

@@ -10,11 +10,14 @@ import {
     CardFooter,
     Stack,
     Box,
-    Text,
-    Heading,
     StackDivider,
     Image,
 } from "@chakra-ui/react";
+import {
+    EditIcon,
+    DeleteIcon
+} from "@chakra-ui/icons";
+import { ReModal } from "../../Modal/ReModal";
 
 interface CommentsProps {
     messageId: number;
@@ -29,8 +32,19 @@ export const Comments = ({ messageId }: CommentsProps) => {
         <Box
             width={'100%'}
             height={'100%'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
         >
-            {sessionUser ? <CreateComment messageId={messageId} sessionUser={sessionUser} refetch={refetch} /> : null}
+            {sessionUser ? <ReModal
+                modalWidth={"30%"}
+                modalHeight={'70%'}
+                buttonValue='Click Here to Post Comment'
+            >
+                <CreateComment messageId={messageId} sessionUser={sessionUser} refetch={refetch} />
+            </ReModal>
+                : null}
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
                     <Box
@@ -70,7 +84,7 @@ export const Comments = ({ messageId }: CommentsProps) => {
                             >
                                 <Box
                                     overflowY={'scroll'}
-                                    width={{ base: '100%', md: '100%', lg: '100%' }}
+                                    width={{ base: '90%', md: '100%', lg: '100%' }}
                                     height={'100%'}
                                     borderRadius={'5%'}
                                 >
@@ -83,7 +97,10 @@ export const Comments = ({ messageId }: CommentsProps) => {
                             >
                                 {sessionUser?.id === comment.userId || sessionUser?.username === "noah" ?
                                     <Box width={'100%'}>
-                                        <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
+                                        <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
+                                            <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
+                                        </ReModal>
+
                                         <DeleteComment sessionUser={sessionUser} id={comment.id} refetch={refetch} />
                                     </Box> : <></>}
                             </CardFooter>

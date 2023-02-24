@@ -57,7 +57,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                     justifyContent={'space-between'}
                     alignItems={'center'}
                     height={'2xs'}
-                    width={'100%'}
+                    width={'95%'}
                     margin={''}
                 >
                     <Heading>

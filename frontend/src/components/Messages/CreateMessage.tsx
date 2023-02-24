@@ -95,9 +95,15 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                         marginTop={'1%'}
                         marginBottom={'-1%'}
                     >
-                        Message Text
+                        Enter Your Message
                     </FormLabel>
-                    <Textarea height={'90%'} border={'1px'} bg={'#fff'} name="message" value={formState.message} onChange={changeHandler}></Textarea>
+                    <Textarea
+                        height={'90%'}
+                        border={'1px'}
+                        bg={'#fff'}
+                        name="message"
+                        value={formState.message}
+                        onChange={changeHandler}></Textarea>
                     <Box
                         display={'flex'}
                         flexDirection={'column'}
@@ -120,8 +126,16 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                                 width={'100%'}
                                 cursor={'grab'}
                             >
-                                <DownloadIcon cursor={'grab'} width={'100%'} />
-                                <Input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler} opacity={'0'}
+                                <DownloadIcon
+                                    cursor={'grab'}
+                                    width={'100%'} />
+                                <Input
+                                    type="file"
+                                    id="file"
+                                    name="photo"
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    onChange={fileChangeHandler}
+                                    opacity={'0'}
                                     marginTop={'-5%'}
                                     cursor={'grab'}
                                     height={'10%'}
