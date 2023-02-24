@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../redux/app/store";
-import { useGetMessagesQuery } from "../../redux/app/services/authApi";
 import { Message } from "../../redux/app/services/authApi";
 import "../general.css"
 import "./messagesForm.css"
@@ -18,6 +17,7 @@ import {
     Image,
     useDisclosure
 } from '@chakra-ui/react'
+import { EditIcon } from "@chakra-ui/icons";
 import { ReModal } from "../Modal/ReModal";
 
 interface MessageProps {
@@ -28,7 +28,6 @@ interface MessageProps {
 export const Messages = ({ messagesList, refetch }: MessageProps) => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
     const { isOpen, onOpen, onClose } = useDisclosure();
-
 
     return (
         <Box
@@ -117,14 +116,16 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                     display={'flex'}
                                     flexDirection={'row'}
                                 >
-                                    <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                    <ReModal buttonValue={<><EditIcon /></>}>
+                                        <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
+                                    </ReModal>
                                     <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
                                 </Box> : <></>}
                         </Stack>
 
                         <Stack>
                             <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                                <ReModal buttonValue="Open Post and Comments">
+                                <ReModal buttonValue="Click for Post and Comments">
                                     <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                                 </ReModal>
                             </CardFooter>

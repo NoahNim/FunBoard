@@ -5,7 +5,6 @@ import {
     Input,
     FormControl,
     FormLabel,
-    FormErrorMessage,
     FormHelperText,
     Textarea,
     Box,
@@ -14,7 +13,6 @@ import {
 import { DownloadIcon } from "@chakra-ui/icons";
 import { User } from "../../redux/app/services/authApi";
 import { useCreateMessageMutation } from "../../redux/app/services/authApi";
-import { ReModal } from "../Modal/ReModal";
 
 interface CreateMessageProps {
     sessionUser: User;
@@ -22,8 +20,8 @@ interface CreateMessageProps {
 }
 
 
-export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
-    const { isOpen, onClose } = useModalContext()
+export const CreateMessage = ({ refetch }: CreateMessageProps) => {
+    const { onClose } = useModalContext()
     const [makeMessage, { isLoading, isError }] = useCreateMessageMutation();
     const [formState, setFormState] = useState({
         title: "",
@@ -88,7 +86,8 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
                     {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
                     <FormLabel
                         marginTop={'1%'}
-                        marginBottom={'-1%'}>
+                        marginBottom={'-1%'}
+                    >
                         Title
                     </FormLabel>
                     <Input border={'1px'} bg={'#fff'} type="text" name="title" value={formState.title} onChange={changeHandler}></Input>

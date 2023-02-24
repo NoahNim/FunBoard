@@ -14,7 +14,7 @@ import {
 
 interface ReModalProps {
     children?: ReactNode
-    buttonValue: string
+    buttonValue: string | ReactNode | null
 }
 
 export const ReModal = ({ children, buttonValue }: ReModalProps) => {
