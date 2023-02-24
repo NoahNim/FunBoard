@@ -12,7 +12,6 @@ import {
     Box,
     StackDivider,
     Image,
-    Text
 } from "@chakra-ui/react";
 import {
     EditIcon,
@@ -54,9 +53,9 @@ export const Comments = ({ messageId }: CommentsProps) => {
                 justifyContent={'center'}
                 alignItems={'center'}
             >
-                <Text
+                <Box
                     marginTop={'1%'}
-                >Here's what people are saying...</Text>
+                >Here's what people are saying...</Box>
             </Box>
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
@@ -67,6 +66,7 @@ export const Comments = ({ messageId }: CommentsProps) => {
                         flexDirection={'column'}
                         justifyContent={'center'}
                         alignItems={'center'}
+                        key={comment.id}
                     >
                         <Card
                             border={'1px'}
@@ -78,32 +78,40 @@ export const Comments = ({ messageId }: CommentsProps) => {
                             justifyContent={'center'}
                             alignItems={'center'}
                             width={'100%'}
-                            key={comment.id}
                         >
-                            {comment?.photo ? <Image
-                                src={`${window.location.href}${comment?.photo}`}
-                                alt='Photo Not Found!'
-                                borderRadius={'lg'}
-                            /> : <></>}
-                            <Stack
-                                divider={<StackDivider />}
-                                spacing='1'
+                            <Box
                                 display={'flex'}
+                                flexDirection={'row'}
                                 justifyContent={'space-between'}
                                 alignItems={'center'}
-                                height={'2xs'}
-                                width={'100%'}
-                                margin={'0'}
                             >
-                                <Box
-                                    overflowY={'scroll'}
-                                    width={{ base: '90%', md: '100%', lg: '100%' }}
-                                    height={'100%'}
-                                    borderRadius={'5%'}
+                                {comment?.photo ? <Image
+                                    maxW={{ base: '200%', sm: '200px' }}
+                                    maxH={'100%'}
+                                    src={`${window.location.href}${comment?.photo}`}
+                                    alt='Photo Not Found!'
+                                    borderRadius={'lg'}
+                                /> : <></>}
+                                <Stack
+                                    divider={<StackDivider />}
+                                    spacing='1'
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                    alignItems={'center'}
+                                    height={'2xs'}
+                                    width={'100%'}
+                                    margin={'0'}
                                 >
-                                    <CardBody>{comment?.comment}</CardBody>
-                                </Box>
-                            </Stack>
+                                    <Box
+                                        overflowY={'scroll'}
+                                        width={{ base: '90%', md: '100%', lg: '100%' }}
+                                        height={'100%'}
+                                        borderRadius={'5%'}
+                                    >
+                                        <CardBody>{comment?.comment}</CardBody>
+                                    </Box>
+                                </Stack>
+                            </Box>
                             <CardFooter
                                 width={'100%'}
                                 overflow={'scroll'}

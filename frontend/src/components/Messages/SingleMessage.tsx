@@ -25,7 +25,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
         <Box
             width={'100%'}
             height={'100%'}
-            marginTop={'5%'}
+            marginTop={'1%'}
             display={'flex'}
             flexDirection={'column'}
             justifyContent={'center'}
