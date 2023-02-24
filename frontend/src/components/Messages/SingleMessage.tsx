@@ -36,7 +36,6 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                 flexDirection={'column'}
                 overflow='scroll'
                 variant='outline'
-                margin={'1%'}
                 justifyContent={'center'}
                 alignItems={'center'}
                 height={'100%'}
@@ -44,7 +43,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
             >
 
                 <Image
-                    width={{ base: '100%', sm: '200px' }}
+                    width={{ base: '100%', sm: '300px' }}
                     src={`${window.location.href}${photo}`}
                     alt='Photo Not Found!'
                     borderRadius={'lg'}

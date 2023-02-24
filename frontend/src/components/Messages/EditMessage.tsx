@@ -33,7 +33,7 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
         setFormState(e.target.value)
     }
 
-    const CreateMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    const EditMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const messageData = { message: formState, id }
@@ -53,7 +53,10 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
 
     return (
         <>
-            <form onSubmit={CreateMessageSubmitHandler} encType="multipart/form-data" style={{ height: '100%', width: '100%' }}>
+            <form
+                onSubmit={EditMessageSubmitHandler}
+                encType="multipart/form-data"
+                style={{ height: '100%', width: '100%' }}>
                 <FormControl
                     display={'flex'}
                     flexDirection={'column'}
@@ -69,8 +72,8 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
                     {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
                     <FormLabel
                         marginTop={'1%'}
-                        marginBottom={'-1%'}
-                    >Message Text</FormLabel>
+                        fontWeight={'bold'}
+                    >Edit Message</FormLabel>
                     <Textarea
                         height={'90%'}
                         border={'1px'}
@@ -78,7 +81,7 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
                         name="message"
                         value={formState}
                         onChange={changeHandler}></Textarea>
-                    <Button bg={'#CFD2CD'} type="submit"><EditIcon /></Button>
+                    <Button width={'100%'} bg={'#CFD2CD'} type="submit"><EditIcon /></Button>
                 </FormControl>
             </form>
         </>

@@ -38,7 +38,7 @@ export const Comments = ({ messageId }: CommentsProps) => {
             alignItems={'center'}
         >
             {sessionUser ? <ReModal
-                modalWidth={"30%"}
+                modalWidth={"50%"}
                 modalHeight={'70%'}
                 buttonValue='Click Here to Post Comment'
             >

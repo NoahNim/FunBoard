@@ -155,7 +155,7 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                             bg={'#CFD2CD'}
                             width={'100%'}
                         >
-                            Post
+                            Post Message
                         </Button>
                     </Box>
                 </FormControl>

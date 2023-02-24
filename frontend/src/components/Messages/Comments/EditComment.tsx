@@ -1,9 +1,17 @@
 import { useState } from "react";
-import { Modal } from "../../Modal/Modal";
-import useModal from "../../Modal/UseModal";
 import { User } from "../../../redux/app/services/authApi";
 import { useEditCommentMutation } from "../../../redux/app/services/authApi";
-import "../messagesForm.css"
+import {
+    useModalContext,
+    Button,
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Textarea,
+    Box,
+} from "@chakra-ui/react";
+import { EditIcon } from "@chakra-ui/icons";
+
 
 interface EditCommentProps {
     sessionUser: User | null;
@@ -15,7 +23,7 @@ interface EditCommentProps {
 
 
 export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: EditCommentProps) => {
-    const { isOpen, toggle } = useModal();
+    const { onClose } = useModalContext()
     const [editComment, { isLoading, isError }] = useEditCommentMutation();
     const [formState, setFormState] = useState(comment)
     const [errorList, setErrorList] = useState([])
@@ -26,7 +34,7 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
         setFormState(e.target.value)
     }
 
-    const CreateMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    const EditCommentSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const commentData = { comment: formState, id, messageId }
@@ -34,8 +42,8 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
         try {
             const res = await editComment(commentData).unwrap();
             const returnedComment = { comment: res.comment }
+            onClose();
             refetch();
-            toggle();
         } catch (error: unknown | any) {
             const data = await error.data.errors
 
@@ -45,14 +53,39 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
 
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Edit comment">
+        <>
             {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
-            <form onSubmit={CreateMessageSubmitHandler} className="message-form" encType="multipart/form-data">
-                <label>Edit Comment</label>
-                <textarea name="message" value={formState} onChange={changeHandler}></textarea>
-                <button type="submit">Submit</button>
+            <form onSubmit={EditCommentSubmitHandler}
+                encType="multipart/form-data"
+                style={{ height: '100%', width: '100%' }}
+            >
+                <FormControl
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    padding={'1%'}
+                >
+                    <FormLabel
+                        marginTop={'1%'}
+                        fontWeight={'bold'}
+                    >Edit Comment</FormLabel>
+                    <Textarea
+                        height={'90%'}
+                        border={'1px'}
+                        bg={'#fff'}
+                        name="comment"
+                        value={formState}
+                        onChange={changeHandler}></Textarea>
+                    <Button
+                        width={'100%'}
+                        bg={'#CFD2CD'}
+                        type="submit"
+                    ><EditIcon /></Button>
+                </FormControl>
             </form>
-        </Modal>
+        </>
     )
 
 }

@@ -130,7 +130,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
                         <Stack>
                             <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                                <ReModal modalWidth={"50%"} modalHeight={'80%'} buttonValue="Click for Post and Comments">
+                                <ReModal modalWidth={"70%"} modalHeight={'80%'} buttonValue="Click for Post and Comments">
                                     <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                                 </ReModal>
                             </CardFooter>
