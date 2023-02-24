@@ -16,7 +16,9 @@ import {
     Heading,
     StackDivider,
     Image,
+    useDisclosure
 } from '@chakra-ui/react'
+import { ReModal } from "../Modal/ReModal";
 
 interface MessageProps {
     messagesList: any
@@ -25,6 +27,7 @@ interface MessageProps {
 
 export const Messages = ({ messagesList, refetch }: MessageProps) => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     return (
@@ -106,7 +109,9 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
                         <Stack>
                             <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                                <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                                <ReModal buttonValue="Open Post and Comments">
+                                    <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                                </ReModal>
                             </CardFooter>
                         </Stack>
                     </Card>

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, PropsWithChildren } from "react";
 import {
     useDisclosure,
     Button,
@@ -11,8 +11,9 @@ import {
     ModalCloseButton,
 } from "@chakra-ui/react";
 
+
 interface ReModalProps {
-    children?: ReactNode;
+    children?: ReactNode
     buttonValue: string
 }
 

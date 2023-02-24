@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-    useDisclosure,
+    useModalContext,
     Button,
     Input,
     FormControl,
@@ -23,7 +23,7 @@ interface CreateMessageProps {
 
 
 export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onClose } = useModalContext()
     const [makeMessage, { isLoading, isError }] = useCreateMessageMutation();
     const [formState, setFormState] = useState({
         title: "",
@@ -76,70 +76,68 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
 
     return (
         <>
-            <ReModal buttonValue="Post Message">
-                {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
-                <form onSubmit={CreateMessageSubmitHandler} style={{ height: '100%', width: '100%' }}>
-                    <FormControl
+            <form onSubmit={CreateMessageSubmitHandler} style={{ height: '100%', width: '100%' }}>
+                <FormControl
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    padding={'1%'}
+                >
+                    {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}>
+                        Title
+                    </FormLabel>
+                    <Input border={'1px'} bg={'#fff'} type="text" name="title" value={formState.title} onChange={changeHandler}></Input>
+                    <FormLabel
+                        marginTop={'1%'}
+                        marginBottom={'-1%'}
+                    >
+                        Message Text
+                    </FormLabel>
+                    <Textarea height={'90%'} border={'1px'} bg={'#fff'} name="message" value={formState.message} onChange={changeHandler}></Textarea>
+                    <Box
                         display={'flex'}
                         flexDirection={'column'}
                         justifyContent={'center'}
                         alignItems={'center'}
-                        height={'100%'}
-                        padding={'1%'}
+                        width={'100%'}
                     >
                         <FormLabel
-                            marginTop={'1%'}
-                            marginBottom={'-1%'}>
-                            Title
-                        </FormLabel>
-                        <Input border={'1px'} bg={'#fff'} type="text" name="title" value={formState.title} onChange={changeHandler}></Input>
-                        <FormLabel
-                            marginTop={'1%'}
-                            marginBottom={'-1%'}
-                        >
-                            Message Text
-                        </FormLabel>
-                        <Textarea height={'90%'} border={'1px'} bg={'#fff'} name="message" value={formState.message} onChange={changeHandler}></Textarea>
-                        <Box
+                            width={'100%'}
                             display={'flex'}
                             flexDirection={'column'}
                             justifyContent={'center'}
                             alignItems={'center'}
+                        >
+                            <Text>Photo Upload</Text>
+                            <DownloadIcon cursor={'grab'} />
+                            <Input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler} opacity={'0'}
+                                marginTop={'-3%'}
+                                cursor={'grab'}
+                                height={'10%'}
+                            ></Input>
+                        </FormLabel>
+                    </Box>
+                    <Box
+                        width={'100%'}
+                        display={'flex'}
+                        justifyContent={'center'}
+                        alignItems={'center'
+                        }>
+                        <Button
+                            type="submit"
+                            bg={'#CFD2CD'}
                             width={'100%'}
                         >
-                            <FormLabel
-                                width={'100%'}
-                                display={'flex'}
-                                flexDirection={'column'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                            >
-                                <Text>Photo Upload</Text>
-                                <DownloadIcon cursor={'grab'} />
-                                <Input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler} opacity={'0'}
-                                    marginTop={'-3%'}
-                                    cursor={'grab'}
-                                    height={'10%'}
-                                ></Input>
-                            </FormLabel>
-                        </Box>
-                        <Box
-                            width={'100%'}
-                            display={'flex'}
-                            justifyContent={'center'}
-                            alignItems={'center'
-                            }>
-                            <Button
-                                type="submit"
-                                bg={'#CFD2CD'}
-                                width={'100%'}
-                            >
-                                Post
-                            </Button>
-                        </Box>
-                    </FormControl>
-                </form>
-            </ReModal>
+                            Post
+                        </Button>
+                    </Box>
+                </FormControl>
+            </form>
         </>
     )
 }

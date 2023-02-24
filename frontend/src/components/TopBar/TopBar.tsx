@@ -1,7 +1,8 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useDisclosure } from "@chakra-ui/react";
 import { MainMenu } from "../Menu/Menu";
 import { CreateMessage } from "../Messages/CreateMessage";
 import { useAppSelector } from "../../redux/app/store";
+import { ReModal } from "../Modal/ReModal";
 
 interface TopBarProps {
     refetch: () => any
@@ -23,7 +24,11 @@ export const TopBar = ({ refetch }: TopBarProps) => {
         >
 
             FunBoard
-            {sessionUser ? <CreateMessage refetch={refetch} sessionUser={sessionUser} /> : <></>}
+            {sessionUser ?
+                <ReModal buttonValue="Create Message">
+                    <CreateMessage refetch={refetch} sessionUser={sessionUser} />
+                </ReModal>
+                : <></>}
             <MainMenu />
         </Box>
     )
