@@ -119,10 +119,10 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                     display={'flex'}
                                     flexDirection={'row'}
                                 >
-                                    <ReModal buttonValue={<><EditIcon /></>}>
+                                    <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
                                         <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
                                     </ReModal>
-                                    <ReModal buttonValue={<><DeleteIcon color={'red'} /></>}>
+                                    <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><DeleteIcon color={'red'} /></>}>
                                         <DeleteMessage title={message.title} id={message.id} refetch={refetch} sessionUser={sessionUser} />
                                     </ReModal>
                                 </Box> : <></>}
@@ -130,7 +130,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
                         <Stack>
                             <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                                <ReModal buttonValue="Click for Post and Comments">
+                                <ReModal modalWidth={"50%"} modalHeight={'80%'} buttonValue="Click for Post and Comments">
                                     <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                                 </ReModal>
                             </CardFooter>

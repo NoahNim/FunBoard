@@ -25,7 +25,7 @@ export const TopBar = ({ refetch }: TopBarProps) => {
 
             FunBoard
             {sessionUser ?
-                <ReModal buttonValue="Create Message">
+                <ReModal modalWidth={'30%'} modalHeight={'80%'} buttonValue="Create Message">
                     <CreateMessage refetch={refetch} sessionUser={sessionUser} />
                 </ReModal>
                 : <></>}

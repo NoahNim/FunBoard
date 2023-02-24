@@ -5,8 +5,6 @@ import {
     Modal,
     ModalOverlay,
     ModalContent,
-    ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
 } from "@chakra-ui/react";
@@ -15,25 +13,28 @@ import {
 interface ReModalProps {
     children?: ReactNode
     buttonValue: string | ReactNode | null
+    modalHeight: string
+    modalWidth: string
 }
 
-export const ReModal = ({ children, buttonValue }: ReModalProps) => {
+export const ReModal = ({ children, buttonValue, modalHeight, modalWidth }: ReModalProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
             <Button onClick={onOpen}>{buttonValue}</Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+            >
                 <ModalOverlay />
 
                 <ModalContent
-                    width={'100%'}
-                    height={'70%'}
-                    padding={'0'}
-                    mb={'0'}
+                    maxWidth={modalWidth}
+                    height={modalHeight}
                 >
-                    <ModalCloseButton width={'6%'} height={'5%'} />
-                    <ModalBody marginTop={'1%'}>
+                    <ModalCloseButton />
+                    <ModalBody marginTop={'3%'}>
                         {children}
                     </ModalBody>
                 </ModalContent>

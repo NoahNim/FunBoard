@@ -34,6 +34,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                 margin={'1%'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                height={'100%'}
             >
 
                 <Image
@@ -42,6 +43,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                     alt='Photo Not Found!'
                     borderRadius={'lg'}
                 />
+
                 <Stack
                     divider={<StackDivider />}
                     spacing='1'
@@ -50,7 +52,7 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                     alignItems={'center'}
                     height={'2xs'}
                     width={'100%'}
-                    margin={'0'}
+                    margin={''}
                 >
                     <Heading>
                         {title}
@@ -63,13 +65,11 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                         borderRadius={'5%'}
                     >
                         <CardBody>
-                            <Text>{message}</Text>
+                            {message}
                         </CardBody>
                     </Box>
                 </Stack>
-                <CardFooter width={'100%'}>
-                    <Comments messageId={id} />
-                </CardFooter>
+                <Comments messageId={id} />
             </Card>
         </Box>
     )
