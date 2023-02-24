@@ -53,7 +53,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                     objectFit={'cover'}
                     maxW={{ base: '50%', sm: '200px', lg: "250px" }}
                     maxH={'100%'}
-                    src={'https://i.imgur.com/KCVm8DV.jpg'}
+                    src={require('./heyhey.jpeg')}
                     alt='Photo Not Found!'
                     borderRadius={'lg'}
                 />
