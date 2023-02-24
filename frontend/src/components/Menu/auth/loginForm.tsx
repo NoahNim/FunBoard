@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../../redux/app/store";
 import { setUser } from "../../../redux/features/auth/userSlice";
 import { useLoginMutation } from '../../../redux/app/services/authApi'
-import './loginForm.css'
-import { LoginModal } from "../../Modal/LoginModal";
-import useModal from "../../Modal/UseModal";
+import {
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Input,
+    Button,
+    Box
+} from '@chakra-ui/react'
 
 
 export const LoginForm = () => {
-    const { isOpen, toggle } = useModal();
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
@@ -26,7 +30,7 @@ export const LoginForm = () => {
         setPassword(e.target.value)
     }
 
-    const loginSubmitFunction = async (e: React.FormEvent<HTMLFormElement>) => {
+    const loginSubmitFunction = async (e: any) => {
         e.preventDefault();
 
         const credential = username
@@ -37,25 +41,45 @@ export const LoginForm = () => {
             const res = await login(user).unwrap();
             const logUser = { user: res.user, token: res.token }
             dispatch(setUser(logUser));
-            toggle()
             setErrorList([])
         } catch (error: any | unknown) {
             const data = await error?.data.errors
-
+            console.log(data)
             setErrorList(data)
         }
     }
 
     return (
-        <LoginModal isOpen={isOpen} toggle={toggle} buttonValue="Login" >
-            {isError ? <div style={{ color: "red" }}>{errorList.map((error) => <div>{error}</div>)}</div> : <></>}
-            <form onSubmit={loginSubmitFunction} className="login-form">
-                <label>username / email </label>
-                <input type="text" value={username} onChange={usernameChangeHandler}></input>
-                <label>password </label>
-                <input type="password" value={password} onChange={passwordChangeHandler}></input>
-                <button type="submit">Login</button>
-            </form>
-        </LoginModal>
+        <form onSubmit={loginSubmitFunction}>
+            <FormControl
+                display={'flex'}
+                flexDirection={'column'}
+                justifyContent={'center'}
+                alignItems={'center'}
+                w={'100%'}
+                h={'100%'}
+            >
+                {isError ? <FormHelperText
+                    display={'flex'}
+                    flexDirection={'column'}
+                    color={'red'}
+                >{errorList.map((error) => <Box>{error}</Box>)}</FormHelperText> : <></>}
+                <FormLabel
+                    marginTop={'1%'}
+                    marginBottom={'-1%'}
+                >
+                    username / email
+                </FormLabel>
+                <Input border={'1px'} bg={'#fff'} type="text" value={username} onChange={usernameChangeHandler}></Input>
+                <FormLabel
+                    marginTop={'1%'}
+                    marginBottom={'-1%'}
+                >
+                    password
+                </FormLabel>
+                <Input border={'1px'} bg={'#fff'} type="password" value={password} onChange={passwordChangeHandler}></Input>
+                <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Login</Button>
+            </FormControl >
+        </form >
     )
 }

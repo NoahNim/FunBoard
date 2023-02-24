@@ -1,7 +1,7 @@
 import { useAppDispatch } from "../../../redux/app/store";
 import { useLazyLogoutQuery } from "../../../redux/app/services/authApi";
 import { removeUser } from "../../../redux/features/auth/userSlice";
-import "./loginForm";
+import { Button } from "@chakra-ui/react";
 
 export const LogoutButton = () => {
     const dispatch = useAppDispatch();
@@ -18,8 +18,13 @@ export const LogoutButton = () => {
     }
 
     return (
-        <div>
-            <button className="logout-button" onClick={logoutHandler}>Logout</button>
-        </div>
+        <Button bg={'#e69797'}
+            border={'2px solid'}
+            borderRadius={'10px'}
+            onClick={logoutHandler}
+            width={'100%'}
+        >
+            Logout
+        </Button>
     )
 }

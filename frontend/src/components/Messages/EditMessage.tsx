@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { Modal } from "../Modal/Modal";
-import useModal from "../Modal/UseModal";
 import { User } from "../../redux/app/services/authApi";
 import { useEditMessageMutation } from "../../redux/app/services/authApi";
-import "./messagesForm.css"
+import {
+    useModalContext,
+    Button,
+    FormControl,
+    FormLabel,
+    FormHelperText,
+    Textarea,
+    Box,
+} from "@chakra-ui/react";
+import { EditIcon } from "@chakra-ui/icons";
 
 interface EditMessageProps {
     sessionUser: User | null;
@@ -15,8 +22,8 @@ interface EditMessageProps {
 
 
 export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMessageProps) => {
-    const { isOpen, toggle } = useModal();
-    const [editMessage, { isLoading, isError }] = useEditMessageMutation();
+    const { onClose } = useModalContext()
+    const [editMessage, { isError }] = useEditMessageMutation();
     const [formState, setFormState] = useState(message)
     const [errorList, setErrorList] = useState([])
 
@@ -26,16 +33,15 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
         setFormState(e.target.value)
     }
 
-    const CreateMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    const EditMessageSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const messageData = { message: formState, id }
 
         try {
             const res = await editMessage(messageData).unwrap();
-            const returnedMessage = { message: res.message }
+            onClose();
             refetch();
-            toggle();
         } catch (error: unknown | any) {
             const data = await error.data.errors
 
@@ -45,15 +51,39 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
 
 
     return (
-        <Modal isOpen={isOpen} toggle={toggle} buttonValue="Edit Message">
-            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
-            <div>{title}</div>
-            <form onSubmit={CreateMessageSubmitHandler} className="message-form" encType="multipart/form-data">
-                <label>Message Text</label>
-                <textarea name="message" value={formState} onChange={changeHandler}></textarea>
-                <button type="submit">Submit</button>
+        <>
+            <form
+                onSubmit={EditMessageSubmitHandler}
+                encType="multipart/form-data"
+                style={{ height: '100%', width: '100%' }}>
+                <FormControl
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    padding={'1%'}
+                >
+                    <Box
+                        fontWeight={'bold'}
+                        marginTop={'1%'}
+                    >Edit {title}</Box>
+                    {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
+                    <FormLabel
+                        marginTop={'1%'}
+                        fontWeight={'bold'}
+                    >Edit Message</FormLabel>
+                    <Textarea
+                        height={'90%'}
+                        border={'1px'}
+                        bg={'#fff'}
+                        name="message"
+                        value={formState}
+                        onChange={changeHandler}></Textarea>
+                    <Button width={'100%'} bg={'#CFD2CD'} type="submit"><EditIcon /></Button>
+                </FormControl>
             </form>
-        </Modal>
+        </>
     )
 
 }
