@@ -23,7 +23,7 @@ interface EditMessageProps {
 
 export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMessageProps) => {
     const { onClose } = useModalContext()
-    const [editMessage, { isLoading, isError }] = useEditMessageMutation();
+    const [editMessage, { isError }] = useEditMessageMutation();
     const [formState, setFormState] = useState(message)
     const [errorList, setErrorList] = useState([])
 
@@ -40,7 +40,6 @@ export const EditMessage = ({ sessionUser, refetch, id, title, message }: EditMe
 
         try {
             const res = await editMessage(messageData).unwrap();
-            const returnedMessage = { message: res.message }
             onClose();
             refetch();
         } catch (error: unknown | any) {

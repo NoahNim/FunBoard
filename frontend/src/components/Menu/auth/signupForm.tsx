@@ -9,9 +9,9 @@ import {
     Input,
     Button,
     Box,
-    Textarea,
     Text
 } from '@chakra-ui/react'
+import { DownloadIcon } from "@chakra-ui/icons";
 
 
 export const SignupForm = () => {
@@ -72,7 +72,6 @@ export const SignupForm = () => {
 
     return (
         <>
-            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={signupSubmitHandler} encType="multipart/form-data">
                 <FormControl
                     display={'flex'}
@@ -80,6 +79,7 @@ export const SignupForm = () => {
                     justifyContent={'center'}
                     alignItems={'center'}
                 >
+                    {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
                     <FormLabel
                         marginTop={'1%'}
                         marginBottom={'-1%'}
@@ -143,17 +143,49 @@ export const SignupForm = () => {
                         border={'1px'}
                         bg={'#fff'}
                     ></Input>
-                    <FormLabel
-                        marginTop={'1%'}
-                        marginBottom={'-1%'}
+                    <Box
+                        display={'flex'}
+                        flexDirection={'column'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                        width={'100%'}
+                        marginTop={'2%'}
                     >
-                        profile photo
-                    </FormLabel>
-                    <Input
-                        type="file" id="file" name="profilePhoto" accept="image/png, image/jpeg, image/jpg"
-                        onChange={fileChangeHandler}
-                    ></Input>
-                    <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Post</Button>
+                        <FormLabel
+                            width={'100%'}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                        >
+                            <Text>Photo Upload</Text>
+                            <Box display={'flex'}
+                                flexDirection={'column'}
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                                width={'100%'}
+                                cursor={'grab'}
+                            >
+                                <DownloadIcon
+                                    cursor={'grab'}
+                                    width={'100%'} />
+                                <Input
+                                    type="file"
+                                    id="file"
+                                    name="profilePhoto"
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    onChange={fileChangeHandler}
+                                    opacity={'0'}
+                                    marginTop={'-5%'}
+                                    cursor={'grab'}
+                                    height={'10%'}
+                                    width={'100%'}
+                                ></Input>
+                            </Box>
+                        </FormLabel>
+                    </Box>
+
+                    <Button type="submit" margin={'2%'} width={'100%'} bg={'#CFD2CD'} >Register</Button>
                 </FormControl>
             </form>
         </>

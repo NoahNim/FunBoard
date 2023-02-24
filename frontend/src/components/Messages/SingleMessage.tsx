@@ -5,7 +5,6 @@ import {
     CardFooter,
     Stack,
     Box,
-    Text,
     Heading,
     StackDivider,
     Image,
@@ -43,7 +42,9 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
             >
 
                 <Image
-                    width={{ base: '100%', sm: '300px' }}
+                    objectFit={'cover'}
+                    maxW={{ base: '50%', sm: '300px', lg: "350px" }}
+                    maxH={'100%'}
                     src={`${window.location.href}${photo}`}
                     alt='Photo Not Found!'
                     borderRadius={'lg'}

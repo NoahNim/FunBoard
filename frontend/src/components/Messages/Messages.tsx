@@ -15,7 +15,6 @@ import {
     Heading,
     StackDivider,
     Image,
-    useDisclosure
 } from '@chakra-ui/react'
 import {
     EditIcon,
@@ -30,7 +29,6 @@ interface MessageProps {
 
 export const Messages = ({ messagesList, refetch }: MessageProps) => {
     const sessionUser = useAppSelector((state) => state?.auth?.user);
-    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <Box
@@ -53,7 +51,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
             >
                 <Image
                     objectFit={'cover'}
-                    maxW={{ base: '200%', sm: '200px' }}
+                    maxW={{ base: '50%', sm: '200px', lg: "250px" }}
                     maxH={'100%'}
                     src={'https://i.imgur.com/KCVm8DV.jpg'}
                     alt='Photo Not Found!'
@@ -92,7 +90,8 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                     >
                         <Image
                             objectFit={'cover'}
-                            width={{ base: '100%', sm: '200px' }}
+                            maxW={{ base: '50%', sm: '200px', lg: "250px" }}
+                            maxH={'100%'}
                             src={`${window.location.href}${message?.photo}`}
                             alt='Photo Not Found!'
                             borderRadius={'lg'}
@@ -140,7 +139,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
                         <Stack>
                             <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                                <ReModal modalWidth={"70%"} modalHeight={'80%'} buttonValue="Click for Post and Comments">
+                                <ReModal modalWidth={"70%"} modalHeight={'80%'} buttonValue="Click for Message and Comments">
                                     <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                                 </ReModal>
                             </CardFooter>

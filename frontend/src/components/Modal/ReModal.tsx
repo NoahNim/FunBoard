@@ -1,4 +1,4 @@
-import { ReactNode, PropsWithChildren } from "react";
+import { ReactNode } from "react";
 import {
     useDisclosure,
     Button,

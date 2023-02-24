@@ -86,7 +86,8 @@ export const Comments = ({ messageId }: CommentsProps) => {
                                 alignItems={'center'}
                             >
                                 {comment?.photo ? <Image
-                                    maxW={{ base: '200%', sm: '200px' }}
+                                    objectFit={'cover'}
+                                    maxW={{ base: '50%', sm: '200px', lg: "250px" }}
                                     maxH={'100%'}
                                     src={`${window.location.href}${comment?.photo}`}
                                     alt='Photo Not Found!'
