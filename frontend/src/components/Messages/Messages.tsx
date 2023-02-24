@@ -67,7 +67,6 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                         variant='outline'
                         margin={'1%'}
                         maxWidth={'100%'}
-                        minWidth={'20%'}
                         key={message.id}
                     >
                         <Stack divider={<StackDivider />} spacing='4'>
@@ -82,15 +81,14 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
                         <Stack
                             divider={<StackDivider />}
-                            spacing='6'
+                            spacing='1'
                             display={'flex'}
                             justifyContent={'center'}
                             alignItems={'center'}
                             maxHeight={'2xs'}
-                            maxWidth={'3xs'}
                         >
                             <Heading>{message.title}</Heading>
-                            <Container margin={'0'} overflowY={'scroll'} overflowX={'scroll'} overflowWrap={'anywhere'} centerContent>
+                            <Container overflowY={'scroll'} maxWidth={'200%'} border={'1px'} borderRadius={'5%'}>
                                 <CardBody>
                                     <Text>{message.message}</Text>
                                 </CardBody>
