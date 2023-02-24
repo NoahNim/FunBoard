@@ -17,7 +17,10 @@ import {
     Image,
     useDisclosure
 } from '@chakra-ui/react'
-import { EditIcon } from "@chakra-ui/icons";
+import {
+    EditIcon,
+    DeleteIcon
+} from "@chakra-ui/icons";
 import { ReModal } from "../Modal/ReModal";
 
 interface MessageProps {
@@ -119,7 +122,9 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                     <ReModal buttonValue={<><EditIcon /></>}>
                                         <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />
                                     </ReModal>
-                                    <DeleteMessage id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                    <ReModal buttonValue={<><DeleteIcon color={'red'} /></>}>
+                                        <DeleteMessage title={message.title} id={message.id} refetch={refetch} sessionUser={sessionUser} />
+                                    </ReModal>
                                 </Box> : <></>}
                         </Stack>
 
