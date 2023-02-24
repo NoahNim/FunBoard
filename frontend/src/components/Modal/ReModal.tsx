@@ -24,7 +24,6 @@ export const ReModal = ({ children, buttonValue }: ReModalProps) => {
             <Button onClick={onOpen}>{buttonValue}</Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
-                <ModalCloseButton />
 
                 <ModalContent
                     width={'70%'}
@@ -32,7 +31,10 @@ export const ReModal = ({ children, buttonValue }: ReModalProps) => {
                     padding={'0'}
                     mb={'0'}
                 >
-                    {children}
+                    <ModalCloseButton />
+                    <ModalBody>
+                        {children}
+                    </ModalBody>
                 </ModalContent>
             </Modal>
         </>
