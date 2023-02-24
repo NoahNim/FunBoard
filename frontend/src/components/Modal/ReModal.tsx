@@ -27,8 +27,8 @@ export const ReModal = ({ children, buttonValue }: ReModalProps) => {
                 <ModalOverlay />
 
                 <ModalContent
-                    width={'70%'}
-                    height={'50%'}
+                    width={'100%'}
+                    height={'70%'}
                     padding={'0'}
                     mb={'0'}
                 >

@@ -1,6 +1,15 @@
-import { MessageModal } from "../Modal/MessaageModal";
-import useModal from "../Modal/UseModal";
 import { Comments } from "./Comments/Comments";
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    Stack,
+    Box,
+    Text,
+    Heading,
+    StackDivider,
+    Image,
+} from "@chakra-ui/react";
 
 
 interface SingleMessageProps {
@@ -12,26 +21,56 @@ interface SingleMessageProps {
 }
 
 export const SingleMessage = ({ title, message, photo, id, index }: SingleMessageProps) => {
-    const { isOpen, toggle } = useModal();
-
     return (
-        <MessageModal isOpen={isOpen} toggle={toggle} buttonValue="Comments...">
-            <div className="box">
-                <div className="box-container">
-                    <div className="box-message">
-                        <img className="post-images" src={`${window.location.href}${photo}`}></img>
-                        <ul key={id}>
-                            <li key={index}>{title}</li>
-                            <li key={`${message}${Math.random()}`}>
-                                <p>{message}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div style={{ width: "100%", backgroundColor: "#A6A2A2", marginTop: "0.4px" }}>
+        <Box
+            width={'100%'}
+            height={'100%'}
+        >
+            <Card
+                display={'flex'}
+                flexDirection={'column'}
+                overflow='scroll'
+                variant='outline'
+                margin={'1%'}
+                justifyContent={'center'}
+                alignItems={'center'}
+            >
+
+                <Image
+                    width={{ base: '100%', sm: '200px' }}
+                    src={`${window.location.href}${photo}`}
+                    alt='Photo Not Found!'
+                    borderRadius={'lg'}
+                />
+                <Stack
+                    divider={<StackDivider />}
+                    spacing='1'
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    height={'2xs'}
+                    width={'100%'}
+                    margin={'0'}
+                >
+                    <Heading>
+                        {title}
+                    </Heading>
+                    <Box
+                        overflowY={'scroll'}
+                        width={{ base: '100%', md: '100%', lg: '100%' }}
+                        height={'100%'}
+                        border={'1px'}
+                        borderRadius={'5%'}
+                    >
+                        <CardBody>
+                            <Text>{message}</Text>
+                        </CardBody>
+                    </Box>
+                </Stack>
+                <CardFooter width={'100%'}>
                     <Comments messageId={id} />
-                </div>
-            </div>
-        </MessageModal>
+                </CardFooter>
+            </Card>
+        </Box>
     )
 }
