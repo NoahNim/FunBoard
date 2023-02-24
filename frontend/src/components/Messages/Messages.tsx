@@ -36,8 +36,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                 overflow='scroll'
                 variant='outline'
                 margin={'1%'}
-                maxWidth={'100%'}
-                minWidth={'20%'}
+                width={{ base: '100%', md: '100%', lg: '100%' }}
                 justifyContent={'center'}
                 alignItems={'center'}
             >
@@ -51,6 +50,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                 <Stack divider={<StackDivider />} spacing='4'>
                     <CardBody
                         alignItems={'center'}
+                        border={'1px'} borderRadius={'5%'}
                     >
                         <Heading>Hello everyone!</Heading>
                         <Text>Welcome to the Funboard! Click Create Message to make a message. Click Logon/Register in the Top Bar to Login or Register! Please be civil and kind to your fellow community members.</Text>
@@ -66,18 +66,17 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                         alignItems={'center'}
                         variant='outline'
                         margin={'1%'}
-                        maxWidth={'100%'}
+                        width={{ base: '100%', md: '100%', lg: '100%' }}
                         key={message.id}
+                        overflow={'scroll'}
                     >
-                        <Stack divider={<StackDivider />} spacing='4'>
-                            <Image
-                                objectFit={'cover'}
-                                maxW={{ base: '100%', sm: '200px' }}
-                                src={`${window.location.href}${message?.photo}`}
-                                alt='Photo Not Found!'
-                                borderRadius={'lg'}
-                            />
-                        </Stack>
+                        <Image
+                            objectFit={'cover'}
+                            width={{ base: '100%', sm: '200px' }}
+                            src={`${window.location.href}${message?.photo}`}
+                            alt='Photo Not Found!'
+                            borderRadius={'lg'}
+                        />
 
                         <Stack
                             divider={<StackDivider />}
@@ -88,7 +87,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                             maxHeight={'2xs'}
                         >
                             <Heading>{message.title}</Heading>
-                            <Container overflowY={'scroll'} maxWidth={'200%'} border={'1px'} borderRadius={'5%'}>
+                            <Container overflowY={'scroll'} width={{ base: '100%', md: '100%', lg: '100%' }} border={'1px'} borderRadius={'5%'}>
                                 <CardBody>
                                     <Text>{message.message}</Text>
                                 </CardBody>
@@ -103,7 +102,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                 </Box> : <></>}
                         </Stack>
 
-                        <CardFooter>
+                        <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
                             <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
                         </CardFooter>
                     </Card>
