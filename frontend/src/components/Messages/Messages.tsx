@@ -16,7 +16,6 @@ import {
     Heading,
     StackDivider,
     Image,
-    Container,
 } from '@chakra-ui/react'
 
 interface MessageProps {
@@ -36,7 +35,6 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                 overflow='scroll'
                 variant='outline'
                 margin={'1%'}
-                width={{ base: '100%', md: '100%', lg: '100%' }}
                 justifyContent={'center'}
                 alignItems={'center'}
             >
@@ -66,7 +64,6 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                         alignItems={'center'}
                         variant='outline'
                         margin={'1%'}
-                        width={{ base: '100%', md: '100%', lg: '100%' }}
                         key={message.id}
                         overflow={'scroll'}
                     >
@@ -85,13 +82,18 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                             justifyContent={'center'}
                             alignItems={'center'}
                             maxHeight={'2xs'}
+                            width={'100%'}
                         >
-                            <Heading>{message.title}</Heading>
-                            <Container overflowY={'scroll'} width={{ base: '100%', md: '100%', lg: '100%' }} border={'1px'} borderRadius={'5%'}>
+                            <Heading
+
+                            >
+                                {message.title}
+                            </Heading>
+                            <Box overflowY={'scroll'} width={{ base: '100%', md: '100%', lg: '100%' }} border={'1px'} borderRadius={'5%'}>
                                 <CardBody>
                                     <Text>{message.message}</Text>
                                 </CardBody>
-                            </Container>
+                            </Box>
                             {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
                                 <Box
                                     display={'flex'}
@@ -102,9 +104,11 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                                 </Box> : <></>}
                         </Stack>
 
-                        <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
-                            <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
-                        </CardFooter>
+                        <Stack>
+                            <CardFooter width={{ base: '100%', md: '100%', lg: '100%' }} overflow={'scroll'}>
+                                <SingleMessage id={message.id} index={index} title={message?.title} message={message?.message} photo={message?.photo} />
+                            </CardFooter>
+                        </Stack>
                     </Card>
                 )
             })}
