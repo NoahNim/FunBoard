@@ -97,6 +97,7 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
                         justifyContent={'center'}
                         alignItems={'center'}
                         width={'100%'}
+                        marginTop={'2%'}
                     >
                         <FormLabel
                             width={'100%'}
@@ -135,6 +136,7 @@ export const CreateComment = ({ sessionUser, refetch, messageId }: CreateMessage
                         type="submit"
                         bg={'#CFD2CD'}
                         width={'100%'}
+                        marginTop={'2%'}
                     >Post Comment</Button>
                 </FormControl>
             </form>

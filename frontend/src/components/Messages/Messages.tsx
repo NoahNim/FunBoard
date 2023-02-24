@@ -59,7 +59,15 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                     alt='Photo Not Found!'
                     borderRadius={'lg'}
                 />
-                <Stack divider={<StackDivider />} spacing='4'>
+                <Stack
+                    divider={<StackDivider />}
+                    spacing='4'
+                    display={'flex'}
+                    justifyContent={'space-between'}
+                    alignItems={'center'}
+                    width={'80%'}
+                    marginLeft={'2%'}
+                >
                     <CardBody
                         alignItems={'center'}
                         border={'1px'} borderRadius={'5%'}
@@ -98,7 +106,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                             alignItems={'center'}
                             height={'2xs'}
                             width={'100%'}
-                            margin={'0'}
+                            marginLeft={'2%'}
                         >
                             <Heading>
                                 {message.title}
@@ -116,8 +124,10 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                             </Box>
                             {sessionUser?.id === message.userId || sessionUser?.username === "noah" ?
                                 <Box
+                                    width={'100%'}
                                     display={'flex'}
                                     flexDirection={'row'}
+                                    justifyContent={'flex-end'}
                                 >
                                     <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
                                         <EditMessage title={message.title} message={message.message} id={message.id} sessionUser={sessionUser} refetch={refetch} />

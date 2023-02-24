@@ -54,7 +54,6 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
 
     return (
         <>
-            {isError ? <div style={{ color: "red" }}>{errorList?.map((error) => <div>{error}</div>)}</div> : <></>}
             <form onSubmit={EditCommentSubmitHandler}
                 encType="multipart/form-data"
                 style={{ height: '100%', width: '100%' }}
@@ -67,6 +66,7 @@ export const EditComment = ({ sessionUser, refetch, id, messageId, comment }: Ed
                     height={'100%'}
                     padding={'1%'}
                 >
+                    {isError ? <FormHelperText color={'red'}>{errorList?.map((error) => <div>{error}</div>)}</FormHelperText> : <></>}
                     <FormLabel
                         marginTop={'1%'}
                         fontWeight={'bold'}

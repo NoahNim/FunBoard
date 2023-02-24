@@ -12,6 +12,7 @@ import {
     Box,
     StackDivider,
     Image,
+    Text
 } from "@chakra-ui/react";
 import {
     EditIcon,
@@ -45,6 +46,18 @@ export const Comments = ({ messageId }: CommentsProps) => {
                 <CreateComment messageId={messageId} sessionUser={sessionUser} refetch={refetch} />
             </ReModal>
                 : null}
+            <Box
+                borderTop={'2px'}
+                width={'100%'}
+                fontWeight={'bold'}
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'center'}
+            >
+                <Text
+                    marginTop={'1%'}
+                >Here's what people are saying...</Text>
+            </Box>
             {commentsList?.map((comment: Comment, index: number) => {
                 return (
                     <Box
@@ -96,7 +109,12 @@ export const Comments = ({ messageId }: CommentsProps) => {
                                 overflow={'scroll'}
                             >
                                 {sessionUser?.id === comment.userId || sessionUser?.username === "noah" ?
-                                    <Box width={'100%'}>
+                                    <Box
+                                        width={'100%'}
+                                        display={'flex'}
+                                        flexDirection={'row'}
+                                        justifyContent={'flex-end'}
+                                    >
                                         <ReModal modalWidth="50%" modalHeight={'70%'} buttonValue={<><EditIcon /></>}>
                                             <EditComment comment={comment.comment} id={comment.id} messageId={comment.messageId} sessionUser={sessionUser} refetch={refetch} />
                                         </ReModal>

@@ -88,7 +88,7 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                         marginTop={'1%'}
                         marginBottom={'-1%'}
                     >
-                        Title
+                        Enter Title
                     </FormLabel>
                     <Input border={'1px'} bg={'#fff'} type="text" name="title" value={formState.title} onChange={changeHandler}></Input>
                     <FormLabel
@@ -110,6 +110,7 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                         justifyContent={'center'}
                         alignItems={'center'}
                         width={'100%'}
+                        marginTop={'2%'}
                     >
                         <FormLabel
                             width={'100%'}
@@ -154,6 +155,7 @@ export const CreateMessage = ({ refetch }: CreateMessageProps) => {
                             type="submit"
                             bg={'#CFD2CD'}
                             width={'100%'}
+                            marginTop={'2%'}
                         >
                             Post Message
                         </Button>

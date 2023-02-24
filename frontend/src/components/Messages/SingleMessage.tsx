@@ -55,21 +55,20 @@ export const SingleMessage = ({ title, message, photo, id, index }: SingleMessag
                     display={'flex'}
                     justifyContent={'space-between'}
                     alignItems={'center'}
-                    height={'2xs'}
+                    height={'40%'}
                     width={'95%'}
-                    margin={''}
+                    overflowY={'scroll'}
+                    margin={'1%'}
                 >
                     <Heading>
                         {title}
                     </Heading>
                     <Box
                         overflowY={'scroll'}
-                        width={{ base: '100%', md: '100%', lg: '100%' }}
-                        height={'100%'}
                         border={'1px'}
                         borderRadius={'5%'}
                     >
-                        <CardBody>
+                        <CardBody height={'100%'}>
                             {message}
                         </CardBody>
                     </Box>
