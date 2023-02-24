@@ -114,12 +114,21 @@ export const CreateMessage = ({ sessionUser, refetch }: CreateMessageProps) => {
                             alignItems={'center'}
                         >
                             <Text>Photo Upload</Text>
-                            <DownloadIcon cursor={'grab'} />
-                            <Input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler} opacity={'0'}
-                                marginTop={'-3%'}
+                            <Box display={'flex'}
+                                flexDirection={'column'}
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                                width={'100%'}
                                 cursor={'grab'}
-                                height={'10%'}
-                            ></Input>
+                            >
+                                <DownloadIcon cursor={'grab'} width={'100%'} />
+                                <Input type="file" id="file" name="photo" accept="image/png, image/jpeg, image/jpg" onChange={fileChangeHandler} opacity={'0'}
+                                    marginTop={'-5%'}
+                                    cursor={'grab'}
+                                    height={'10%'}
+                                    width={'100%'}
+                                ></Input>
+                            </Box>
                         </FormLabel>
                     </Box>
                     <Box

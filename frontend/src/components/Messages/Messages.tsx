@@ -31,7 +31,14 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
 
 
     return (
-        <Box width={'80%'}>
+        <Box
+            width={'100%'}
+            height={'100%'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            alignItems={'center'}
+        >
             <Card
                 display={'flex'}
                 flexDirection={'row'}
@@ -40,10 +47,12 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                 margin={'1%'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                width={'90%'}
             >
                 <Image
                     objectFit={'cover'}
-                    maxW={{ base: '100%', sm: '200px' }}
+                    maxW={{ base: '200%', sm: '200px' }}
+                    maxH={'100%'}
                     src={'https://i.imgur.com/KCVm8DV.jpg'}
                     alt='Photo Not Found!'
                     borderRadius={'lg'}
@@ -69,6 +78,7 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                         margin={'1%'}
                         key={message.id}
                         overflow={'scroll'}
+                        width={'90%'}
                     >
                         <Image
                             objectFit={'cover'}
@@ -82,17 +92,22 @@ export const Messages = ({ messagesList, refetch }: MessageProps) => {
                             divider={<StackDivider />}
                             spacing='1'
                             display={'flex'}
-                            justifyContent={'center'}
+                            justifyContent={'space-between'}
                             alignItems={'center'}
-                            maxHeight={'2xs'}
+                            height={'2xs'}
                             width={'100%'}
+                            margin={'0'}
                         >
-                            <Heading
-
-                            >
+                            <Heading>
                                 {message.title}
                             </Heading>
-                            <Box overflowY={'scroll'} width={{ base: '100%', md: '100%', lg: '100%' }} border={'1px'} borderRadius={'5%'}>
+                            <Box
+                                overflowY={'scroll'}
+                                width={{ base: '100%', md: '100%', lg: '100%' }}
+                                height={'100%'}
+                                border={'1px'}
+                                borderRadius={'5%'}
+                            >
                                 <CardBody>
                                     <Text>{message.message}</Text>
                                 </CardBody>
