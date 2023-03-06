@@ -23,7 +23,7 @@ module.exports = {
         userId: 1,
         title: "The time has come",
         message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut metus a urna commodo fermentum. Morbi ut sagittis velit. Nulla fringilla nunc quis nibh placerat, vel pharetra velit commodo. Etiam vestibulum, urna sit amet molestie iaculis, arcu elit bibendum urna, vel semper nulla leo id turpis. Nunc interdum dolor eu ultrices tempus. Nullam euismod sem a ipsum posuere, vel vestibulum enim luctus. Nulla facilisi. Nullam eget bibendum velit. Donec id congue leo. Sed ac lectus vel tortor sodales interdum. Aliquam erat volutpat. Ut hendrerit eleifend tellus, eget sollicitudin ex. Vivamus venenatis eleifend enim, in feugiat metus consequat nec. Nulla facilisi.",
-        photo: "https://i.imgur.com/xTCfqri.jpeg",
+        photo: "./rain.jpeg",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
